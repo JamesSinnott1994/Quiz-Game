@@ -41,12 +41,11 @@ As a **site owner**, I want:
 
 ### Strategy
 - Project goals:
-    - The goal of "The Saw Doctors" website is to provide a clean, intuitive site that will allow visitors to find out more about the band, listen to some of their music, purchase the band's music/merchandise, and allow visitors to contact or book the band.
-    - The Saw Doctors website has two target audiences: fans and potential fans of the band.
+    - The goal of this Quiz application is to provide an enjoyable interactive game that will test a user's general knowledge or knowledge about a specific topic. The game should be easy to understand, simple to interact with and give feedback to the user on all inputs.
 - Focus:
-    - The main focus of the project is to create a website for the band so as to increase their online presence. This site will be the go-to place for fans and potential fans of the band to find out all they need to know about the band and their latest activities.
+    - The main focus of the project is to build a fun engaging interactive quiz game that will display many different and interesting questions generated from an external API.
 - Definition:
-    - We are creating a custom built unique website for the band that will be intuitive and responsive on different devices.
+    - We are creating an interactive Quiz application that will be playable on multiple devices.
 - Value:
-    - The value for the band in having this site is that it will help drive traffic towards the band’s social media accounts, will increase sales through purchasing of the band’s music/merchandise, and will get more work for the band through online bookings.
-    - The value for fans and potential fans is that the site will help them to achieve their goals of finding out the latest news involving the band, learning more about the band’s history, and purchasing the band’s music/merchandise.
+    - The value this project will provide, is that it will showcase to future employers my ability to use JavaScript to add interactivity to a web application, as well as my ability to retrieve data from an API.
+    - The value for users of the application is that it will provide a fun engaging user experience.
