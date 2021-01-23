@@ -4,8 +4,10 @@ The purpose of this website is to create a fun interactive general knowledge qui
 
 ## Table of Contents
 - [User Experience (UX)](#user-experience-(ux))
-    - [User Stories](#user-stories)
     - [Strategy](#strategy)
+        - [User Stories](#user-stories)
+        - [Project Goal](#project-goal)
+        - [Strategy Tradeoffs](#strategy-tradeoffs)
     - [Scope](#scope)
     - [Structure](#structure)
     - [Skeleton](#skeleton)
@@ -18,7 +20,9 @@ The purpose of this website is to create a fun interactive general knowledge qui
 ---
 ## User Experience (UX)
 
-### User Stories
+### Strategy
+
+#### User Stories
 As a **first-time player**, I want:
 1. To see a visually appealing game.
 2. To easily understand how the game works.
@@ -39,8 +43,8 @@ As a **site owner**, I want:
 4. To create a game that is available on different devices.
 5. To create a game that makes users want to play it again.
 
-### Strategy
-- Project goals:
+#### Project Goal
+- Project goal:
     - The goal of this Quiz application is to provide an enjoyable interactive game that will test a user's general knowledge or knowledge about a specific topic. The game should be easy to understand, simple to interact with and give feedback to the user on all inputs.
 - Focus:
     - The main focus of the project is to build a fun engaging interactive quiz game that will display many different and interesting questions generated from an external API.
@@ -49,3 +53,19 @@ As a **site owner**, I want:
 - Value:
     - The value this project will provide, is that it will showcase to future employers my ability to use JavaScript to add interactivity to a web application, as well as my ability to retrieve data from an API.
     - The value for users of the application is that it will provide a fun engaging user experience.
+
+#### Strategy Tradeoffs
+
+Opportunity/Problem | Importance (1-5) | Viability/Feasibility (1-5)
+:-------- |:--------:|:--------:
+Display Timer | 2 | 3
+Score Tracker | 4 | 5
+Display Questions | 5 | 5
+Present Answers | 5 | 5
+Validation of Answers | 5 | 5
+Display questions based on difficulty | 4 | 5
+Display questions based on topic | 3 | 5
+Sounds / Music | 1 | 4
+New Game / Exit Game | 5 | 5
+Game Instructions | 3 | 5
+End of Game information | 4 | 5
