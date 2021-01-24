@@ -62,10 +62,46 @@ Display Timer | 2 | 3
 Score Tracker | 4 | 5
 Display Questions | 5 | 5
 Present Answers | 5 | 5
-Validation of Answers | 5 | 5
 Display questions based on difficulty | 4 | 5
 Display questions based on topic | 3 | 5
 Sounds / Music | 1 | 4
 New Game / Exit Game | 5 | 5
 Game Instructions | 3 | 5
 End of Game information | 4 | 5
+Give hints | 2 | 4
+
+### Scope
+- Main features (For Minimal Viable Product)
+    - Display area for the questions generated from the Open Trivia API.
+    - Answer presentation area, which will appear after the user submits his answer.
+    - The ability to start a New game, or exit the current game.
+    - End of game information will be given to the user.
+    - Built using best practices of semantic HTML and accessibility.
+    - Be fully responsive for mobile use.
+
+- Secondary / Future Features:
+    - Timer that displays how long the game has been on-going OR countdown to answer a question.
+    - Display score that player has achieved after answering questions correctly.
+    - Ability to select questions based on a particular topic.
+    - Ability to select questions based on a particular difficulty.
+    - Background music and sounds for the game.
+    - There will be a game instructions page OR modal window on how to play the game.
+    - Hint feature, which will subtract user points in order to reduce the possible correct answers from 4 to 2.
+
+### Structure
+The website will be broken down into three areas in order to achieve the project goals and meet the user stories:
+1. Home Page:
+- The Homepage will showcase the logo for the game. The page will display two buttons, a "Play" button and an "Instructions" button.
+- "Play" button will take the user to the Game Page.
+- "Instructions" button will take the user to the Instructions.
+2. Instructions Page:
+- Will give instructions on how to play the game. 
+- Will include a button to return to the Home page.
+3. Game Page:
+- There will be a header / navbar which will display certain information about the user and game i.e. Game Logo, Questions remaining, User Score etc.
+- Will display a randomly generated question for the user.
+- Underneath each question will be four boxes of each of the possible correct answers.
+- User will be given visual feedback on which answer they got correct or wrong.
+- When the game is finished, the user will be presented with their stats. This may be a modal popup window. This modal window will include buttons to start a new game or to exit the game.
+    - New Game button will generate a new set of quiz questions.
+    - Exit Game button will return the user to the Home Page.
