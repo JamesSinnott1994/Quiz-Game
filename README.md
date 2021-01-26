@@ -105,3 +105,17 @@ The website will be broken down into three areas in order to achieve the project
 - When the game is finished, the user will be presented with their stats. This may be a modal popup window. This modal window will include buttons to start a new game or to exit the game.
     - New Game button will generate a new set of quiz questions.
     - Exit Game button will return the user to the Home Page.
+
+### Skeleton
+1. Home Page Wireframe:
+    - [Mobile](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/home/home-mobile.png)
+    - [Tablet](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/home/home-tablet.png)
+    - [Desktop](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/home/home-desktop.png)
+2. Instructions Page Wireframe:
+    - [Mobile](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/instructions/instructions-mobile.png)
+    - [Tablet](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/instructions/instructions-tablet.png)
+    - [Desktop](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/instructions/instructions-desktop.png)
+3. Game Page Wireframe:
+    - [Mobile](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/game/game-mobile.pdf)
+    - [Tablet](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/game/game-tablet.pdf)
+    - [Desktop](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/game/game-desktop.pdf)
