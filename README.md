@@ -119,3 +119,29 @@ The website will be broken down into three areas in order to achieve the project
     - [Mobile](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/game/game-mobile.pdf)
     - [Tablet](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/game/game-tablet.pdf)
     - [Desktop](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/game/game-desktop.pdf)
+
+### Surface
+- Typography:
+    - Two fonts will be used in this application:
+        - The Calistoga font will be used for any headers.
+        - The Caladea font will be used for the text, questions, and answers.
+- Colour scheme:
+    - Background colour  ![#e6ece2](https://placehold.it/15/e6ece2/000000?text=+)<br>
+    - Text Colours  ![#2b2726](https://placehold.it/15/2b2726/000000?text=+) / ![#FFFFFF](https://placehold.it/15/FFFFFF/000000?text=+)<br>
+    - Ordinary button colour  ![#c0bdae](https://placehold.it/15/c0bdae/000000?text=+)<br>
+    - Correct answer colour  ![#63ba09](https://placehold.it/15/63ba09/000000?text=+)<br>
+    - Wrong answer colour  ![#e35a47](https://placehold.it/15/e35a47/000000?text=+)<br>
+    - Star Colour  ![#ffe785](https://placehold.it/15/ffe785/000000?text=+)<br>
+
+- Media:
+    - I will use a Logo image for the Home page
+    - I will use images for the various quiz topics.
+    - I may use some low fidelity background music.
+    - I may use a sound for getting the correct answer.
+    - I may use a sound for getting the wrong answer.
+
+- Effects:
+    - There will be a transition animation for buttons sliding into place.
+    - There will be fading animations for buttons fading out of sight.
+    - There will be hover effects for the various buttons.
+    - There will be shadow effects for the various buttons.
