@@ -12,6 +12,10 @@ The purpose of this website is to create a fun interactive general knowledge qui
     - [Structure](#structure)
     - [Skeleton](#skeleton)
     - [Surface](#surface)
+        - [Typography](#typography)
+        - [Colour Scheme](#colour-scheme)
+        - [Media](#media)
+        - [Effects](#effects)
 - [Technologies](#technologies)
 - [Testing](#testing)
 - [Deployment](#deployment)
@@ -29,7 +33,7 @@ As a **first-time player**, I want:
 3. To be able to pick a quiz topic.
 4. To be given feedback on my answers.
 5. To be rewarded when I get the right answer.
-6. To be able to track my score.
+6. To be able to see my score.
 
 As a **returning player**, I want:
 1.	To skip any instructions and jump straight into a new game.
@@ -47,7 +51,7 @@ As a **site owner**, I want:
 - Project goal:
     - The goal of this Quiz application is to provide an enjoyable interactive game that will test a user's general knowledge or knowledge about a specific topic. The game should be easy to understand, simple to interact with and give feedback to the user on all inputs.
 - Focus:
-    - The main focus of the project is to build a fun engaging interactive quiz game that will display many different and interesting questions generated from an external API.
+    - The main focus of the project is to build a fun engaging interactive quiz game that will display many different and interesting questions generated from the Open Trivia Database API.
 - Definition:
     - We are creating an interactive Quiz application that will be playable on multiple devices.
 - Value:
@@ -59,7 +63,7 @@ As a **site owner**, I want:
 Opportunity/Problem | Importance (1-5) | Viability/Feasibility (1-5)
 :-------- |:--------:|:--------:
 Display Timer | 2 | 3
-Score Tracker | 4 | 5
+Display Score | 4 | 5
 Display Questions | 5 | 5
 Present Answers | 5 | 5
 Display questions based on difficulty | 4 | 5
@@ -73,7 +77,8 @@ Give hints | 2 | 4
 ### Scope
 - Main features (For Minimal Viable Product)
     - Display area for the questions generated from the Open Trivia API.
-    - Answer presentation area, which will appear after the user submits his answer.
+    - Visual feedback for when a user selects an answer.
+    - Display score that player has achieved after answering questions correctly.
     - The ability to start a New game, or exit the current game.
     - End of game information will be given to the user.
     - Built using best practices of semantic HTML and accessibility.
@@ -81,7 +86,6 @@ Give hints | 2 | 4
 
 - Secondary / Future Features:
     - Timer that displays how long the game has been on-going OR countdown to answer a question.
-    - Display score that player has achieved after answering questions correctly.
     - Ability to select questions based on a particular topic.
     - Ability to select questions based on a particular difficulty.
     - Background music and sounds for the game.
@@ -91,57 +95,59 @@ Give hints | 2 | 4
 ### Structure
 The website will be broken down into three areas in order to achieve the project goals and meet the user stories:
 1. Home Page:
-- The Homepage will showcase the logo for the game. The page will display two buttons, a "Play" button and an "Instructions" button.
+- The Home page will showcase the logo for the game. The page will display two buttons, a "Play" button and an "Instructions" button.
 - "Play" button will take the user to the Game Page.
 - "Instructions" button will take the user to the Instructions.
 2. Instructions Page:
 - Will give instructions on how to play the game. 
 - Will include a button to return to the Home page.
 3. Game Page:
+- There will be two screens that allow a user to choose the topic and difficulty of questions.
 - There will be a header / navbar which will display certain information about the user and game i.e. Game Logo, Questions remaining, User Score etc.
 - Will display a randomly generated question for the user.
-- Underneath each question will be four boxes of each of the possible correct answers.
+- Underneath each question will be four boxes with each of the possible correct answers.
 - User will be given visual feedback on which answer they got correct or wrong.
-- When the game is finished, the user will be presented with their stats. This may be a modal popup window. This modal window will include buttons to start a new game or to exit the game.
+- When the game is finished, the user will be presented with their stats. Underneath the stats there will be buttons to start a new game or to exit the game.
     - New Game button will generate a new set of quiz questions.
     - Exit Game button will return the user to the Home Page.
 
 ### Skeleton
 1. Home Page Wireframe:
-    - [Mobile](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/home/home-mobile.png)
-    - [Tablet](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/home/home-tablet.png)
-    - [Desktop](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/home/home-desktop.png)
+    - [Mobile](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/home/home-mobile.pdf)
+    - [Tablet](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/home/home-tablet.pdf)
+    - [Desktop](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/home/home-desktop.pdf)
 2. Instructions Page Wireframe:
-    - [Mobile](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/instructions/instructions-mobile.png)
-    - [Tablet](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/instructions/instructions-tablet.png)
-    - [Desktop](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/instructions/instructions-desktop.png)
+    - [Mobile](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/instructions/instructions-mobile.pdf)
+    - [Tablet](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/instructions/instructions-tablet.pdf)
+    - [Desktop](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/instructions/instructions-desktop.pdf)
 3. Game Page Wireframe:
     - [Mobile](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/game/game-mobile.pdf)
     - [Tablet](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/game/game-tablet.pdf)
     - [Desktop](https://github.com/JamesSinnott1994/Quiz-Game/blob/master/wireframes/game/game-desktop.pdf)
 
 ### Surface
-- Typography:
-    - Two fonts will be used in this application:
-        - The Calistoga font will be used for any headers.
-        - The Caladea font will be used for the text, questions, and answers.
-- Colour scheme:
-    - Background colour  ![#e6ece2](https://placehold.it/15/e6ece2/000000?text=+)<br>
-    - Text Colours  ![#2b2726](https://placehold.it/15/2b2726/000000?text=+) / ![#FFFFFF](https://placehold.it/15/FFFFFF/000000?text=+)<br>
-    - Ordinary button colour  ![#c0bdae](https://placehold.it/15/c0bdae/000000?text=+)<br>
-    - Correct answer colour  ![#63ba09](https://placehold.it/15/63ba09/000000?text=+)<br>
-    - Wrong answer colour  ![#e35a47](https://placehold.it/15/e35a47/000000?text=+)<br>
-    - Star Colour  ![#ffe785](https://placehold.it/15/ffe785/000000?text=+)<br>
 
-- Media:
-    - I will use a Logo image for the Home page
-    - I will use images for the various quiz topics.
-    - I may use some low fidelity background music.
-    - I may use a sound for getting the correct answer.
-    - I may use a sound for getting the wrong answer.
+#### Typography
+- Two fonts will be used in this application:
+    - The Calistoga font will be used for any headers.
+    - The Caladea font will be used for the text, questions, and answers.
 
-- Effects:
-    - There will be a transition animation for buttons sliding into place.
-    - There will be fading animations for buttons fading out of sight.
-    - There will be hover effects for the various buttons.
-    - There will be shadow effects for the various buttons.
+#### Colour scheme
+- Background colour  ![#e6ece2](https://placehold.it/15/e6ece2/000000?text=+)<br>
+- Ordinary button colour  ![#c0bdae](https://placehold.it/15/c0bdae/000000?text=+)<br>
+- Correct answer colour  ![#63ba09](https://placehold.it/15/63ba09/000000?text=+)<br>
+- Wrong answer colour  ![#e35a47](https://placehold.it/15/e35a47/000000?text=+)<br>
+- Star Colour  ![#ffe785](https://placehold.it/15/ffe785/000000?text=+)<br>
+
+#### Media
+- I will use a Logo image for the Home page
+- I will use images for the various quiz topics.
+- I may use some low fidelity background music.
+- I may use a sound for getting the correct answer.
+- I may use a sound for getting the wrong answer.
+
+#### Effects
+- There will be a transition animation for buttons sliding into place.
+- There will be fading animations for buttons fading out of sight.
+- There will be hover effects for the various buttons.
+- There will be shadow effects for the various buttons.
