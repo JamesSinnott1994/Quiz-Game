@@ -1,8 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caladea:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 body {
     background-color: #e6ece2;
 }
 
-/* Home Page */
+h1 {
+    font-family: "Calistoga", sans-serif;
+}
+
+p {
+    font-family: "Caladea", sans-serif;
+    font-size: 1.25em;
+    font-weight: bold;
+    line-height: 2em;
+    margin-bottom: 2em;
+}
+
+/*--------------------------------------------HOME PAGE*/
 
 #logo {
     height: 50vh;
@@ -11,6 +26,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#logo h1 {
+    font-size: 3em;
 }
 
 #menu {
@@ -22,6 +41,7 @@ body {
     background-color: #03C03C; 
     color: white;
     text-decoration: none;
+    font-family: "Caladea", sans-serif;
     border-radius: 8px;
     width: 60%;
     height: 80px;
@@ -38,7 +58,36 @@ body {
     justify-content: center;
 }
 
-/* Bootstrap Breakpoints */
+/*--------------------------------------------INSTRUCTIONS PAGE*/
+
+#instructions-header {
+    margin-top: 2em;
+    text-align: center;
+}
+
+#instructions-text {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#instructions-button {
+    /* https://cssgradient.io/shades-of-green/ */
+    background-color: #03C03C; 
+    color: white;
+    text-decoration: none;
+    font-family: "Caladea", sans-serif;
+    border-radius: 8px;
+    width: 60%;
+    height: 80px;
+    font-size: 1.5em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
 
 /* // X-Small devices (portrait phones, less than 576px) */
 /* // No media query for `xs` since this is the default in Bootstrap */
@@ -56,12 +105,25 @@ body {
         font-size: 2em;
         font-weight: 600;
     }
+    #instructions-button {
+        width: 50%;
+        height: 120px;
+        font-size: 2em;
+        font-weight: 600;
+    }
+    #logo h1 {
+        font-size: 6em;
+    }
 }
 
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     .button {
         font-size: 2.5em;
+    }
+    #instructions-button {
+        font-size: 2.5em;
+        width: 20%;
     }
 }
 
