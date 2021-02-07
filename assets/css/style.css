@@ -3,6 +3,13 @@
 
 body {
     background-color: #e6ece2;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+header {
+	text-align: center;
 }
 
 h1 {
@@ -21,7 +28,6 @@ p {
 
 #logo {
     height: 50vh;
-    text-align: center;
 
     display: flex;
     align-items: center;
@@ -36,8 +42,15 @@ p {
     height: 50vh;
 }
 
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .button {
     /* https://cssgradient.io/shades-of-green/ */
+    /*background-color: #03C03C; */
     color: white;
     text-decoration: none;
     font-family: "Caladea", sans-serif;
@@ -46,12 +59,6 @@ p {
     height: 80px;
     font-size: 1.5em;
     font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.button-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -86,6 +93,30 @@ p {
     justify-content: center;
 }
 
+/*--------------------------------------------GAME PAGE*/
+
+#topic-header {
+	height: 5vh;
+}
+
+#topic-section {
+	min-height: 90vh;
+}
+
+.topic-btn {
+	color: white;
+    text-decoration: none;
+    font-family: "Caladea", sans-serif;
+    border-radius: 8px;
+    width: 60%;
+    height: 80px;
+    font-size: 1.5em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
 
 /* // X-Small devices (portrait phones, less than 576px) */
@@ -100,6 +131,12 @@ p {
 @media (min-width: 768px) {
     .button {
         width: 50%;
+        height: 120px;
+        font-size: 2em;
+        font-weight: 600;
+    }
+    .topic-btn {
+    	width: 65%;
         height: 120px;
         font-size: 2em;
         font-weight: 600;
