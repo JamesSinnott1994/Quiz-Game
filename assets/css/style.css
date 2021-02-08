@@ -103,6 +103,19 @@ p {
 	min-height: 90vh;
 }
 
+#difficulty-header {
+    height: 5vh;
+    display: none;
+}
+
+#difficulty-section {
+	min-height: 90vh;
+}
+
+#difficulty-screen {
+    display: none;
+}
+
 .screen-btn {
 	color: white;
     text-decoration: none;
