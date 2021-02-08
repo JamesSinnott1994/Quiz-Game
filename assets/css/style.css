@@ -103,7 +103,7 @@ p {
 	min-height: 90vh;
 }
 
-.topic-btn {
+.screen-btn {
 	color: white;
     text-decoration: none;
     font-family: "Caladea", sans-serif;
@@ -135,7 +135,7 @@ p {
         font-size: 2em;
         font-weight: 600;
     }
-    .topic-btn {
+    .screen-btn {
     	width: 65%;
         height: 120px;
         font-size: 2em;
@@ -160,6 +160,9 @@ p {
     #instructions-button {
         font-size: 2.5em;
         width: 20%;
+    }
+    .screen-btn {
+    	width: 300px;
     }
 }
 
