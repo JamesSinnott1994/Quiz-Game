@@ -45,7 +45,7 @@ $(document).ready(function() {
     });
 
     // RETRIEVE QUESTIONS FROM API
-    function getAPIData(callback) { // "callback" = "printDataToConsole"
+    function getAPIData(callback) { // "callback" = "filterAPIData"
         var xhr = new XMLHttpRequest();
 
         if (difficulty != "random") {
@@ -68,10 +68,15 @@ $(document).ready(function() {
             filteredQuestions.push(data["results"][i]);
         }
         console.log(filteredQuestions);
+
+        // Once data is filtered display the question
+        displayQuestion();
     }
 
-    
-    // GAME SCREEN
+    // DISPLAY QUESTION
+    function displayQuestion() {
+        $("#question").html(filteredQuestions[0]["question"]);
+    }
 
     console.log("DOWN LOW");
 
