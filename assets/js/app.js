@@ -3,8 +3,10 @@ $(document).ready(function() {
     console.log("UP HIGH");
 
     // Variable declarations
-    let topic = "";
-    let difficulty = "";
+    let topic;
+    let difficulty;
+    let filteredQuestions = [];
+    const amountOfQuestions = 10;
 
     // TOPIC SCREEN
     // Binds a click event to each button on the Topic screen
@@ -38,7 +40,7 @@ $(document).ready(function() {
              $("#difficulty-header").hide();
 
              // Call function to retrieve API Data
-             getAPIData(printDataToConsole);
+             getAPIData(filterAPIData);
         });
     });
 
@@ -47,9 +49,9 @@ $(document).ready(function() {
         var xhr = new XMLHttpRequest();
 
         if (difficulty != "random") {
-            xhr.open("GET", `https://opentdb.com/api.php?amount=100&category=${topic}&difficulty=${difficulty}`);
+            xhr.open("GET", `https://opentdb.com/api.php?amount=100&category=${topic}&difficulty=${difficulty}&type=multiple`);
         } else {
-            xhr.open("GET", `https://opentdb.com/api.php?amount=100&category=${topic}`);
+            xhr.open("GET", `https://opentdb.com/api.php?amount=100&category=${topic}&type=multiple`);
         }
         xhr.send();
 
@@ -60,9 +62,14 @@ $(document).ready(function() {
         };
     }
 
-    function printDataToConsole(data) {
-        console.log(data);
+    // FILTER DATA
+    function filterAPIData(data) {
+        for (let i = 0; i < amountOfQuestions; i++) {
+            filteredQuestions.push(data["results"][i]);
+        }
+        console.log(filteredQuestions);
     }
+
     
     // GAME SCREEN
 
