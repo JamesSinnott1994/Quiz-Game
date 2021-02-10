@@ -130,6 +130,26 @@ p {
     justify-content: center;
 }
 
+#nav-item-container {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+#nav-item-container li {
+    margin-right: 1rem;
+}
+
+#game-header {
+    display: none;
+}
+
+#game-screen {
+    display: none;
+}
+
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
 
 /* // X-Small devices (portrait phones, less than 576px) */
@@ -162,6 +182,12 @@ p {
     }
     #logo h1 {
         font-size: 6em;
+    }
+    #game-header {
+        font-size: 2em;
+    }
+    .navbar-brand {
+        font-size: 1.25em;
     }
 }
 

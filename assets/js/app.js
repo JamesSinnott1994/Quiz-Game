@@ -37,10 +37,13 @@ $(document).ready(function() {
 
             // Hide Difficulty screen
             $("#difficulty-screen").hide();
-             $("#difficulty-header").hide();
+            $("#difficulty-header").hide();
 
-             // Call function to retrieve API Data
-             getAPIData(filterAPIData);
+            // Show Game screen
+            $("#game-screen").show();
+            $("#game-header").css('display', 'flex');
+            // Call function to retrieve API Data
+            // getAPIData(filterAPIData);
         });
     });
 
