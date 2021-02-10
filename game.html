@@ -13,11 +13,11 @@
 
 <body>
 
-    <header class="my-5">
-        <h1 id="topic-header">Choose a Topic</h1>
-        <h1 id="difficulty-header">Choose a Difficulty</h1>
+    <header>
+        <h1 id="topic-header" class="my-5">Choose a Topic</h1>
+        <h1 id="difficulty-header" class="my-5">Choose a Difficulty</h1>
 
-        <nav id="game-header" class="navbar navbar-light bg-light fixed-top">
+        <nav id="game-header" class="navbar navbar-light bg-light">
 
             <a class="navbar-brand ml-2" href="#">Navbar</a>
 
@@ -111,9 +111,37 @@
     </main>
 
     <main id="game-screen">
+
         <section id="img-container" class="mb-4">
     		<img id="img" src="assets/img/general-knowledge.jpg" alt="Topic Image">
     	</section>
+
+    	<section id="game-area">
+
+    		<h2 id="question" class="mb-4 mb-lg-2">Who was the founder of Rome?</h2>
+
+    		<section id="answer-btn-container" class="row m-0">
+    			<!-- Columns start at 100% wide on mobile -->
+	            <!-- 50% wide on tablet & desktop  -->
+	            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
+	                <button id="answer-one" class="answer-btn">Julius Caesar</button>
+	            </div>
+
+	            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
+	                <button id="answer-two" class="answer-btn">Caligula</button>
+	            </div>
+
+	            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
+	                <button id="answer-three" class="answer-btn">Romulus</button>
+	            </div>
+
+	            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
+	                <button id="answer-four" class="answer-btn">Remus</button>
+	            </div>
+    		</section>
+
+    	</section>
+
     </main>
 
     <footer></footer>
