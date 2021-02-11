@@ -201,6 +201,7 @@ p {
 #continue-btn {
     color: white;
     background-color: #444444;
+    opacity: 0.5;
     text-decoration: none;
     font-family: "Caladea", sans-serif;
     border-radius: 8px;

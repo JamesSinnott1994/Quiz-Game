@@ -6,7 +6,10 @@ $(document).ready(function() {
     let topic;
     let difficulty;
     let filteredQuestions = [];
-    const amountOfQuestions = 10;
+    const amountOfQuestions = 2;
+    let question;
+    let correctAnswer;
+    let incorrectAnswers;
 
     // TOPIC SCREEN
     // Binds a click event to each button on the Topic screen
@@ -43,7 +46,45 @@ $(document).ready(function() {
             $("#game-screen").show();
             $("#game-header").css('display', 'flex');
             // Call function to retrieve API Data
-            // getAPIData(filterAPIData);
+            getAPIData(filterAPIData);
+        });
+    });
+
+    // GAME SCREEN
+    // Binds a click event to each button on the Game screen
+    $("#answer-btn-container button").each(function() {
+        $(this).bind('click', function() {
+
+            let answer = $(this).html();
+
+            if (answer == correctAnswer) {
+                alert("CORRECT ANSWER!");
+                // Display animation
+                $(this).css('background-color', 'green');
+                $("#continue-btn").css('opacity', '1');
+            } else {
+                alert("WRONG ANSWER.")
+                // Display animation
+                $(this).css('background-color', 'red');
+                $(".correct-answer").css('background-color', 'green');
+                $("#continue-btn").css('opacity', '1');
+            }
+        });
+    });
+
+    //Binds click event listener to Continue button
+    $("#continue-btn").each(function() {
+        $(this).bind('click', function() {
+            // Display next question
+            if (filteredQuestions.length > 1) {
+                $("#answer-btn-container button").css('background-color', '#c0bdae');
+                $("#answer-btn-container button").removeClass('correct-answer');
+                filteredQuestions.shift();
+                displayQuestion();
+            } else {
+                alert("NO MORE QUESTIONS");
+                // Game Over!
+            }
         });
     });
 
@@ -80,10 +121,11 @@ $(document).ready(function() {
     function displayQuestion() {
 
     	// $("#question").html(filteredQuestions[0]["question"]);
-
-        let question = filteredQuestions[0]["question"];
-        let correctAnswer = filteredQuestions[0]["correct_answer"]
-        let incorrectAnswers = filteredQuestions[0]["incorrect_answers"];
+        console.log(filteredQuestions[0]);
+        question = filteredQuestions[0]["question"];
+        correctAnswer = filteredQuestions[0]["correct_answer"]
+        incorrectAnswers = filteredQuestions[0]["incorrect_answers"];
+        console.log(correctAnswer);
 
         // Generate a random number between 1 and 4 so that the correct answer
         // is randomly placed
