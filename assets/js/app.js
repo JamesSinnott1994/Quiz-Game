@@ -6,10 +6,12 @@ $(document).ready(function() {
     let topic;
     let difficulty;
     let filteredQuestions = [];
+    let questionsAnswered = 0;
     const amountOfQuestions = 2;
     let question;
     let correctAnswer;
     let incorrectAnswers;
+    let score = 0;
 
     // TOPIC SCREEN
     // Binds a click event to each button on the Topic screen
@@ -51,6 +53,8 @@ $(document).ready(function() {
     });
 
     // GAME SCREEN
+    $("#questions-amount").html(amountOfQuestions);
+
     // Binds a click event to each button on the Game screen
     $("#answer-btn-container button").each(function() {
         $(this).bind('click', function() {
@@ -62,9 +66,15 @@ $(document).ready(function() {
                 // Display animation
                 $(this).css('background-color', 'green');
                 $("#continue-btn").css('opacity', '1');
+                score += 5;
+                questionsAnswered += 1;
+                $("#score").html(score);
+                $("#questions-answered").html(questionsAnswered);
             } else {
                 alert("WRONG ANSWER.")
                 // Display animation
+                questionsAnswered += 1;
+                $("#questions-answered").html(questionsAnswered);
                 $(this).css('background-color', 'red');
                 $(".correct-answer").css('background-color', 'green');
                 $("#continue-btn").css('opacity', '1');
