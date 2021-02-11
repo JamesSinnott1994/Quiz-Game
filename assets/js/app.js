@@ -43,7 +43,7 @@ $(document).ready(function() {
             $("#game-screen").show();
             $("#game-header").css('display', 'flex');
             // Call function to retrieve API Data
-            // getAPIData(filterAPIData);
+            getAPIData(filterAPIData);
         });
     });
 
@@ -78,7 +78,36 @@ $(document).ready(function() {
 
     // DISPLAY QUESTION
     function displayQuestion() {
-        $("#question").html(filteredQuestions[0]["question"]);
+
+    	// $("#question").html(filteredQuestions[0]["question"]);
+
+        let question = filteredQuestions[0]["question"];
+        let correctAnswer = filteredQuestions[0]["correct_answer"]
+        let incorrectAnswers = filteredQuestions[0]["incorrect_answers"];
+
+        // Generate a random number between 1 and 4 so that the correct answer
+        // is randomly placed
+        let randomNumber = 1 + Math.floor(Math.random() * 4);
+
+        $("#question").html(question);
+
+        console.log(randomNumber);
+        $(`#answer-${randomNumber}`).html(correctAnswer);
+        $(`#answer-${randomNumber}`).addClass("correct-answer");
+
+        // incorrectAnswers.forEach( function(item, index) {
+
+        // });
+
+        for (let i = 0; i < 4; i++) {
+        	if ( $(`#answer-${i+1}`).hasClass("correct-answer") ) {
+        		continue;
+        	} else {
+        		$(`#answer-${i+1}`).html(incorrectAnswers[0]);
+        		incorrectAnswers.shift();
+        	}
+        }
+
     }
 
     console.log("DOWN LOW");
