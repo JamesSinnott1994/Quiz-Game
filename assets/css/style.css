@@ -192,6 +192,27 @@ p {
     justify-content: center;
 }
 
+#continue-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#continue-btn {
+    color: white;
+    background-color: #444444;
+    text-decoration: none;
+    font-family: "Caladea", sans-serif;
+    border-radius: 8px;
+    width: 50%;
+    height: 45px;
+    font-size: 1.5em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
 
 /* // X-Small devices (portrait phones, less than 576px) */
@@ -240,6 +261,11 @@ p {
     .answer-btn {
         width: 90%;
         height: 100px;
+        font-size: 2em;
+    }
+    #continue-btn {
+        width: 40%;
+        height: 70px;
         font-size: 2em;
     }
 }

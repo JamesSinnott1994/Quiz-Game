@@ -15,7 +15,7 @@ $(document).ready(function() {
 
             // Assign topic to button that was clicked on
             topic = $(this).val();
-            alert(`User clicked on ${topic}`);
+            // alert(`User clicked on ${topic}`);
             // Hide Topic screen
             $("#topic-screen").hide();
              $("#topic-header").hide();
@@ -33,7 +33,7 @@ $(document).ready(function() {
 
             // Assign topic to button that was clicked on
             difficulty = $(this).html().toLowerCase();
-            alert(`User clicked on ${difficulty}`);
+            // alert(`User clicked on ${difficulty}`);
 
             // Hide Difficulty screen
             $("#difficulty-screen").hide();
@@ -43,7 +43,7 @@ $(document).ready(function() {
             $("#game-screen").show();
             $("#game-header").css('display', 'flex');
             // Call function to retrieve API Data
-            getAPIData(filterAPIData);
+            // getAPIData(filterAPIData);
         });
     });
 
