@@ -86,22 +86,19 @@ $(document).ready(function() {
     });
 
     //Binds click event listener to Continue button
-    $("#continue-btn").each(function() {
-        $(this).bind('click', function() {
-
-            // Display next question
-            if (filteredQuestions.length > 1) {
-                $("#answer-btn-container button").css('background-color', '#c0bdae');
-                $("#answer-btn-container button").removeClass('correct-answer');
-                filteredQuestions.shift();
-                displayQuestion();
-                disableContinueBtn();
-            } else {
-                disableContinueBtn();
-                alert("NO MORE QUESTIONS");
-                // Game Over!
-            }
-        });
+    $("#continue-btn").bind('click', function() {
+        // Display next question
+        if (filteredQuestions.length > 1) {
+            $("#answer-btn-container button").css('background-color', '#c0bdae');
+            $("#answer-btn-container button").removeClass('correct-answer');
+            filteredQuestions.shift();
+            displayQuestion();
+            disableContinueBtn();
+        } else {
+            disableContinueBtn();
+            alert("NO MORE QUESTIONS");
+            // Game Over!
+        }
     });
 
     // RETRIEVE QUESTIONS FROM API
