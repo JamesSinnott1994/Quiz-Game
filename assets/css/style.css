@@ -146,6 +146,17 @@ p {
     margin-right: 1rem;
 }
 
+#error-response-section {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    display: none;
+}
+
+#error-response {
+    color: red;;
+}
+
 #game-header {
     display: none;
 }

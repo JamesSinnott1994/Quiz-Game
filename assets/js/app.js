@@ -20,7 +20,7 @@ $(document).ready(function() {
 
             // Assign topic to button that was clicked on
             topic = $(this).val();
-            // alert(`User clicked on ${topic}`);
+            alert(`User clicked on ${topic}`);
             // Hide Topic screen
             $("#topic-screen").hide();
              $("#topic-header").hide();
@@ -38,15 +38,8 @@ $(document).ready(function() {
 
             // Assign topic to button that was clicked on
             difficulty = $(this).html().toLowerCase();
-            // alert(`User clicked on ${difficulty}`);
+            alert(`User clicked on ${difficulty}`);
 
-            // Hide Difficulty screen
-            $("#difficulty-screen").hide();
-            $("#difficulty-header").hide();
-
-            // Show Game screen
-            $("#game-screen").show();
-            $("#game-header").css('display', 'flex');
             // Call function to retrieve API Data
             getAPIData(filterAPIData);
         });
@@ -85,7 +78,7 @@ $(document).ready(function() {
         });
     });
 
-    //Binds click event listener to Continue button
+    // Binds click event listener to Continue button
     $("#continue-btn").bind('click', function() {
         // Display next question
         if (filteredQuestions.length > 1) {
@@ -121,17 +114,33 @@ $(document).ready(function() {
 
     // FILTER DATA
     function filterAPIData(data) {
-        for (let i = 0; i < amountOfQuestions; i++) {
-            filteredQuestions.push(data["results"][i]);
-        }
-        console.log(filteredQuestions);
 
-        // Once data is filtered display the question
-        displayQuestion();
+        // Checks for any error from the response code of the API data
+        let anyErrors = checkForErrors(data["response_code"]);
+
+        if (!anyErrors) {
+            console.log(data);
+            for (let i = 0; i < amountOfQuestions; i++) {
+                filteredQuestions.push(data["results"][i]);
+            }
+            console.log(filteredQuestions);
+
+            // Once data is filtered display the question
+            displayQuestion();
+        }
+
     }
 
     // DISPLAY QUESTION
     function displayQuestion() {
+
+        // Hide Difficulty screen
+        $("#difficulty-screen").hide();
+        $("#difficulty-header").hide();
+
+        // Show Game screen
+        $("#game-screen").show();
+        $("#game-header").css('display', 'flex');
 
     	// $("#question").html(filteredQuestions[0]["question"]);
         console.log(filteredQuestions[0]);
@@ -177,4 +186,41 @@ function enableContinueBtn() {
 function disableContinueBtn() {
     $("#continue-btn").css('opacity', '0.5');
     $("#continue-btn").attr("disabled", true);
+}
+
+function checkForErrors(responseCode) {
+    /*
+    Will return a boolean value:
+        - true, if errors exist
+        - false, if no errors exist
+    */
+    if (responseCode == 0) {
+        console.log("Code 0: SUCCESS. Returned results successfully.");
+        return false;
+    } else if (responseCode == 1) {
+        console.log("Code 1: NO RESULTS. Could not return results. The API doesn't have enough questions for your query. (Ex. Asking for 50 Questions in a Category that only has 20.)");
+        $("#error-response").html("No results from that particular category");
+        $("#error-response-section").show();
+        return true;
+    } else if (responseCode == 2) {
+        console.log("Code 2: INVALID PARAMETER. Contains an invalid parameter. Arguements passed in aren't valid. (Ex. Amount = Five)");
+        $("#error-response").html("2");
+        $("#error-response-section").show();
+        return true;
+    } else if (responseCode == 3) {
+        console.log("Code 3: TOKEN NOT FOUND. Session Token does not exist.");
+        $("#error-response").html("3");
+        $("#error-response-section").show();
+        return true;
+    } else if (responseCode == 4) {
+        console.log("Code 4: TOKEN EMPTY. Session Token has returned all possible questions for the specified query. Resetting the Token is necessary.");
+        $("#error-response").html("4");
+        $("#error-response-section").show();
+        return true;
+    } else {
+        console.log("UNKNOWAN ERROR");
+        $("#error-response").html("Unknowan Error");
+        $("#error-response-section").show();
+        return true;
+    }
 }
