@@ -65,7 +65,9 @@ $(document).ready(function() {
                 alert("CORRECT ANSWER!");
                 // Display animation
                 $(this).css('background-color', 'green');
-                $("#continue-btn").css('opacity', '1');
+
+                enableContinueBtn();
+
                 score += 5;
                 questionsAnswered += 1;
                 $("#score").html(score);
@@ -77,7 +79,8 @@ $(document).ready(function() {
                 $("#questions-answered").html(questionsAnswered);
                 $(this).css('background-color', 'red');
                 $(".correct-answer").css('background-color', 'green');
-                $("#continue-btn").css('opacity', '1');
+
+                enableContinueBtn();
             }
         });
     });
@@ -85,13 +88,16 @@ $(document).ready(function() {
     //Binds click event listener to Continue button
     $("#continue-btn").each(function() {
         $(this).bind('click', function() {
+
             // Display next question
             if (filteredQuestions.length > 1) {
                 $("#answer-btn-container button").css('background-color', '#c0bdae');
                 $("#answer-btn-container button").removeClass('correct-answer');
                 filteredQuestions.shift();
                 displayQuestion();
+                disableContinueBtn();
             } else {
+                disableContinueBtn();
                 alert("NO MORE QUESTIONS");
                 // Game Over!
             }
@@ -165,3 +171,13 @@ $(document).ready(function() {
     console.log("DOWN LOW");
 
 });
+
+function enableContinueBtn() {
+    $("#continue-btn").css('opacity', '1');
+    $("#continue-btn").attr("disabled", false);
+}
+
+function disableContinueBtn() {
+    $("#continue-btn").css('opacity', '0.5');
+    $("#continue-btn").attr("disabled", true);
+}
