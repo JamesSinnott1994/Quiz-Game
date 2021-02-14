@@ -13,6 +13,7 @@ $(document).ready(function() {
     let incorrectAnswers;
     let score = 0;
 
+    //localStorage.clear();
     console.log(localStorage);
 
     // USERNAME SCREEN
@@ -245,9 +246,11 @@ function addNameToStorage(username) {
     let noOfNames = localStorage.length;
 
     if (noOfNames == 0) {
-        localStorage.setItem(`user-${1}`, username);
+        localStorage.setItem(`user-${1}-name`, username);
+        localStorage.setItem(`user-${1}-score`, 0);
     } else {
-        localStorage.setItem(`user-${noOfNames+1}`, username);
+        localStorage.setItem(`user-${(noOfNames/2)+1}-name`, username);
+        localStorage.setItem(`user-${(noOfNames/2)+1}-score`, 0);
     }
 }
 
