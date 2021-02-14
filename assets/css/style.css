@@ -93,14 +93,51 @@ p {
     justify-content: center;
 }
 
+/*--------------------------------------------GAME PAGE - USERNAME SCREEN*/
+
+#username-header {
+    height: 5vh;
+    /*display: none;*/
+}
+
+#username-section {
+    min-height: 70vh;
+    width: 80%;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#username-screen {
+    /*display: none;*/
+}
+
+#username-error-section {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    display: none;
+}
+
+#username-error-response {
+    color: red;
+}
+
 /*--------------------------------------------GAME PAGE - TOPIC SCREEN*/
 
 #topic-header {
     height: 5vh;
+    display: none;
 }
 
 #topic-section {
 	min-height: 90vh;
+}
+
+#topic-screen {
+    display: none;
 }
 
 .screen-btn {
@@ -154,7 +191,7 @@ p {
 }
 
 #error-response {
-    color: red;;
+    color: red;
 }
 
 #game-header {
@@ -306,6 +343,9 @@ p {
         width: 80%;
         height: 80px;
         font-size: 2em;
+    }
+    #username-section {
+        width: 60%;
     }
 }
 

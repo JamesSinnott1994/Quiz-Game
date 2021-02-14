@@ -13,6 +13,57 @@ $(document).ready(function() {
     let incorrectAnswers;
     let score = 0;
 
+    // USERNAME SCREEN
+    // Click
+    $("#username-btn").bind('click', function() {
+
+        let username = $('#user-input').val()
+
+        if (username != '') {
+
+            localStorage.setItem("username", username);
+
+            // Hide Username screen
+            $("#username-screen").hide();
+            $("#username-header").hide();
+
+            // Display Topic screen
+            $("#topic-screen").show();
+            $("#topic-header").show();
+
+            console.log(localStorage);
+        } else {
+            $("#username-error-response").html("Please enter a username.");
+            $("#username-error-section").show();
+        }
+    });
+
+    // Key Press (If User clicks Enter)
+    $(document).keypress(function(e) {
+
+        let username = $('#user-input').val()
+
+        if (e.which == 13) {
+            if (username != '') {
+
+                localStorage.setItem("username", username);
+
+                // Hide Username screen
+                $("#username-screen").hide();
+                $("#username-header").hide();
+
+                // Display Topic screen
+                $("#topic-screen").show();
+                $("#topic-header").show();
+
+                console.log(localStorage);
+            } else {
+                $("#username-error-response").html("Please enter a username.");
+                $("#username-error-section").show();
+            }
+        }
+    });
+
     // TOPIC SCREEN
     // Binds a click event to each button on the Topic screen
     $("#topic-section button").each(function() {
