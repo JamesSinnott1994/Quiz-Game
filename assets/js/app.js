@@ -13,6 +13,8 @@ $(document).ready(function() {
     let incorrectAnswers;
     let score = 0;
 
+    console.log(localStorage);
+
     // USERNAME SCREEN
     // Click
     $("#username-btn").bind('click', function() {
@@ -21,7 +23,8 @@ $(document).ready(function() {
 
         if (username != '') {
 
-            localStorage.setItem("username", username);
+            // localStorage.setItem("username", username);
+            addNameToStorage(username);
 
             // Hide Username screen
             $("#username-screen").hide();
@@ -46,7 +49,8 @@ $(document).ready(function() {
         if (e.which == 13) {
             if (username != '') {
 
-                localStorage.setItem("username", username);
+                // localStorage.setItem("username", username);
+                addNameToStorage(username);
 
                 // Hide Username screen
                 $("#username-screen").hide();
@@ -228,6 +232,24 @@ $(document).ready(function() {
     console.log("DOWN LOW");
 
 });
+
+function addNameToStorage(username) {
+    /*
+    - This function helps us to store multiple names in the Storage Object.
+
+    - This will be used for displaying names in the leaderboard.
+
+    - This data is shared across different directories in the same domain, so when you refresh
+    the page all the names entered will be persisted in the Storage object.
+    */
+    let noOfNames = localStorage.length;
+
+    if (noOfNames == 0) {
+        localStorage.setItem(`user-${1}`, username);
+    } else {
+        localStorage.setItem(`user-${noOfNames+1}`, username);
+    }
+}
 
 function enableContinueBtn() {
     $("#continue-btn").css('opacity', '1');
