@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-    console.log("UP HIGH");
-
     // Variable declarations
     let topic;
     let difficulty;
@@ -13,6 +11,7 @@ $(document).ready(function() {
     let incorrectAnswers;
     let score = 0;
     let noOfCorrectAnswers = 0;
+    let currentUserID;
 
     //localStorage.clear();
     //console.log(localStorage);
@@ -27,6 +26,8 @@ $(document).ready(function() {
 
             // localStorage.setItem("username", username);
             addNameToStorage(username);
+
+            currentUserID = 
 
             // Hide Username screen
             $("#username-screen").hide();
@@ -149,6 +150,13 @@ $(document).ready(function() {
             disableContinueBtn();
         } else {
 
+            // Log User score in local storage
+            //console.log("********************************************************");
+            //console.log(`currentUserID: ${currentUserID}`);
+            localStorage.setItem(`user-${currentUserID}-score`, score);
+            //console.log(localStorage);
+            //console.log("********************************************************");
+
             // For Game Over Screen
             $('#points').html(score);
             $('#correct-answers').html(noOfCorrectAnswers);
@@ -165,6 +173,18 @@ $(document).ready(function() {
             $("#game-over-screen").show();
             $("#game-over-header").show();
         }
+    });
+
+    $('#leaderboard-btn').bind('click', function() {
+
+        displayLeaderboardData();
+
+        $("#game-over-screen").hide();
+        $("#game-over-header").hide();
+
+        // Display Game Over screen
+        $("#leaderboard-screen").show();
+        $("#leaderboard-header").show();
     });
 
     // RETRIEVE QUESTIONS FROM API
@@ -192,11 +212,11 @@ $(document).ready(function() {
         let anyErrors = checkForErrors(data["response_code"]);
 
         if (!anyErrors) {
-            console.log(data);
+            //console.log(data);
             for (let i = 0; i < amountOfQuestions; i++) {
                 filteredQuestions.push(data["results"][i]);
             }
-            console.log(filteredQuestions);
+            //console.log(filteredQuestions);
 
             // Once data is filtered display the question
             displayQuestion();
@@ -216,11 +236,11 @@ $(document).ready(function() {
         $("#game-header").css('display', 'flex');
 
     	// $("#question").html(filteredQuestions[0]["question"]);
-        console.log(filteredQuestions[0]);
+        //console.log(filteredQuestions[0]);
         question = filteredQuestions[0]["question"];
         correctAnswer = filteredQuestions[0]["correct_answer"]
         incorrectAnswers = filteredQuestions[0]["incorrect_answers"];
-        console.log(correctAnswer);
+        //console.log(correctAnswer);
 
         // Generate a random number between 1 and 4 so that the correct answer
         // is randomly placed
@@ -228,7 +248,7 @@ $(document).ready(function() {
 
         $("#question").html(question);
 
-        console.log(randomNumber);
+        //console.log(randomNumber);
         $(`#answer-${randomNumber}`).html(correctAnswer);
         $(`#answer-${randomNumber}`).addClass("correct-answer");
 
@@ -247,29 +267,33 @@ $(document).ready(function() {
 
     }
 
-    console.log("DOWN LOW");
+    function addNameToStorage(username) {
+        /*
+        - This function helps us to store multiple names in the Storage Object.
+
+        - This will be used for displaying names in the leaderboard.
+
+        - This data is shared across different directories in the same domain, so when you refresh
+        the page all the names entered will be persisted in the Storage object.
+        */
+        let noOfNames = localStorage.length;
+
+        if (noOfNames == 0) {
+            currentUserID = 1;
+            //console.log("1");
+            //console.log(currentUserID);
+            localStorage.setItem(`user-${currentUserID}-name`, username);
+            localStorage.setItem(`user-${currentUserID}-score`, 0);
+        } else {
+            currentUserID = (noOfNames / 2) + 1;
+            //console.log("2");
+            //console.log(currentUserID);
+            localStorage.setItem(`user-${currentUserID}-name`, username);
+            localStorage.setItem(`user-${currentUserID}-score`, 0);
+        }
+    }
 
 });
-
-function addNameToStorage(username) {
-    /*
-    - This function helps us to store multiple names in the Storage Object.
-
-    - This will be used for displaying names in the leaderboard.
-
-    - This data is shared across different directories in the same domain, so when you refresh
-    the page all the names entered will be persisted in the Storage object.
-    */
-    let noOfNames = localStorage.length;
-
-    if (noOfNames == 0) {
-        localStorage.setItem(`user-${1}-name`, username);
-        localStorage.setItem(`user-${1}-score`, 0);
-    } else {
-        localStorage.setItem(`user-${(noOfNames/2)+1}-name`, username);
-        localStorage.setItem(`user-${(noOfNames/2)+1}-score`, 0);
-    }
-}
 
 function enableContinueBtn() {
     $("#continue-btn").css('opacity', '1');
@@ -281,6 +305,24 @@ function disableContinueBtn() {
     $("#continue-btn").attr("disabled", true);
 }
 
+function displayLeaderboardData() {
+    let noOfNames = localStorage.length;
+
+    // Make a new object
+        // Where we associate the name with a score
+
+    let scoreObject = {};
+
+    for (let i = 1; i <= noOfNames; i++) {
+        let userName = localStorage[`user-${i}-name`];
+        let userScore = localStorage[`user-${i}-score`];
+
+        scoreObject[userName] = userScore;
+    }
+
+    console.log(scoreObject);
+}
+
 function checkForErrors(responseCode) {
     /*
     Will return a boolean value:
@@ -288,30 +330,30 @@ function checkForErrors(responseCode) {
         - false, if no errors exist
     */
     if (responseCode == 0) {
-        console.log("Code 0: SUCCESS. Returned results successfully.");
+        //console.log("Code 0: SUCCESS. Returned results successfully.");
         return false;
     } else if (responseCode == 1) {
-        console.log("Code 1: NO RESULTS. Could not return results. The API doesn't have enough questions for your query. (Ex. Asking for 50 Questions in a Category that only has 20.)");
+        //console.log("Code 1: NO RESULTS. Could not return results. The API doesn't have enough questions for your query. (Ex. Asking for 50 Questions in a Category that only has 20.)");
         $("#error-response").html("No results from that particular category");
         $("#error-response-section").show();
         return true;
     } else if (responseCode == 2) {
-        console.log("Code 2: INVALID PARAMETER. Contains an invalid parameter. Arguements passed in aren't valid. (Ex. Amount = Five)");
+        //console.log("Code 2: INVALID PARAMETER. Contains an invalid parameter. Arguements passed in aren't valid. (Ex. Amount = Five)");
         $("#error-response").html("2");
         $("#error-response-section").show();
         return true;
     } else if (responseCode == 3) {
-        console.log("Code 3: TOKEN NOT FOUND. Session Token does not exist.");
+        //console.log("Code 3: TOKEN NOT FOUND. Session Token does not exist.");
         $("#error-response").html("3");
         $("#error-response-section").show();
         return true;
     } else if (responseCode == 4) {
-        console.log("Code 4: TOKEN EMPTY. Session Token has returned all possible questions for the specified query. Resetting the Token is necessary.");
+        //console.log("Code 4: TOKEN EMPTY. Session Token has returned all possible questions for the specified query. Resetting the Token is necessary.");
         $("#error-response").html("4");
         $("#error-response-section").show();
         return true;
     } else {
-        console.log("UNKNOWAN ERROR");
+        //console.log("UNKNOWAN ERROR");
         $("#error-response").html("Unknowan Error");
         $("#error-response-section").show();
         return true;

@@ -279,6 +279,23 @@ p {
     height: 50vh;
 }
 
+/*--------------------------------------------GAME PAGE - LEADERBOARD SCREEN*/
+
+#leaderboard-screen {
+    display: none;
+}
+
+#leaderboard-header {
+    height: 5vh;
+    display: none;
+}
+
+#leaderboard-section {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
 
 /* // X-Small devices (portrait phones, less than 576px) */
