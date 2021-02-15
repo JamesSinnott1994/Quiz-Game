@@ -110,10 +110,6 @@ p {
     justify-content: center;
 }
 
-#username-screen {
-    /*display: none;*/
-}
-
 #username-error-section {
     width: 90%;
     margin: 0 auto;
@@ -260,6 +256,27 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+/*--------------------------------------------GAME PAGE - GAME OVER SCREEN*/
+
+#game-over-screen {
+    display: none;
+}
+
+#game-over-header {
+    height: 5vh;
+    display: none;
+}
+
+#game-over-section {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#game-over-menu {
+    height: 50vh;
 }
 
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/

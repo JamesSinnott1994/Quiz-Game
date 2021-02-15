@@ -29,6 +29,8 @@
 
         </nav>
 
+        <h1 id="game-over-header" class="my-5">Quiz Complete</h1>
+
     </header>
 
     <main id="username-screen">
@@ -166,6 +168,34 @@
 
     	</section>
 
+    </main>
+
+    <main id="game-over-screen">
+        <section id="game-over-section">
+            <p>You Scored:</p>
+            <p><span id="points">0</span> points</p>
+
+            <p>You got <span id="correct-answers">0</span> out of <span id="total-questions">0</span> questions correct</p>
+        </section>
+
+        <section id="game-over-menu" class="row m-0">
+
+             <!-- Columns start at 100% wide on mobile and bump up to 33% wide on desktop -->
+            <div class="col-12 col-lg-4 button-container">
+                <a href="game.html" class="button" style="background-color: #03C03C;">New Game</a>
+            </div>
+
+            <!-- Columns start at 33% wide on mobile and bump up to 50% wide on desktop -->
+            <div class="col-12 col-lg-4 button-container">
+                <a href="index.html" class="button" style="background-color: Tomato;">View Leaderboard</a>
+            </div>
+            
+            <!-- Columns start at 33% wide on mobile and bump up to 50% wide on desktop -->
+            <div class="col-12 col-lg-4 button-container">
+                <a href="index.html" class="button" style="background-color: CornflowerBlue;">Exit Game</a>
+            </div>
+            
+        </section>
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>

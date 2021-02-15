@@ -7,14 +7,15 @@ $(document).ready(function() {
     let difficulty;
     let filteredQuestions = [];
     let questionsAnswered = 0;
-    const amountOfQuestions = 2;
+    const amountOfQuestions = 1;
     let question;
     let correctAnswer;
     let incorrectAnswers;
     let score = 0;
+    let noOfCorrectAnswers = 0;
 
     //localStorage.clear();
-    console.log(localStorage);
+    //console.log(localStorage);
 
     // USERNAME SCREEN
     // Click
@@ -43,7 +44,7 @@ $(document).ready(function() {
     });
 
     // Key Press (If User clicks Enter)
-    $(document).keypress(function(e) {
+    $(document).on('keypress', function(e) {
 
         let username = $('#user-input').val()
 
@@ -78,7 +79,7 @@ $(document).ready(function() {
 
             // Assign topic to button that was clicked on
             topic = $(this).val();
-            alert(`User clicked on ${topic}`);
+            //alert(`User clicked on ${topic}`);
             // Hide Topic screen
             $("#topic-screen").hide();
              $("#topic-header").hide();
@@ -96,7 +97,7 @@ $(document).ready(function() {
 
             // Assign topic to button that was clicked on
             difficulty = $(this).html().toLowerCase();
-            alert(`User clicked on ${difficulty}`);
+            //alert(`User clicked on ${difficulty}`);
 
             // Call function to retrieve API Data
             getAPIData(filterAPIData);
@@ -113,7 +114,7 @@ $(document).ready(function() {
             let answer = $(this).html();
 
             if (answer == correctAnswer) {
-                alert("CORRECT ANSWER!");
+                //alert("CORRECT ANSWER!");
                 // Display animation
                 $(this).css('background-color', 'green');
 
@@ -121,10 +122,11 @@ $(document).ready(function() {
 
                 score += 5;
                 questionsAnswered += 1;
+                noOfCorrectAnswers += 1;
                 $("#score").html(score);
                 $("#questions-answered").html(questionsAnswered);
             } else {
-                alert("WRONG ANSWER.")
+                //alert("WRONG ANSWER.")
                 // Display animation
                 questionsAnswered += 1;
                 $("#questions-answered").html(questionsAnswered);
@@ -146,9 +148,22 @@ $(document).ready(function() {
             displayQuestion();
             disableContinueBtn();
         } else {
+
+            // For Game Over Screen
+            $('#points').html(score);
+            $('#correct-answers').html(noOfCorrectAnswers);
+            $('#total-questions').html(amountOfQuestions);
+
             disableContinueBtn();
-            alert("NO MORE QUESTIONS");
+            //alert("NO MORE QUESTIONS");
             // Game Over!
+            // Hide Game screen
+            $("#game-screen").hide();
+            $("#game-header").hide();
+
+            // Display Game Over screen
+            $("#game-over-screen").show();
+            $("#game-over-header").show();
         }
     });
 
