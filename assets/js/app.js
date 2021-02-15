@@ -62,6 +62,8 @@ $(document).ready(function() {
                 $("#topic-header").show();
 
                 console.log(localStorage);
+
+                $(document).off('keypress');
             } else {
                 $("#username-error-response").html("Please enter a username.");
                 $("#username-error-section").show();
