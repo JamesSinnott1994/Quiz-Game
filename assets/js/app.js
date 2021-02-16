@@ -26,10 +26,6 @@ $(document).ready(function() {
 
     console.log(typeof(arrayOfUserObjects));
 
-    //localStorage.clear();
-    //console.log(localStorage);
-    displayLeaderboardData();
-
     // USERNAME SCREEN
     // Click
     $("#username-btn").bind('click', function() {
@@ -60,9 +56,6 @@ $(document).ready(function() {
 
         if (e.which == 13) {
             if (username != '') {
-
-                // localStorage.setItem("username", username);
-                addNameToStorage(username);
 
                 // Hide Username screen
                 $("#username-screen").hide();
@@ -245,7 +238,7 @@ $(document).ready(function() {
         $("#game-screen").show();
         $("#game-header").css('display', 'flex');
 
-    	// $("#question").html(filteredQuestions[0]["question"]);
+        // $("#question").html(filteredQuestions[0]["question"]);
         //console.log(filteredQuestions[0]);
         question = filteredQuestions[0]["question"];
         correctAnswer = filteredQuestions[0]["correct_answer"]
@@ -267,12 +260,12 @@ $(document).ready(function() {
         // });
 
         for (let i = 0; i < 4; i++) {
-        	if ( $(`#answer-${i+1}`).hasClass("correct-answer") ) {
-        		continue;
-        	} else {
-        		$(`#answer-${i+1}`).html(incorrectAnswers[0]);
-        		incorrectAnswers.shift();
-        	}
+            if ( $(`#answer-${i+1}`).hasClass("correct-answer") ) {
+                continue;
+            } else {
+                $(`#answer-${i+1}`).html(incorrectAnswers[0]);
+                incorrectAnswers.shift();
+            }
         }
 
     }
@@ -293,11 +286,18 @@ function displayLeaderboardData() {
 
     let retrievedData = localStorage.getItem("userObjects");
     let leaderboardData = JSON.parse(retrievedData);
+    let leaderboardSortedData;
 
     // Got help for below with the following link
     // https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
     if (leaderboardData != null) {
-        console.log(leaderboardData.sort((a, b) => (a.score > b.score) ? -1 : 1));
+        leaderboardSortedData = leaderboardData.sort((a, b) => (a.score > b.score) ? -1 : 1);
+    }
+
+    for (let i = 0; i < leaderboardSortedData.length; i++) {
+        $("#leaderboard-list").append(
+            `<li>${leaderboardSortedData[i]["name"]}: ${leaderboardSortedData[i]["score"]} points</li>`
+        );
     }
 }
 
