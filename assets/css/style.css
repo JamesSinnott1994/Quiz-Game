@@ -296,6 +296,10 @@ p {
     text-align: center;
 }
 
+#leaderboard-list {
+    list-style-type: none;
+}
+
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
 
 /* // X-Small devices (portrait phones, less than 576px) */

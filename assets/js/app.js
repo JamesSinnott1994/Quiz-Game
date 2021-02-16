@@ -41,8 +41,6 @@ $(document).ready(function() {
             // Display Topic screen
             $("#topic-screen").show();
             $("#topic-header").show();
-
-            console.log(localStorage);
         } else {
             $("#username-error-response").html("Please enter a username.");
             $("#username-error-section").show();
@@ -52,7 +50,7 @@ $(document).ready(function() {
     // Key Press (If User clicks Enter)
     $(document).on('keypress', function(e) {
 
-        let username = $('#user-input').val()
+        username = $('#user-input').val()
 
         if (e.which == 13) {
             if (username != '') {
@@ -64,8 +62,6 @@ $(document).ready(function() {
                 // Display Topic screen
                 $("#topic-screen").show();
                 $("#topic-header").show();
-
-                console.log(localStorage);
 
                 $(document).off('keypress');
             } else {
