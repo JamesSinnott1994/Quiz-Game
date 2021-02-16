@@ -118,6 +118,7 @@ $(document).ready(function() {
                 $(this).css('background-color', 'green');
 
                 enableContinueBtn();
+                disableAnswerBtns();
 
                 score += 5;
                 questionsAnswered += 1;
@@ -133,6 +134,7 @@ $(document).ready(function() {
                 $(".correct-answer").css('background-color', 'green');
 
                 enableContinueBtn();
+                disableAnswerBtns();
             }
         });
     });
@@ -146,6 +148,7 @@ $(document).ready(function() {
             filteredQuestions.shift();
             displayQuestion();
             disableContinueBtn();
+            enableAnswerBtns();
         } else {
 
             // Log User score in local storage
@@ -273,9 +276,21 @@ function enableContinueBtn() {
     $("#continue-btn").attr("disabled", false);
 }
 
+function enableAnswerBtns() {
+    $("#answer-btn-container button").each(function() {
+        $(this).attr("disabled", false);
+    });
+}
+
 function disableContinueBtn() {
     $("#continue-btn").css('opacity', '0.5');
     $("#continue-btn").attr("disabled", true);
+}
+
+function disableAnswerBtns() {
+    $("#answer-btn-container button").each(function() {
+        $(this).attr("disabled", true);
+    });
 }
 
 function displayLeaderboardData() {
