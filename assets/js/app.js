@@ -12,22 +12,31 @@ $(document).ready(function() {
     let score = 0;
     let noOfCorrectAnswers = 0;
     let currentUserID;
+    let username = '';
+
+    // Get array of user objects
+    let retrievedData = localStorage.getItem("userObjects");
+    let arrayOfUserObjects = JSON.parse(retrievedData);
+
+    // If arrayOfUserObjects is null set it to an array
+    // Prevents "push" error later on
+    if (arrayOfUserObjects == null) {
+        arrayOfUserObjects = [];
+    }
+
+    console.log(typeof(arrayOfUserObjects));
 
     //localStorage.clear();
     //console.log(localStorage);
+    displayLeaderboardData();
 
     // USERNAME SCREEN
     // Click
     $("#username-btn").bind('click', function() {
 
-        let username = $('#user-input').val()
+        username = $('#user-input').val()
 
         if (username != '') {
-
-            // localStorage.setItem("username", username);
-            addNameToStorage(username);
-
-            currentUserID = 
 
             // Hide Username screen
             $("#username-screen").hide();
@@ -151,11 +160,12 @@ $(document).ready(function() {
         } else {
 
             // Log User score in local storage
-            //console.log("********************************************************");
-            //console.log(`currentUserID: ${currentUserID}`);
-            localStorage.setItem(`user-${currentUserID}-score`, score);
-            //console.log(localStorage);
-            //console.log("********************************************************");
+            let userObject = {
+                "name": username,
+                "score": score
+            };
+            arrayOfUserObjects.push(userObject);
+            localStorage.setItem('userObjects', JSON.stringify(arrayOfUserObjects));
 
             // For Game Over Screen
             $('#points').html(score);
@@ -267,32 +277,6 @@ $(document).ready(function() {
 
     }
 
-    function addNameToStorage(username) {
-        /*
-        - This function helps us to store multiple names in the Storage Object.
-
-        - This will be used for displaying names in the leaderboard.
-
-        - This data is shared across different directories in the same domain, so when you refresh
-        the page all the names entered will be persisted in the Storage object.
-        */
-        let noOfNames = localStorage.length;
-
-        if (noOfNames == 0) {
-            currentUserID = 1;
-            //console.log("1");
-            //console.log(currentUserID);
-            localStorage.setItem(`user-${currentUserID}-name`, username);
-            localStorage.setItem(`user-${currentUserID}-score`, 0);
-        } else {
-            currentUserID = (noOfNames / 2) + 1;
-            //console.log("2");
-            //console.log(currentUserID);
-            localStorage.setItem(`user-${currentUserID}-name`, username);
-            localStorage.setItem(`user-${currentUserID}-score`, 0);
-        }
-    }
-
 });
 
 function enableContinueBtn() {
@@ -306,21 +290,15 @@ function disableContinueBtn() {
 }
 
 function displayLeaderboardData() {
-    let noOfNames = localStorage.length;
 
-    // Make a new object
-        // Where we associate the name with a score
+    let retrievedData = localStorage.getItem("userObjects");
+    let leaderboardData = JSON.parse(retrievedData);
 
-    let scoreObject = {};
-
-    for (let i = 1; i <= noOfNames; i++) {
-        let userName = localStorage[`user-${i}-name`];
-        let userScore = localStorage[`user-${i}-score`];
-
-        scoreObject[userName] = userScore;
+    // Got help for below with the following link
+    // https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
+    if (leaderboardData != null) {
+        console.log(leaderboardData.sort((a, b) => (a.score > b.score) ? -1 : 1));
     }
-
-    console.log(scoreObject);
 }
 
 function checkForErrors(responseCode) {
