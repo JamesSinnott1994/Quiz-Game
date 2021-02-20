@@ -93,11 +93,45 @@ p {
     justify-content: center;
 }
 
+/*--------------------------------------------GAME PAGE - COMMON SELECTORS*/
+
+#topic-header, #difficulty-header, #game-over-header, #leaderboard-header {
+    height: 5vh;
+    display: none;
+}
+
+#topic-section, #difficulty-section {
+	min-height: 90vh;
+}
+
+#topic-screen, #difficulty-screen, #game-header, #game-screen, #game-over-screen, #leaderboard-screen {
+    display: none;
+}
+
+#game-area, #game-over-section, #leaderboard-section {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#answer-btn-container, #continue-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#username-error-section, #error-response-section {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    display: none;
+    color: red;
+}
+
 /*--------------------------------------------GAME PAGE - USERNAME SCREEN*/
 
 #username-header {
     height: 5vh;
-    /*display: none;*/
 }
 
 #username-section {
@@ -110,31 +144,7 @@ p {
     justify-content: center;
 }
 
-#username-error-section {
-    width: 90%;
-    margin: 0 auto;
-    text-align: center;
-    display: none;
-}
-
-#username-error-response {
-    color: red;
-}
-
 /*--------------------------------------------GAME PAGE - TOPIC SCREEN*/
-
-#topic-header {
-    height: 5vh;
-    display: none;
-}
-
-#topic-section {
-	min-height: 90vh;
-}
-
-#topic-screen {
-    display: none;
-}
 
 .screen-btn {
     color: white;
@@ -148,21 +158,6 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-/*--------------------------------------------GAME PAGE - DIFFICULTY SCREEN*/
-
-#difficulty-header {
-    height: 5vh;
-    display: none;
-}
-
-#difficulty-section {
-	min-height: 90vh;
-}
-
-#difficulty-screen {
-    display: none;
 }
 
 /*--------------------------------------------GAME PAGE - GAME SCREEN*/
@@ -179,25 +174,6 @@ p {
     margin-right: 1rem;
 }
 
-#error-response-section {
-    width: 90%;
-    margin: 0 auto;
-    text-align: center;
-    display: none;
-}
-
-#error-response {
-    color: red;
-}
-
-#game-header {
-    display: none;
-}
-
-#game-screen {
-    display: none;
-}
-
 #img-container {
     background-color: red;
     width: 100%;
@@ -209,34 +185,19 @@ p {
     height: 100%;
 }
 
-#game-area {
-    width: 90%;
-    margin: 0 auto;
-    text-align: center;
-}
-
-#answer-btn-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 .answer-btn {
     color: black;
     background-color: #c0bdae;
+
     text-decoration: none;
     font-family: "Caladea", sans-serif;
     border-radius: 8px;
+
     width: 90%;
+
     height: 45px;
     font-size: 1.5em;
     font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#continue-btn-container {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -260,41 +221,11 @@ p {
 
 /*--------------------------------------------GAME PAGE - GAME OVER SCREEN*/
 
-#game-over-screen {
-    display: none;
-}
-
-#game-over-header {
-    height: 5vh;
-    display: none;
-}
-
-#game-over-section {
-    width: 90%;
-    margin: 0 auto;
-    text-align: center;
-}
-
 #game-over-menu {
     height: 50vh;
 }
 
 /*--------------------------------------------GAME PAGE - LEADERBOARD SCREEN*/
-
-#leaderboard-screen {
-    display: none;
-}
-
-#leaderboard-header {
-    height: 5vh;
-    display: none;
-}
-
-#leaderboard-section {
-    width: 90%;
-    margin: 0 auto;
-    text-align: center;
-}
 
 #leaderboard-list {
     list-style-type: none;
@@ -312,7 +243,7 @@ p {
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
-    .button {
+    .button, #instructions-button {
         width: 50%;
         height: 120px;
         font-size: 2em;
@@ -320,12 +251,6 @@ p {
     }
     .screen-btn {
     	width: 65%;
-        height: 120px;
-        font-size: 2em;
-        font-weight: 600;
-    }
-    #instructions-button {
-        width: 50%;
         height: 120px;
         font-size: 2em;
         font-weight: 600;
@@ -374,16 +299,13 @@ p {
         margin: 0 auto;
         height: 250px;
     }
-    #game-area {
+    #game-area, #username-section {
         max-width: 60%;
     }
     .answer-btn {
         width: 80%;
         height: 80px;
         font-size: 2em;
-    }
-    #username-section {
-        width: 60%;
     }
 }
 
