@@ -5,7 +5,7 @@ $(document).ready(function() {
     let difficulty;
     let filteredQuestions = [];
     let questionsAnswered = 0;
-    const amountOfQuestions = 1;
+    const amountOfQuestions = 2;
     let question;
     let correctAnswer;
     let incorrectAnswers;
@@ -13,6 +13,8 @@ $(document).ready(function() {
     let noOfCorrectAnswers = 0;
     let currentUserID;
     let username = '';
+    let time = 30;
+    let timerStopped = false;
 
     // Get array of user objects
     let retrievedData = localStorage.getItem("userObjects");
@@ -112,6 +114,8 @@ $(document).ready(function() {
 
             let answer = $(this).html();
 
+            timerStopped = true;
+
             if (answer == correctAnswer) {
                 //alert("CORRECT ANSWER!");
                 // Display animation
@@ -146,6 +150,9 @@ $(document).ready(function() {
             $("#answer-btn-container button").css('background-color', '#c0bdae');
             $("#answer-btn-container button").removeClass('correct-answer');
             filteredQuestions.shift();
+            time = 30;
+            timerStopped = false;
+            $("#timer").html(`${time}`);
             displayQuestion();
             disableContinueBtn();
             enableAnswerBtns();
@@ -214,16 +221,13 @@ $(document).ready(function() {
         let anyErrors = checkForErrors(data["response_code"]);
 
         if (!anyErrors) {
-            //console.log(data);
             for (let i = 0; i < amountOfQuestions; i++) {
                 filteredQuestions.push(data["results"][i]);
             }
-            //console.log(filteredQuestions);
 
             // Once data is filtered display the question
             displayQuestion();
         }
-
     }
 
     // DISPLAY QUESTION
@@ -237,12 +241,11 @@ $(document).ready(function() {
         $("#game-screen").show();
         $("#game-header").css('display', 'flex');
 
-        // $("#question").html(filteredQuestions[0]["question"]);
-        //console.log(filteredQuestions[0]);
+        timer();
+
         question = filteredQuestions[0]["question"];
         correctAnswer = filteredQuestions[0]["correct_answer"]
         incorrectAnswers = filteredQuestions[0]["incorrect_answers"];
-        //console.log(correctAnswer);
 
         // Generate a random number between 1 and 4 so that the correct answer
         // is randomly placed
@@ -250,13 +253,8 @@ $(document).ready(function() {
 
         $("#question").html(question);
 
-        //console.log(randomNumber);
         $(`#answer-${randomNumber}`).html(correctAnswer);
         $(`#answer-${randomNumber}`).addClass("correct-answer");
-
-        // incorrectAnswers.forEach( function(item, index) {
-
-        // });
 
         for (let i = 0; i < 4; i++) {
             if ( $(`#answer-${i+1}`).hasClass("correct-answer") ) {
@@ -266,6 +264,37 @@ $(document).ready(function() {
                 incorrectAnswers.shift();
             }
         }
+    }
+
+    // TIMER
+    function timer() {
+        /*
+        Got help with this timer function from here:
+        https://www.w3schools.com/howto/howto_js_countdown.asp
+        */
+
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+            
+        if (!timerStopped) {
+            time -= 1;
+            $("#timer").html(`${time}`);
+        }
+
+        if(timerStopped) {
+            clearInterval(x);
+        }
+
+        // If the count down is over, write some text 
+        if (time <= 0) {
+            clearInterval(x);
+            $("#timer").html("Expired");
+
+            enableContinueBtn();
+            disableAnswerBtns();
+            $(".correct-answer").css('background-color', 'green');
+        }
+        }, 1000);
 
     }
 
