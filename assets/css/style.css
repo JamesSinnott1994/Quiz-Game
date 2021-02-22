@@ -222,7 +222,7 @@ p {
 
 /*--------------------------------------------GAME PAGE - GAME OVER SCREEN*/
 
-#game-over-menu {
+#game-over-menu, #leaderboard-menu {
     height: 50vh;
 }
 

@@ -5,7 +5,7 @@ $(document).ready(function() {
     let difficulty;
     let filteredQuestions = [];
     let questionsAnswered = 0;
-    const amountOfQuestions = 10;
+    const amountOfQuestions = 1;
     let question;
     let correctAnswer;
     let incorrectAnswers;
@@ -16,8 +16,6 @@ $(document).ready(function() {
     let time = 30;
     let timerStopped = false;
     let gameScreenDisplayed = false;
-
-    localStorage.clear();
 
     // Get array of user objects
     let retrievedData = localStorage.getItem("userObjects");
@@ -150,6 +148,7 @@ $(document).ready(function() {
         }
     });
 
+    // DISPLAY LEADERBOARD SCREEN
     $('#leaderboard-btn').bind('click', function() {
 
         displayLeaderboardData();
@@ -160,6 +159,17 @@ $(document).ready(function() {
         // Display Game Over screen
         $("#leaderboard-screen").show();
         $("#leaderboard-header").show();
+    });
+
+    // DISPLAY GAME OVER (GAME STATS) SCREEN
+    $('#game-stats-btn').bind('click', function() {
+
+        // Display Game Over screen
+        $("#leaderboard-screen").hide();
+        $("#leaderboard-header").hide();
+
+        $("#game-over-screen").show();
+        $("#game-over-header").show();
     });
 
     // RETRIEVE QUESTIONS FROM API
