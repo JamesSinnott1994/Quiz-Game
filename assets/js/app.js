@@ -17,6 +17,8 @@ $(document).ready(function() {
     let timerStopped = false;
     let gameScreenDisplayed = false;
 
+    localStorage.clear();
+
     // Get array of user objects
     let retrievedData = localStorage.getItem("userObjects");
     let arrayOfUserObjects = JSON.parse(retrievedData);
