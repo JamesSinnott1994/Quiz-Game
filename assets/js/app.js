@@ -5,7 +5,7 @@ $(document).ready(function() {
     let difficulty;
     let filteredQuestions = [];
     let questionsAnswered = 0;
-    const amountOfQuestions = 2;
+    const amountOfQuestions = 10;
     let question;
     let correctAnswer;
     let incorrectAnswers;
@@ -15,6 +15,7 @@ $(document).ready(function() {
     let username = '';
     let time = 30;
     let timerStopped = false;
+    let gameScreenDisplayed = false;
 
     // Get array of user objects
     let retrievedData = localStorage.getItem("userObjects");
@@ -25,8 +26,6 @@ $(document).ready(function() {
     if (arrayOfUserObjects == null) {
         arrayOfUserObjects = [];
     }
-
-    console.log(typeof(arrayOfUserObjects));
 
     // USERNAME SCREEN
     // Click
@@ -107,41 +106,6 @@ $(document).ready(function() {
 
     // GAME SCREEN
     $("#questions-amount").html(amountOfQuestions);
-
-    // Binds a click event to each button on the Game screen
-    $("#answer-btn-container button").each(function() {
-        $(this).bind('click', function() {
-
-            let answer = $(this).html();
-
-            timerStopped = true;
-
-            if (answer == correctAnswer) {
-                //alert("CORRECT ANSWER!");
-                // Display animation
-                $(this).css('background-color', 'green');
-
-                enableContinueBtn();
-                disableAnswerBtns();
-
-                score += 5;
-                questionsAnswered += 1;
-                noOfCorrectAnswers += 1;
-                $("#score").html(score);
-                $("#questions-answered").html(questionsAnswered);
-            } else {
-                //alert("WRONG ANSWER.")
-                // Display animation
-                questionsAnswered += 1;
-                $("#questions-answered").html(questionsAnswered);
-                $(this).css('background-color', 'red');
-                $(".correct-answer").css('background-color', 'green');
-
-                enableContinueBtn();
-                disableAnswerBtns();
-            }
-        });
-    });
 
     // Binds click event listener to Continue button
     $("#continue-btn").bind('click', function() {
@@ -233,15 +197,56 @@ $(document).ready(function() {
     // DISPLAY QUESTION
     function displayQuestion() {
 
-        // Hide Difficulty screen
-        $("#difficulty-screen").hide();
-        $("#difficulty-header").hide();
+        if (!gameScreenDisplayed) {
+            // Hide Difficulty screen
+            $("#difficulty-screen").hide();
+            $("#difficulty-header").hide();
 
-        // Show Game screen
-        $("#game-screen").show();
-        $("#game-header").css('display', 'flex');
+            // Show Game screen
+            $("#game-screen").show();
+            $("#game-header").css('display', 'flex');
+
+            gameScreenDisplayed = true;
+        }
 
         timer();
+
+        addButtons();
+
+        // Binds a click event to each button on the Game screen
+        $("#answer-btn-container button").each(function() {
+            $(this).bind('click', function() {
+
+                let answer = $(this).html();
+
+                timerStopped = true;
+
+                if (answer == correctAnswer) {
+                    //alert("CORRECT ANSWER!");
+                    // Display animation
+                    $(this).css('background-color', 'green');
+
+                    enableContinueBtn();
+                    disableAnswerBtns();
+
+                    score += 5;
+                    questionsAnswered += 1;
+                    noOfCorrectAnswers += 1;
+                    $("#score").html(score);
+                    $("#questions-answered").html(questionsAnswered);
+                } else {
+                    //alert("WRONG ANSWER.")
+                    // Display animation
+                    questionsAnswered += 1;
+                    $("#questions-answered").html(questionsAnswered);
+                    $(this).css('background-color', 'red');
+                    $(".correct-answer").css('background-color', 'green');
+
+                    enableContinueBtn();
+                    disableAnswerBtns();
+                }
+            });
+        });
 
         question = filteredQuestions[0]["question"];
         correctAnswer = filteredQuestions[0]["correct_answer"]
@@ -264,6 +269,8 @@ $(document).ready(function() {
                 incorrectAnswers.shift();
             }
         }
+
+        makeBtnHeightSame();
     }
 
     // TIMER
@@ -296,6 +303,35 @@ $(document).ready(function() {
         }
         }, 1000);
 
+    }
+
+    function addButtons() {
+        /*
+        - Re-creates all buttons.
+
+        - The reason why we have to re-create all the buttons is because of an issue relating to the makeBtnHeightSame() function.
+        - For some reason when the height of all divs is set intially to the maxHeight of the largest div, it never then sets to the new max height for the divs of the next displayed question. I don't know why this is. But this function deals with the problem, perhaps in an inefficient way.
+        */
+        $("#answer-btn-container").empty();
+
+        $("#answer-btn-container").append(`
+            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
+                <button id="answer-1" class="answer-btn">"Here's lookin' at you, kid."</button>
+            </div>
+
+            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
+                <button id="answer-2" class="answer-btn">"Frankly, my dear, I don't give a damn."</button>
+            </div>
+
+            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
+                <button id="answer-3" class="answer-btn">"Of all the gin joints, in all the towns, in all the world, she walks into mine..."</button>
+            </div>
+
+            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
+                <button id="answer-4" class="answer-btn">"Round up the usual suspects."</button>
+            </div>
+            `
+        );
     }
 
 });
@@ -339,6 +375,26 @@ function displayLeaderboardData() {
             `<li>${leaderboardSortedData[i]["name"]}: ${leaderboardSortedData[i]["score"]} points</li>`
         );
     }
+}
+
+function makeBtnHeightSame() {
+    /*
+    This function will make all the div containers of each answer button the same height
+    This is to prevent mismatched heights between the buttons if the answer text of one button is very long
+
+    Help for this function from the following source:
+    https://css-tricks.com/snippets/jquery/equalize-heights-of-divs/
+    */
+    let maxHeight = 0;
+
+    $(".answer-btn").each(function() {
+
+        if ($(this).height() > maxHeight) { 
+            maxHeight = $(this).height();
+        }
+    });
+
+    $(".answer-btn").height(maxHeight);
 }
 
 function checkForErrors(responseCode) {

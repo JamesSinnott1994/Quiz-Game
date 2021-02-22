@@ -195,7 +195,8 @@ p {
 
     width: 90%;
 
-    height: 45px;
+    min-height: 45px;
+    
     font-size: 1.5em;
     font-weight: 600;
     display: flex;
@@ -272,7 +273,7 @@ p {
     }
     .answer-btn {
         width: 90%;
-        height: 100px;
+        min-height: 100px;
         font-size: 2em;
     }
     #continue-btn {
@@ -304,7 +305,7 @@ p {
     }
     .answer-btn {
         width: 80%;
-        height: 80px;
+        min-height: 80px;
         font-size: 2em;
     }
 }
