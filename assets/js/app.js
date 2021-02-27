@@ -5,7 +5,7 @@ $(document).ready(function() {
     let difficulty;
     let filteredQuestions = [];
     let questionsAnswered = 0;
-    const amountOfQuestions = 1;
+    const amountOfQuestions = 3;
     let question;
     let correctAnswer;
     let incorrectAnswers;
@@ -235,6 +235,10 @@ $(document).ready(function() {
 
                 if (answer == correctAnswer) {
                     //alert("CORRECT ANSWER!");
+
+                    // https://medium.com/@ericschwartz7/adding-audio-to-your-app-with-jquery-fa96b99dfa97
+                    $("#correct-sound")[0].play();
+
                     // Display animation
                     $(this).css('background-color', 'green');
 
@@ -247,7 +251,7 @@ $(document).ready(function() {
                     $("#score").html(score);
                     $("#questions-answered").html(questionsAnswered);
                 } else {
-                    //alert("WRONG ANSWER.")
+                    $("#wrong-sound")[0].play();
                     // Display animation
                     questionsAnswered += 1;
                     $("#questions-answered").html(questionsAnswered);
