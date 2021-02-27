@@ -119,6 +119,12 @@ $(document).ready(function() {
             time = 30;
             timerStopped = false;
             $("#timer").html(`${time}`);
+
+            $("#game-screen").hide();
+            $("#game-header").hide();
+            $("#game-screen").fadeIn(1000);
+            $("#game-header").css('display', 'flex');
+
             displayQuestion();
             disableContinueBtn();
             enableAnswerBtns();
@@ -217,7 +223,8 @@ $(document).ready(function() {
             $("#difficulty-header").hide();
 
             // Show Game screen
-            $("#game-screen").show();
+            //$("#game-screen").show();
+            $("#game-screen").fadeIn(1000);
             $("#game-header").css('display', 'flex');
 
             gameScreenDisplayed = true;
