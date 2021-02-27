@@ -17,6 +17,8 @@ $(document).ready(function() {
     let timerStopped = false;
     let gameScreenDisplayed = false;
 
+    localStorage.clear();
+
     // Get array of user objects
     let retrievedData = localStorage.getItem("userObjects");
     let arrayOfUserObjects = JSON.parse(retrievedData);
@@ -325,7 +327,10 @@ $(document).ready(function() {
 
             enableContinueBtn();
             disableAnswerBtns();
+
+            $("#wrong-sound")[0].play();
             $(".correct-answer").css('background-color', 'green');
+            $(".correct-answer").css('transition', 'all ease 1s');
         }
         }, 1000);
 
