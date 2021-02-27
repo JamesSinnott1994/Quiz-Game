@@ -233,6 +233,9 @@ $(document).ready(function() {
 
                 timerStopped = true;
 
+                console.log(answer);
+                console.log("correctAnswer: " + correctAnswer);
+
                 if (answer == correctAnswer) {
                     // https://medium.com/@ericschwartz7/adding-audio-to-your-app-with-jquery-fa96b99dfa97
                     $("#correct-sound")[0].play();
@@ -272,7 +275,6 @@ $(document).ready(function() {
         });
 
         question = filteredQuestions[0]["question"];
-        correctAnswer = filteredQuestions[0]["correct_answer"]
         incorrectAnswers = filteredQuestions[0]["incorrect_answers"];
 
         // Generate a random number between 1 and 4 so that the correct answer
@@ -281,8 +283,9 @@ $(document).ready(function() {
 
         $("#question").html(question);
 
-        $(`#answer-${randomNumber}`).html(correctAnswer);
+        $(`#answer-${randomNumber}`).html(filteredQuestions[0]["correct_answer"]);
         $(`#answer-${randomNumber}`).addClass("correct-answer");
+        correctAnswer = $(`#answer-${randomNumber}`).html();
 
         for (let i = 0; i < 4; i++) {
             if ( $(`#answer-${i+1}`).hasClass("correct-answer") ) {
@@ -339,19 +342,19 @@ $(document).ready(function() {
 
         $("#answer-btn-container").append(`
             <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
-                <button id="answer-1" class="answer-btn">"Here's lookin' at you, kid."</button>
+                <button id="answer-1" class="answer-btn">"Quote"</button>
             </div>
 
             <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
-                <button id="answer-2" class="answer-btn">"Frankly, my dear, I don't give a damn."</button>
+                <button id="answer-2" class="answer-btn">"Quote"</button>
             </div>
 
             <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
-                <button id="answer-3" class="answer-btn">"Of all the gin joints, in all the towns, in all the world, she walks into mine..."</button>
+                <button id="answer-3" class="answer-btn">"Quote"</button>
             </div>
 
             <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
-                <button id="answer-4" class="answer-btn">"Round up the usual suspects."</button>
+                <button id="answer-4" class="answer-btn">"Quote"</button>
             </div>
             `
         );
