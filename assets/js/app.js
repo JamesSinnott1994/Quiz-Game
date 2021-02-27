@@ -239,6 +239,7 @@ $(document).ready(function() {
 
                     // Display animation
                     $(this).css('background-color', 'green');
+                    $(this).css('transition', 'all ease 1s');
 
                     enableContinueBtn();
                     disableAnswerBtns();
@@ -252,11 +253,15 @@ $(document).ready(function() {
                     smoothFocus();
                 } else {
                     $("#wrong-sound")[0].play();
-                    // Display animation
                     questionsAnswered += 1;
                     $("#questions-answered").html(questionsAnswered);
+
+                    // Display animation
                     $(this).css('background-color', 'red');
+                    $(this).css('transition', 'all ease 1s');
+
                     $(".correct-answer").css('background-color', 'green');
+                    $(".correct-answer").css('transition', 'all ease 1s');
 
                     enableContinueBtn();
                     disableAnswerBtns();
@@ -368,7 +373,7 @@ function smoothFocus() {
     event.preventDefault();
     $('html, body').animate({
         scrollTop: target.offset().top
-    }, 2000, function() {
+    }, 1000, function() {
         // Callback after animation
         // Must change focus!
         var $target = $(target);
