@@ -197,6 +197,10 @@ $(document).ready(function() {
 
         $("#game-over-screen").show();
         $("#game-over-header").show();
+
+        // Remove all leaderboard data from the leaderboard list element
+        // Prevents same data from being appended multiple times in the displayLeaderboardData function
+        $("#leaderboard-list").empty();
     });
 
     // RETRIEVE QUESTIONS FROM API
