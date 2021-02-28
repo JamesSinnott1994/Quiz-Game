@@ -350,10 +350,16 @@ $(document).ready(function() {
             clearInterval(x);
         }
 
+        // Change colour
+        if (time <= 10) {
+            $("#timer-container").css('color', 'red');
+        }
+
         // If the count down is over, write some text 
         if (time <= 0) {
             clearInterval(x);
             $("#timer").html("Expired");
+            $("#timer-container").css('color', 'black');
 
             enableContinueBtn();
             disableAnswerBtns();
