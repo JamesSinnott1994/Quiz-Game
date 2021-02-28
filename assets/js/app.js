@@ -17,7 +17,7 @@ $(document).ready(function() {
     let timerStopped = false;
     let gameScreenDisplayed = false;
 
-    localStorage.clear();
+    //localStorage.clear();
 
     // Get array of user objects
     let retrievedData = localStorage.getItem("userObjects");
@@ -154,6 +154,25 @@ $(document).ready(function() {
             $("#game-over-screen").show();
             $("#game-over-header").show();
         }
+    });
+
+    // Binds click event to game header logo
+    $('#modal-logo').bind('click', function() {
+        // https://www.w3schools.com/howto/howto_css_modals.asp
+
+        timerStopped = true;
+
+        $("#myModal").css('display', 'block');
+    });
+
+    // Closes modal when Resume Button is clicked
+    $('#modal-resume-btn').bind('click', function() {
+
+        timerStopped = false;
+        timer();
+
+        // Display Game Over screen
+        $("#myModal").css('display', 'none');
     });
 
     // DISPLAY LEADERBOARD SCREEN
