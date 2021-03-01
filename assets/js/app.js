@@ -295,6 +295,7 @@ $(document).ready(function() {
             time = 30; // Reset timer
             timerStopped = false; // Restart timer
             $("#timer").html(`${time}`);
+            $("#timer-container").css('color', 'black');
 
             // Animation to fade from question to question
             $("#game-screen").hide();
