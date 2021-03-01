@@ -2,6 +2,7 @@ $(document).ready(function() {
 
     // Variable declarations
     let topic;
+    let imageName;
     let difficulty;
     let filteredQuestions = [];
     let questionsAnswered = 0;
@@ -81,7 +82,12 @@ $(document).ready(function() {
 
             // Assign topic to button that was clicked on
             topic = $(this).val();
-            //alert(`User clicked on ${topic}`);
+            imageName = $(this).html().toLowerCase();
+            imageName = imageName.replace(/\s/g, "-");
+            console.log(imageName);
+
+            $("#img").attr("src", `assets/img/${imageName}.jpg`);
+
             // Hide Topic screen
             $("#topic-screen").hide();
              $("#topic-header").hide();
@@ -208,9 +214,14 @@ $(document).ready(function() {
         var xhr = new XMLHttpRequest();
 
         if (difficulty != "random") {
-            xhr.open("GET", `https://opentdb.com/api.php?amount=100&category=${topic}&difficulty=${difficulty}&type=multiple`);
+            console.log(`Topic: ${topic}`);
+            console.log(`Difficulty: ${difficulty}`);
+            console.log();
+            xhr.open("GET", `https://opentdb.com/api.php?amount=10&category=${topic}&difficulty=${difficulty}&type=multiple`);
         } else {
-            xhr.open("GET", `https://opentdb.com/api.php?amount=100&category=${topic}&type=multiple`);
+            console.log(`Topic: ${topic}`);
+            console.log(`Difficulty: ${difficulty}`);
+            xhr.open("GET", `https://opentdb.com/api.php?amount=10&category=${topic}&type=multiple`);
         }
         xhr.send();
 
@@ -467,6 +478,8 @@ function displayLeaderboardData() {
         leaderboardSortedData = leaderboardData.sort((a, b) => (a.score > b.score) ? -1 : 1);
     }
 
+    console.log(leaderboardData);
+
     for (let i = 0; i < leaderboardSortedData.length; i++) {
         $("#leaderboard-list").append(
             `<li>${leaderboardSortedData[i]["name"]}: ${leaderboardSortedData[i]["score"]} points</li>`
@@ -500,6 +513,7 @@ function checkForErrors(responseCode) {
         - true, if errors exist
         - false, if no errors exist
     */
+    console.log(responseCode);
     if (responseCode == 0) {
         //console.log("Code 0: SUCCESS. Returned results successfully.");
         return false;
