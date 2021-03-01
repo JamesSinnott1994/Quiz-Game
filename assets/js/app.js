@@ -6,7 +6,7 @@ $(document).ready(function() {
     let difficulty;
     let filteredQuestions = [];
     let questionsAnswered = 0;
-    const amountOfQuestions = 3;
+    const amountOfQuestions = 1;
     let question;
     let correctAnswer;
     let incorrectAnswers;
@@ -503,15 +503,23 @@ function displayLeaderboardData() {
     // https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
     if (leaderboardData != null) {
         leaderboardSortedData = leaderboardData.sort((a, b) => (a.score > b.score) ? -1 : 1);
+
+        while (leaderboardSortedData.length > 12) {
+            leaderboardSortedData.pop();
+        }
+
+        for (let i = 0; i < leaderboardSortedData.length; i++) {
+            $("tbody").append(
+                `<tr>
+                    <th>#${i+1}</th>
+                    <td>${leaderboardSortedData[i]["name"]}</td>
+                    <td>${leaderboardSortedData[i]["score"]}</td>
+                </tr>`
+            );
+        }
     }
 
     console.log(leaderboardData);
-
-    for (let i = 0; i < leaderboardSortedData.length; i++) {
-        $("#leaderboard-list").append(
-            `<li>${leaderboardSortedData[i]["name"]}: ${leaderboardSortedData[i]["score"]} points</li>`
-        );
-    }
 }
 
 function makeBtnHeightSame() {

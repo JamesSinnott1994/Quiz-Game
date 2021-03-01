@@ -289,8 +289,17 @@ p {
 
 /*--------------------------------------------GAME PAGE - LEADERBOARD SCREEN*/
 
-#leaderboard-list {
-    list-style-type: none;
+table {
+    text-align: center;
+}
+
+thead {
+    border-top: 1px solid #212529;
+}
+
+tr {
+    /* border-top: 1px solid #212529; */
+    border-bottom: 1px solid #212529;
 }
 
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
@@ -341,6 +350,14 @@ p {
         width: 40%;
         height: 70px;
         font-size: 2em;
+    }
+    #leaderboard-table {
+        width: 80%;
+        margin: 0 auto;
+    }
+    #leaderboard-table {
+        border-left: 1px solid #212529;
+        border-right: 1px solid #212529;
     }
     .modal-content {
         margin: 15% auto; /* 15% from the top and centered */
