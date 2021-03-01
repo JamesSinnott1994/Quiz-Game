@@ -33,28 +33,82 @@ $(document).ready(function() {
     // Binds a click event to the username button
     $("#username-btn").bind('click', function() {
 
+        let issue = ""; // Used in switch statement
         username = $('#user-input').val()
 
-        if (username != '') {
-            goToTopicScreen();
-        } else {
-            $("#username-error-response").html("Please enter a username.");
-            $("#username-error-section").show();
+        // Check if username entered
+        if(username == '') {
+            issue = "No username entered";
+        }
+
+        // Check if username already exists with anonymous function
+        let nameExists = false;
+        arrayOfUserObjects.forEach(user => {
+            if (user["name"] == username) {
+                nameExists = true;
+            }
+        });
+
+        // Error message if username already exists
+        if(nameExists && username != '') {
+            issue = "Username exists";
+        }
+
+        // Switch statement
+        // Gets rid of nested ifs and elses
+        switch(issue) {
+            case "Username exists":
+                $("#username-error-response").html("Username already exists. Please enter a new username.");
+                $("#username-error-section").show();
+                break;
+            case "No username entered":
+                $("#username-error-response").html("Please enter a username.");
+                $("#username-error-section").show();
+                break;
+            default:
+                goToTopicScreen();
         }
     });
 
     // Binds a keypress event to the document for entering username
     $(document).on('keypress', function(e) {
 
+        let issue = ""; // Used in switch statement
         username = $('#user-input').val()
 
+        // Check if username entered
+        if(username == '') {
+            issue = "No username entered";
+        }
+
+        // Check if username already exists with anonymous function
+        let nameExists = false;
+        arrayOfUserObjects.forEach(user => {
+            if (user["name"] == username) {
+                nameExists = true;
+            }
+        });
+
+        // Error message if username already exists
+        if(nameExists && username != '') {
+            issue = "Username exists";
+        }
+
         if (e.which == 13) {
-            if (username != '') {
-                goToTopicScreen();
-                $(document).off('keypress'); // Turn off keypress detection
-            } else {
-                $("#username-error-response").html("Please enter a username.");
-                $("#username-error-section").show();
+            // Switch statement
+            // Gets rid of nested ifs and elses
+            switch(issue) {
+                case "Username exists":
+                    $("#username-error-response").html("Username already exists. Please enter a new username.");
+                    $("#username-error-section").show();
+                    break;
+                case "No username entered":
+                    $("#username-error-response").html("Please enter a username.");
+                    $("#username-error-section").show();
+                    break;
+                default:
+                    goToTopicScreen();
+                    $(document).off('keypress'); // Turn off keypress detection
             }
         }
     });
