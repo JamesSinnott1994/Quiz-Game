@@ -171,6 +171,19 @@ h1 {
 
 /*--------------------------------------------GAME PAGE - GAME SCREEN*/
 
+#hud-logo {
+    width: 45px;
+    height: 45px;
+}
+
+.navbar-brand h3 {
+    display: inline;
+}
+
+#modal-logo {
+    font-family: "Calistoga", sans-serif;
+}
+
 #nav-item-container {
     display: flex;
     flex-direction: row;
@@ -355,6 +368,10 @@ tr {
     #instructions-text p {
         font-size: 2em;
     }
+    #hud-logo {
+        width: 60px;
+        height: 60px;
+    }
     #game-header {
         font-size: 2em;
     }
@@ -426,6 +443,10 @@ tr {
         max-width: 60%;
         margin: 0 auto;
         height: 250px;
+    }
+    #hud-logo {
+        width: 75px;
+        height: 75px;
     }
     #game-area, #username-section {
         max-width: 60%;
