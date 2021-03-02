@@ -582,6 +582,9 @@ function smoothFocusOnTop() {
 
 function displayLeaderboardData() {
 
+    // Empties leaderboard of any data to prevent duplicate data being appended below
+    $("tbody").empty();
+
     // Retrieve names and scores from local storage
     let retrievedData = localStorage.getItem("userObjects");
     let leaderboardData = JSON.parse(retrievedData);
