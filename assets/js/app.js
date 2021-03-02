@@ -6,7 +6,7 @@ $(document).ready(function() {
     let difficulty;
     let quizData = [];
     let questionsAnswered = 0;
-    const amountOfQuestions = 2;
+    const amountOfQuestions = 1;
     let question;
     let correctAnswer;
     let incorrectAnswers;
@@ -623,6 +623,7 @@ function displayLeaderboardData() {
 
         // Append user data to the leaderboard table
         for (let i = 0; i < leaderboardSortedData.length; i++) {
+
             $("tbody").append(
                 `<tr>
                     <th>#${i+1}</th>

@@ -81,7 +81,7 @@ h1 {
 #instructions-text p {
     font-family: "Caladea", sans-serif;
     font-size: 1.25em;
-    font-weight: bold;
+    /* font-weight: bold; */
     line-height: 1.5em;
     margin-bottom: 2em;
 }
@@ -305,8 +305,15 @@ h1 {
 
 /*--------------------------------------------GAME PAGE - GAME OVER SCREEN*/
 
-#game-over-menu, #leaderboard-menu {
-    height: 50vh;
+#game-over-menu .button-container, #leaderboard-menu .button-container {
+    margin-bottom: 2em;
+}
+
+#game-over-screen p {
+    font-family: "Caladea", sans-serif;
+    font-size: 1.25em;
+    line-height: 1.5em;
+    margin-bottom: 2em;
 }
 
 /*--------------------------------------------GAME PAGE - LEADERBOARD SCREEN*/
@@ -394,6 +401,15 @@ tr {
         height: 70px;
         font-size: 2em;
     }
+    #game-over-header {
+        font-size: 4em;
+    }
+    #game-over-screen {
+        margin-top: 5em;
+    }
+    #game-over-screen p {
+        font-size: 2em;
+    }
     #leaderboard-table {
         width: 80%;
         margin: 0 auto;
@@ -460,6 +476,15 @@ tr {
         margin: 10% auto; /* 10% from the top and centered */
         width: 70%; /* Could be more or less, depending on screen size */
         height: 70%;
+    }
+    #game-over-header {
+        font-size: 3em;
+    }
+    #game-over-screen p{
+        font-size: 1.75em;
+    }
+    #game-over-section {
+        margin-bottom: 8em;
     }
 }
 
