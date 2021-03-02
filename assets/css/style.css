@@ -19,7 +19,7 @@ h1 {
 
 #logo-img-container {
     background-color: red;
-    width: 65%;
+    width: 55%;
     height: 175px;
     margin: 2em auto 0;
 }
@@ -344,7 +344,7 @@ tr {
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
     #logo-img-container {
-        width: 55%;
+        width: 45%;
         height: 280px;
         margin: 3em auto 0;
     }
