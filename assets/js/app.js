@@ -320,9 +320,11 @@ $(document).ready(function() {
             localStorage.setItem('userObjects', JSON.stringify(arrayOfUserObjects));
 
             // Updates game over screen data
+            $('#username').html(username);
             $('#points').html(score);
             $('#correct-answers').html(noOfCorrectAnswers);
             $('#total-questions').html(amountOfQuestions);
+            getLeaderboardPosition();
 
             // Hide Game screen
             $("#game-screen").hide();
@@ -578,6 +580,24 @@ function smoothFocusOnTop() {
     });
     }
 
+}
+
+function getLeaderboardPosition() {
+    // Retrieve names and scores from local storage
+    let retrievedData = localStorage.getItem("userObjects");
+    let leaderboardData = JSON.parse(retrievedData);
+    let leaderboardSortedData;
+
+    // Got help for below with the following link
+    // https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
+    leaderboardSortedData = leaderboardData.sort((a, b) => (a.score > b.score) ? -1 : 1);
+
+    leaderboardSortedData.forEach(function(user, position){
+        if (user["name"] == $('#username').html()) {
+            $('#position').html(position+1);
+            $('#no-of-players').html(leaderboardSortedData.length);
+        }
+    });
 }
 
 function displayLeaderboardData() {
