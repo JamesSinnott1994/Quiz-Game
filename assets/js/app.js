@@ -6,7 +6,7 @@ $(document).ready(function() {
     let difficulty;
     let quizData = [];
     let questionsAnswered = 0;
-    const amountOfQuestions = 10;
+    const amountOfQuestions = 2;
     let question;
     let correctAnswer;
     let incorrectAnswers;
