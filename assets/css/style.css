@@ -15,14 +15,6 @@ h1 {
     font-family: "Calistoga", sans-serif;
 }
 
-p {
-    font-family: "Caladea", sans-serif;
-    font-size: 1.25em;
-    font-weight: bold;
-    line-height: 2em;
-    margin-bottom: 2em;
-}
-
 /*--------------------------------------------HOME PAGE*/
 
 #logo-img-container {
@@ -84,6 +76,14 @@ p {
     width: 90%;
     max-width: 1000px;
     margin: 0 auto;
+}
+
+#instructions-text p {
+    font-family: "Caladea", sans-serif;
+    font-size: 1.25em;
+    font-weight: bold;
+    line-height: 1.5em;
+    margin-bottom: 2em;
 }
 
 #instructions-button {
@@ -349,6 +349,12 @@ tr {
     #logo h1 {
         font-size: 6em;
     }
+    #instructions-header h1 {
+        font-size: 4em;
+    }
+    #instructions-text p {
+        font-size: 2em;
+    }
     #game-header {
         font-size: 2em;
     }
@@ -406,6 +412,12 @@ tr {
     #instructions-button {
         font-size: 2.5em;
         width: 20%;
+    }
+    #instructions-header h1 {
+        font-size: 3em;
+    }
+    #instructions-text p {
+        font-size: 1.75em;
     }
     .screen-btn {
     	width: 300px;
