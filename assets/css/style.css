@@ -88,18 +88,7 @@ h1 {
 
 #instructions-button {
     /* https://cssgradient.io/shades-of-green/ */
-    background-color: #03C03C; 
-    color: white;
-    text-decoration: none;
-    font-family: "Caladea", sans-serif;
-    border-radius: 8px;
-    width: 60%;
-    height: 80px;
-    font-size: 1.5em;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: #03C03C;
 }
 
 /*--------------------------------------------GAME PAGE - COMMON SELECTORS*/
@@ -467,7 +456,7 @@ tr {
     .screen-btn {
     	width: 300px;
     }
-     #img-container {
+    #img-container {
         max-width: 60%;
         margin: 0 auto;
         height: 250px;
