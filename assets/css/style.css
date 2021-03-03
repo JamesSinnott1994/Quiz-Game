@@ -18,7 +18,7 @@ h1 {
 /*--------------------------------------------HOME PAGE*/
 
 #logo-img-container {
-    background-color: red;
+    background-color: #e6ece2;
     width: 55%;
     height: 175px;
     margin: 2em auto 0;
@@ -318,6 +318,18 @@ h1 {
 
 /*--------------------------------------------GAME PAGE - LEADERBOARD SCREEN*/
 
+/* For sticking the leaderboard menu to bottom of page, help gotten from link below */
+/* https://css-tricks.com/couple-takes-sticky-footer/ */
+#leaderboard-screen {
+    min-height: 80vh;
+    grid-template-rows: 1fr auto;
+}
+
+#leaderboard-menu {
+    grid-row-start: 2;
+    grid-row-end: 3;
+}
+
 table {
     text-align: center;
 }
@@ -414,7 +426,7 @@ tr {
         width: 80%;
         margin: 0 auto;
     }
-    #leaderboard-table {
+    tr {
         border-left: 1px solid #212529;
         border-right: 1px solid #212529;
     }

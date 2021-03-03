@@ -362,7 +362,7 @@ $(document).ready(function() {
         $("#game-over-header").hide();
 
         // Display Game Over screen
-        $("#leaderboard-screen").show();
+        $("#leaderboard-screen").css('display', 'grid');
         $("#leaderboard-header").show();
     });
 
