@@ -6,7 +6,7 @@ $(document).ready(function() {
     let difficulty;
     let quizData = [];
     let questionsAnswered = 0;
-    const amountOfQuestions = 1;
+    const amountOfQuestions = 10;
     let question;
     let correctAnswer;
     let incorrectAnswers;
@@ -17,8 +17,6 @@ $(document).ready(function() {
     let time = 30;
     let timerStopped = false;
     let gameScreenDisplayed = false;
-
-    //localStorage.clear();
 
     // Get array of user objects
     let retrievedData = localStorage.getItem("userObjects");

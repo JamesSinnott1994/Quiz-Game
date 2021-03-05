@@ -63,6 +63,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 /*--------------------------------------------INSTRUCTIONS PAGE*/
@@ -249,22 +250,36 @@ h1 {
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
+  background-color: #e6ece2;
   margin: 20% auto; /* 20% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
-  height: 80%;
+  min-height: 80%;
 }
 
 .modal-header {
-  padding: 2px 16px;
-  background-color: #5cb85c;
-  color: white;
+    /* background: green; */
+    padding: 2px 16px;
+    color: white;
+    width: 100%;
 }
 
-.modal-header h2 {
+#modal-img-container {
+    width: 80%;
+    height: 150px;
     margin: 0 auto;
+    background-color: red;
+}
+
+#modal-img {
+    width: 100%;
+    height: 100%;
+}
+
+.modal h2 {
+    font-family: "Calistoga", sans-serif;
+    margin: 0 auto 1em;
     text-align: center;
 }
 
@@ -402,6 +417,18 @@ tr {
         height: 70px;
         font-size: 2em;
     }
+    #modal-img-container {
+        width: 60%;
+        height: 250px;
+    }
+    .modal h2 {
+        margin: 0 auto;
+        font-size: 4em;
+    }
+    .modal-body .button {
+        margin: 0.5em auto;
+        width: 60%;
+    }
     #game-over-header {
         font-size: 4em;
     }
@@ -474,9 +501,22 @@ tr {
         font-size: 2em;
     }
     .modal-content {
-        margin: 10% auto; /* 10% from the top and centered */
+        margin: 8% auto; /* 10% from the top and centered */
         width: 70%; /* Could be more or less, depending on screen size */
         height: 70%;
+    }
+    #modal-img-container {
+        width: 33%;
+        height: 225px;
+    }
+    .modal h2 {
+        margin: 0 auto;
+        font-size: 4em;
+    }
+    .modal-body .button {
+        margin: 0.5em auto;
+        width: 80%;
+        text-align: center;
     }
     #game-over-header {
         font-size: 3em;
