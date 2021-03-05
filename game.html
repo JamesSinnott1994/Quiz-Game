@@ -2,39 +2,49 @@
 <html lang="en">
 
 <head>
+    <!-- Meta Data -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="favicon.png" type="image/x-icon" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="Description" content="General Knowledge Quiz Game"/>
+
+    <!-- Favicon -->
+    <link rel="icon" href="favicon.png" type="image/x-icon" />
+
+    <!-- Adds Bootstrap to the project -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha2/css/bootstrap.min.css">
+
+    <!-- Local Stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
-    <title>Quiz Game - Play</title>
+
+    <title>QuizUp - Play</title>
 </head>
 
 <body>
 
+    <!-- "Correct" sound -->
     <audio id="correct-sound">
         <source src="assets/sounds/correct-answer-9.mp3" type="audio/mp3">
     </audio>
 
+    <!-- "Wrong" sound -->
     <audio id="wrong-sound">
         <source src="assets/sounds/wrong-answer.mp3" type="audio/mp3">
     </audio>
 
     <header>
-        <h1 id="username-header" class="my-5">Enter Username</h1>
-        <h1 id="topic-header" class="my-5">Choose a Topic</h1>
-        <h1 id="difficulty-header" class="my-5">Choose a Difficulty</h1>
 
+        <h1 id="username-header" class="my-5">Enter Username</h1><!-- Username header -->
+        <h1 id="topic-header" class="my-5">Choose a Topic</h1><!-- Topic header -->
+        <h1 id="difficulty-header" class="my-5">Choose a Difficulty</h1><!-- Difficulty header -->
+
+        <!-- Heads-Up-Display (HUD) -->
         <nav id="game-header" class="navbar navbar-light fixed-top bg-light">
 
-            <!-- <a class="navbar-brand ml-2 py-0" href="#">
-                <img id="hud-logo" src="assets/img/hud-logo2.jpg" alt="HUD Logo">
-            </a> -->
-
+            <!-- Clickable Link - Will open Modal popup window -->
             <a id="modal-logo" class="navbar-brand ml-2" href="#">QuizUp</a>
 
+            <!-- Game data, i.e. Score, Timer, Questions remaining -->
             <ul id="nav-item-container">
                 <li>Score: <span id="score">0</span></li>
                 <li id="timer-container">Timer: <span id="timer">30</span></li>
@@ -43,90 +53,125 @@
 
         </nav>
 
-        <h1 id="game-over-header" class="my-5">Quiz Complete</h1>
-        <h1 id="leaderboard-header" class="my-5">Leaderboard</h1>
+        <h1 id="game-over-header" class="my-5">Quiz Complete</h1><!-- Game Over header -->
+        <h1 id="leaderboard-header" class="my-5">Leaderboard</h1><!-- Leaderboard header -->
 
     </header>
 
+    <!-- 
+        -> There are six "main" elements representing six screens of the Game page.
+
+        -> According to the HTML Standard:
+
+        "A document must not have more than one main element that does not have the hidden attribute specified."
+
+        (https://html.spec.whatwg.org/multipage/grouping-content.html#the-main-element)
+     -->
+
+    <!-- 1) Enter Username Screen -->
     <main id="username-screen">
 
+        <!-- Error will appear if invalid username is entered -->
         <section id="username-error-section">
             <p id="username-error-response">Template</p>
         </section>
 
+        <!-- Username input section -->
         <section id="username-section">
+
             <div class="input-group mb-3">
-              <input id ="user-input" name="fname" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="username-btn" autofocus>
-              <button class="btn btn-outline-secondary" type="button" id="username-btn">Submit</button>
+                
+                <!-- Input box -->
+                <input id ="user-input" name="fname" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="username-btn" autofocus>
+
+                <!-- Submit button -->
+                <button class="btn btn-outline-secondary" type="button" id="username-btn">Submit</button>
+
             </div>
+
         </section>
 
     </main>
 
-    <main id="topic-screen">
+    <!-- 2) Choose Topic Screen -->
+    <main id="topic-screen" class="container-fluid">
 
         <section id="topic-section" class="row m-0">
 
-            <!-- Columns start at 100% wide on mobile -->
-            <!-- 50% wide on mobile  -->
+            <!-- Each column starts at 100% wide on mobile -->
             <!-- 50% wide on tablet  -->
             <!-- 25% wide on desktop  -->
             <div class="col-12 col-md-6 col-lg-3 button-container mb-5">
+
                 <!-- "value" attribute corresponds to "category" value for the API query string -->
                 <button class="screen-btn" value="9" style="background-color: #03C03C;">General Knowledge</button>
+
             </div>
 
             <div class="col-12 col-md-6 col-lg-3 button-container mb-5">
+
                 <!-- "value" attribute corresponds to "category" value for the API query string -->
                 <button class="screen-btn" value="11"  style="background-color: PaleVioletRed;">Entertainment</button>
+
             </div>
 
             <div class="col-12 col-md-6 col-lg-3 button-container mb-5">
+
                 <!-- "value" attribute corresponds to "category" value for the API query string -->
                 <button class="screen-btn" value="17"  style="background-color: CornflowerBlue;">Science</button>
+
             </div>
 
             <div class="col-12 col-md-6 col-lg-3 button-container mb-5">
+
                 <!-- "value" attribute corresponds to "category" value for the API query string -->
                 <button class="screen-btn" value="23"  style="background-color: Orange;">History</button>
+
             </div>
 
             <div class="col-12 col-md-6 col-lg-3 button-container mb-5">
+
                 <!-- "value" attribute corresponds to "category" value for the API query string -->
                 <button class="screen-btn" value="20"  style="background-color: DarkMagenta;">Mythology</button>
+
             </div>
 
             <div class="col-12 col-md-6 col-lg-3 button-container mb-5">
+
                 <!-- "value" attribute corresponds to "category" value for the API query string -->
                 <button class="screen-btn" value="22"  style="background-color: ForestGreen;">Geography</button>
+
             </div>
 
             <div class="col-12 col-md-6 col-lg-3 button-container mb-5">
+
                 <!-- "value" attribute corresponds to "category" value for the API query string -->
                 <button class="screen-btn" value="21"  style="background-color: FireBrick;">Sports</button>
+
             </div>
 
             <div class="col-12 col-md-6 col-lg-3 button-container mb-5">
+
                 <!-- "value" attribute corresponds to "category" value for the API query string -->
                 <button class="screen-btn" value="24"  style="background-color: LightSlateGrey;">Politics</button>
+                
             </div>
 
         </section>
 
     </main>
 
-    <main id="difficulty-screen">
+    <!-- 3) Choose Difficulty Screen -->
+    <main id="difficulty-screen" class="container-fluid">
 
+        <!-- Error will appear if API data cannot be retreived -->
         <section id="error-response-section">
             <p id="error-response">Template</p>
         </section>
 
+        <!-- Section area for buttons -->
         <section id="difficulty-section" class="row m-0">
 
-            <!-- Columns start at 100% wide on mobile -->
-            <!-- 50% wide on mobile  -->
-            <!-- 50% wide on tablet  -->
-            <!-- 25% wide on desktop  -->
             <div class="col-12 col-md-6 col-lg-4 button-container mb-5">
                 <button class="screen-btn" style="background-color: #03C03C;">Easy</button>
             </div>
@@ -147,17 +192,16 @@
 
     </main>
 
+    <!-- 4) Game Screen -->
     <main id="game-screen">
 
-        <!-- Trigger/Open The Modal -->
-        <!-- <button id="myBtn">Open Modal</button> -->
-
-        <!-- The Modal -->
+        <!-- Modal Popup -->
         <section id="myModal" class="modal">
 
             <!-- Modal content -->
-            <div class="modal-content">
+            <div class="container-fluid modal-content">
 
+                <!-- Contains Logo image -->
                 <div class="modal-header">
                     
                     <div id="modal-img-container">
@@ -168,7 +212,8 @@
 
                 <h2>QuizUp</h2>
                 
-                <div class="modal-body row m-0">
+                <div class="modal-body row m-0">`
+
                     <!-- Columns start at 100% wide on mobile and bump up to 33% wide on desktop -->
                     <div class="col-12 col-lg-4 button-container">
                         <a href="game.html" class="button" style="background-color: #03C03C;">New Game</a>
@@ -183,42 +228,50 @@
                     <div class="col-12 col-lg-4 button-container">
                         <a href="index.html" class="button" style="background-color: CornflowerBlue;">Exit Game</a>
                     </div>
+
                 </div>
 
             </div>
 
         </section>
 
-        
-
-        <section id="img-container" class="mt-5 mb-4">
+        <!-- Shows an image for the topic selected -->
+        <div id="img-container" class="mt-5 mb-4">
     		<img id="img" src="assets/img/general-knowledge.jpg" alt="Topic Image">
-    	</section>
+    	</div>
 
-    	<section id="game-area">
+        <!-- Game area section -->
+    	<section id="game-area" class="container-fluid">
 
+            <!-- Displays each question -->
     		<h2 id="question" class="mb-4 mb-lg-2">Which of the following is NOT a quote from the 1942 film Casablanca?</h2>
 
+            <!-- Section container for the four answer buttons -->
     		<section id="answer-btn-container" class="row m-0">
-    			<!-- Columns start at 100% wide on mobile -->
-	            <!-- 50% wide on tablet & desktop  -->
+
+    			<!-- First answer button -->
 	            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
 	                <button id="answer-1" class="answer-btn">"Here's lookin' at you, kid."</button>
 	            </div>
 
+                <!-- Second answer button -->
 	            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
 	                <button id="answer-2" class="answer-btn">"Frankly, my dear, I don't give a damn."</button>
 	            </div>
 
+                <!-- Third answer button -->
 	            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
 	                <button id="answer-3" class="answer-btn">"Of all the gin joints, in all the towns, in all the world, she walks into mine..."</button>
 	            </div>
 
+                <!-- Fourth answer button -->
 	            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
 	                <button id="answer-4" class="answer-btn">"Round up the usual suspects."</button>
-	            </div>
+                </div>
+                
     		</section>
 
+            <!-- Continue button -->
             <div id="continue-btn-container">
                 <button id="continue-btn" class="mb-5 mt-4" disabled>Continue</button>
             </div>
@@ -227,42 +280,55 @@
 
     </main>
 
-    <main id="game-over-screen">
+    <!-- 5) Game Over Screen -->
+    <main id="game-over-screen" class="container-fluid">
+
+        <!-- User data displayed once game is finished -->
         <section id="game-over-section">
+
+            <!-- Player score -->
             <p>
                 <b><span id="username">Username</span></b>, you scored <b><span id="points">0</span></b> points.
             </p>
 
-            <p>You got <span id="correct-answers">0</span> out of <span id="total-questions">0</span> questions correct.</p>
+            <!-- Answers player got correct -->
+            <p>You got <b><span id="correct-answers">0</span></b> out of <b><span id="total-questions">0</span></b> questions correct.</p>
 
+            <!-- Player position on the leaderboard -->
             <p>You are at position <b><span id="position">0</span></b> out of <b><span id="no-of-players">0</span></b> players on the leaderboard.</p>
+
         </section>
 
+        <!-- Menu -->
         <section id="game-over-menu" class="row m-0">
 
-             <!-- Columns start at 100% wide on mobile and bump up to 33% wide on desktop -->
             <div class="col-12 col-lg-4 button-container">
                 <a href="game.html" class="button" style="background-color: #03C03C;">New Game</a>
             </div>
 
-            <!-- Columns start at 33% wide on mobile and bump up to 50% wide on desktop -->
             <div class="col-12 col-lg-4 button-container">
                 <a href="#" id="leaderboard-btn" class="button" style="background-color: Tomato;">Leaderboard</a>
             </div>
             
-            <!-- Columns start at 33% wide on mobile and bump up to 50% wide on desktop -->
             <div class="col-12 col-lg-4 button-container">
                 <a href="index.html" class="button" style="background-color: CornflowerBlue;">Exit Game</a>
             </div>
             
         </section>
+
     </main>
 
+    <!-- 6) Leaderboard Screen -->
     <main id="leaderboard-screen">
 
-        <!-- https://getbootstrap.com/docs/4.0/content/tables/ -->
+        <!-- 
+            Bootstrap Table:
+            https://getbootstrap.com/docs/4.0/content/tables/ 
+        -->
         <section id="leaderboard-table">
+
             <table class="table table-striped">
+
                 <thead>
                     <tr>
                         <th scope="col">Rank</th>
@@ -270,36 +336,46 @@
                         <th scope="col">Score</th>
                     </tr>
                 </thead>
+
                 <tbody>
+                    <!-- Users data will be appended here by JavaScript file -->
                 </tbody>
+
             </table>
+
         </section>
         
-        
-        <section id="leaderboard-menu" class="row">
+        <!-- Menu -->
+        <section id="leaderboard-menu" class="container-fluid">
 
-             <!-- Columns start at 100% wide on mobile and bump up to 33% wide on desktop -->
-            <div class="col-12 col-lg-4 button-container">
-                <a href="game.html" class="button" style="background-color: #03C03C;">New Game</a>
-            </div>
+            <div class="row">
 
-            <!-- Columns start at 33% wide on mobile and bump up to 50% wide on desktop -->
-            <div class="col-12 col-lg-4 button-container">
-                <a href="#" id="game-stats-btn" class="button" style="background-color: Tomato;">Game Stats</a>
-            </div>
-            
-            <!-- Columns start at 33% wide on mobile and bump up to 50% wide on desktop -->
-            <div class="col-12 col-lg-4 button-container">
-                <a href="index.html" class="button" style="background-color: CornflowerBlue;">Exit Game</a>
+                <div class="col-12 col-lg-4 button-container">
+                    <a href="game.html" class="button" style="background-color: #03C03C;">New Game</a>
+                </div>
+
+                <div class="col-12 col-lg-4 button-container">
+                    <a href="#" id="game-stats-btn" class="button" style="background-color: Tomato;">Game Stats</a>
+                </div>
+                
+                <div class="col-12 col-lg-4 button-container">
+                    <a href="index.html" class="button" style="background-color: CornflowerBlue;">Exit Game</a>
+                </div>
+
             </div>
             
         </section>
 
     </main>
 
+    <!-- Bootstrap JavaScript plugins -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-alpha2/js/bootstrap.min.js"></script>
+
+    <!-- Adds jQuery to project -->
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+
+    <!-- Local JavaScript file -->
     <script src="assets/js/app.js"></script>
 </body>
 
