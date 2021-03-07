@@ -11,10 +11,6 @@ header {
 	text-align: center;
 }
 
-h1 {
-    font-family: "Calistoga", sans-serif;
-}
-
 /*--------------------------------------------HOME PAGE*/
 
 #logo-img-container {
@@ -24,18 +20,13 @@ h1 {
     margin: 2em auto 0;
 }
 
-#logo-img {
-    width: 100%;
-    height: 100%;
-}
-
-#logo {
+#logo-header {
     align-items: center;
     justify-content: center;
     margin-bottom: 4.5em;
 }
 
-#logo h1 {
+#logo-header h1 {
     font-size: 3em;
 }
 
@@ -49,9 +40,30 @@ h1 {
     justify-content: center;
 }
 
-.button {
-    /* https://cssgradient.io/shades-of-green/ */
-    /*background-color: #03C03C; */
+/*--------------------------------------------INSTRUCTIONS PAGE*/
+
+#instructions-header {
+    margin-top: 2em;
+}
+
+#instructions-text {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/*--------------------------------------------COMMON SELECTORS*/
+
+h1, #modal-logo {
+    font-family: "Calistoga", sans-serif;
+}
+
+#logo-img, #img, #modal-img {
+    width: 100%;
+    height: 100%;
+}
+
+.button, .screen-btn {
     color: white;
     text-decoration: none;
     font-family: "Caladea", sans-serif;
@@ -63,36 +75,28 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
 }
 
-/*--------------------------------------------INSTRUCTIONS PAGE*/
-
-#instructions-header {
-    margin-top: 2em;
-    text-align: center;
-}
-
-#instructions-text {
-    width: 90%;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-#instructions-text p {
+#instructions-text p, #game-over-screen p {
     font-family: "Caladea", sans-serif;
     font-size: 1.25em;
-    /* font-weight: bold; */
     line-height: 1.5em;
     margin-bottom: 2em;
 }
 
-#instructions-button {
-    /* https://cssgradient.io/shades-of-green/ */
-    background-color: #03C03C;
+#username-section, #answer-btn-container, #continue-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/*--------------------------------------------GAME PAGE - COMMON SELECTORS*/
+#username-error-section, #error-response-section {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    display: none;
+    color: red;
+}
 
 #topic-header, #difficulty-header, #game-over-header, #leaderboard-header {
     height: 5vh;
@@ -113,18 +117,8 @@ h1 {
     text-align: center;
 }
 
-#answer-btn-container, #continue-btn-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#username-error-section, #error-response-section {
-    width: 90%;
-    margin: 0 auto;
-    text-align: center;
-    display: none;
-    color: red;
+#game-over-menu .button-container, #leaderboard-menu .button-container {
+    margin-bottom: 2em;
 }
 
 /*--------------------------------------------GAME PAGE - USERNAME SCREEN*/
@@ -137,42 +131,9 @@ h1 {
     min-height: 70vh;
     width: 80%;
     margin: 0 auto;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/*--------------------------------------------GAME PAGE - TOPIC SCREEN*/
-
-.screen-btn {
-    color: white;
-    text-decoration: none;
-    font-family: "Caladea", sans-serif;
-    border-radius: 8px;
-    width: 60%;
-    height: 80px;
-    font-size: 1.5em;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /*--------------------------------------------GAME PAGE - GAME SCREEN*/
-
-#hud-logo {
-    width: 45px;
-    height: 45px;
-}
-
-.navbar-brand h3 {
-    display: inline;
-}
-
-#modal-logo {
-    font-family: "Calistoga", sans-serif;
-}
 
 #nav-item-container {
     display: flex;
@@ -192,23 +153,14 @@ h1 {
     height: 175px;
 }
 
-#img {
-    width: 100%;
-    height: 100%;
-}
-
-.answer-btn {
+.answer-btn, #continue-btn {
     color: black;
     background-color: #c0bdae;
-
     text-decoration: none;
     font-family: "Caladea", sans-serif;
     border-radius: 8px;
-
     width: 90%;
-
     min-height: 45px;
-    
     font-size: 1.5em;
     font-weight: 600;
     display: flex;
@@ -220,49 +172,42 @@ h1 {
     color: white;
     background-color: #444444;
     opacity: 0.5;
-    text-decoration: none;
-    font-family: "Caladea", sans-serif;
-    border-radius: 8px;
     width: 50%;
     height: 45px;
-    font-size: 1.5em;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 /*--------------------------------------------GAME PAGE - MODAL WINDOW*/
 
-/* The Modal (background) */
+/* 
+For creating the modal window I got help from the following source:
+https://www.w3schools.com/howto/howto_css_modals.asp 
+*/
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
 }
 
 /* Modal Content/Box */
 .modal-content {
   background-color: #e6ece2;
-  margin: 20% auto; /* 20% from the top and centered */
+  margin: 20% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 80%;
   min-height: 80%;
 }
 
 .modal-header {
-    /* background: green; */
     padding: 2px 16px;
     color: white;
-    width: 100%;
 }
 
 #modal-img-container {
@@ -272,52 +217,18 @@ h1 {
     background-color: red;
 }
 
-#modal-img {
-    width: 100%;
-    height: 100%;
-}
-
 .modal h2 {
     font-family: "Calistoga", sans-serif;
     margin: 0 auto 1em;
     text-align: center;
 }
 
-/* Modal Body */
 .modal-body {
     padding: 2px 16px;
 }
 
 .modal-body .button {
     width: 80%;
-}
-
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-/*--------------------------------------------GAME PAGE - GAME OVER SCREEN*/
-
-#game-over-menu .button-container, #leaderboard-menu .button-container {
-    margin-bottom: 2em;
-}
-
-#game-over-screen p {
-    font-family: "Caladea", sans-serif;
-    font-size: 1.25em;
-    line-height: 1.5em;
-    margin-bottom: 2em;
 }
 
 /*--------------------------------------------GAME PAGE - LEADERBOARD SCREEN*/
@@ -343,19 +254,10 @@ thead {
 }
 
 tr {
-    /* border-top: 1px solid #212529; */
     border-bottom: 1px solid #212529;
 }
 
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
-
-/* // X-Small devices (portrait phones, less than 576px) */
-/* // No media query for `xs` since this is the default in Bootstrap */
-
-/* // Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) {
-
-}
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
@@ -364,39 +266,29 @@ tr {
         height: 280px;
         margin: 3em auto 0;
     }
-    #logo {
+    #logo-header {
         margin-bottom: 9em;
     }
-    #menu .button-container{
+    #logo-header h1 {
+        font-size: 6em;
+    }
+    #menu .button-container {
         margin-bottom: 6em;
     }
-    .button, #instructions-button {
+    .button, #instructions-button, .screen-btn {
         width: 50%;
         height: 120px;
         font-size: 2em;
         font-weight: 600;
     }
-    .screen-btn {
-    	width: 65%;
-        height: 120px;
-        font-size: 2em;
-        font-weight: 600;
-    }
-    #logo h1 {
-        font-size: 6em;
-    }
     #instructions-header h1 {
         font-size: 4em;
     }
-    #instructions-text p {
+    #instructions-text p, #game-over-screen p, #game-header {
         font-size: 2em;
     }
-    #hud-logo {
-        width: 60px;
-        height: 60px;
-    }
-    #game-header {
-        font-size: 2em;
+    .screen-btn {
+    	width: 65%;
     }
     .navbar-brand {
         font-size: 1.25em;
@@ -429,14 +321,15 @@ tr {
         margin: 0.5em auto;
         width: 60%;
     }
+    .modal-content {
+        margin: 15% auto; /* 15% from the top and centered */
+        width: 90%; /* Could be more or less, depending on screen size */
+    }
     #game-over-header {
         font-size: 4em;
     }
     #game-over-screen {
         margin-top: 5em;
-    }
-    #game-over-screen p {
-        font-size: 2em;
     }
     #leaderboard-table {
         width: 80%;
@@ -446,25 +339,18 @@ tr {
         border-left: 1px solid #212529;
         border-right: 1px solid #212529;
     }
-    .modal-content {
-        margin: 15% auto; /* 15% from the top and centered */
-        width: 90%; /* Could be more or less, depending on screen size */
-    }
 }
 
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
     #logo-img-container {
         width: 20%;
-        height: 280px;
         margin: 2em auto 0;
     }
-    #logo {
-        align-items: center;
-        justify-content: center;
+    #logo-header {
         margin-bottom: 6em;
     }
-    #menu .button-container{
+    #menu .button-container {
         margin-bottom: 0;
     }
     .button {
@@ -477,7 +363,7 @@ tr {
     #instructions-header h1 {
         font-size: 3em;
     }
-    #instructions-text p {
+    #instructions-text p, #game-over-screen p {
         font-size: 1.75em;
     }
     .screen-btn {
@@ -487,10 +373,6 @@ tr {
         max-width: 60%;
         margin: 0 auto;
         height: 250px;
-    }
-    #hud-logo {
-        width: 75px;
-        height: 75px;
     }
     #game-area, #username-section {
         max-width: 60%;
@@ -509,10 +391,6 @@ tr {
         width: 33%;
         height: 225px;
     }
-    .modal h2 {
-        margin: 0 auto;
-        font-size: 4em;
-    }
     .modal-body .button {
         margin: 0.5em auto;
         width: 80%;
@@ -521,18 +399,7 @@ tr {
     #game-over-header {
         font-size: 3em;
     }
-    #game-over-screen p{
-        font-size: 1.75em;
-    }
     #game-over-section {
         margin-bottom: 8em;
     }
-}
-
-/* // X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-}
-
-/* // XX-Large devices (larger desktops, 1400px and up) */
-@media (min-width: 1400px) {
 }
