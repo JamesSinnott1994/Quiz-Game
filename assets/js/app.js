@@ -15,8 +15,45 @@ $(document).ready(function() {
     let currentUserID;
     let username = '';
     let time = 30;
-    let timerStopped = false;
+    let timerStopped = true;
     let gameScreenDisplayed = false;
+
+    /*
+    Got help with this timer function from here:
+    https://www.w3schools.com/howto/howto_js_countdown.asp
+    */
+
+    // Update the count down every 1 second
+    let myTimer = setInterval(function() {
+        
+        // Decrement timer each second
+        if (!timerStopped) {
+            time -= 1;
+            $("#timer").html(`${time}`);
+        }
+
+        // Change colour if less than 10
+        if (time <= 10) {
+            $("#timer-container").css('color', 'red');
+        }
+
+        // If the count down is over:
+            // Play wrong sound
+            // Show correct answer
+        if (time <= 0) {
+            timerStopped = true;
+            time = 30;
+            $("#timer").html("Expired");
+            $("#timer-container").css('color', 'black');
+
+            enableContinueBtn();
+            disableAnswerBtns();
+
+            $("#wrong-sound")[0].play();
+            $(".correct-answer").css('background-color', 'green');
+            $(".correct-answer").css('transition', 'all ease 1s');
+        }
+    }, 1000);
 
     // Get array of user objects
     let retrievedData = localStorage.getItem("userObjects");
@@ -190,7 +227,7 @@ $(document).ready(function() {
             gameScreenDisplayed = true;
         }
 
-        timer(); // Start timer
+        timerStopped = false;
         addAnswerButtons();
 
         // Binds a click event to each answer button on the Game screen
@@ -345,7 +382,6 @@ $(document).ready(function() {
     $('#modal-resume-btn').bind('click', function() {
 
         timerStopped = false;
-        timer();// Start timer
 
         $("#myModal").css('display', 'none');
     });
@@ -380,48 +416,7 @@ $(document).ready(function() {
         $("#leaderboard-list").empty();
     });
 
-    // Timer
     function timer() {
-        /*
-        Got help with this timer function from here:
-        https://www.w3schools.com/howto/howto_js_countdown.asp
-        */
-
-        // Update the count down every 1 second
-        var x = setInterval(function() {
-            
-        // Decrement timer each second
-        if (!timerStopped) {
-            time -= 1;
-            $("#timer").html(`${time}`);
-        }
-
-        // Clears timer set
-        if(timerStopped) {
-            clearInterval(x);
-        }
-
-        // Change colour if less than 10
-        if (time <= 10) {
-            $("#timer-container").css('color', 'red');
-        }
-
-        // If the count down is over:
-            // Play wrong sound
-            // Show correct answer
-        if (time <= 0) {
-            clearInterval(x);
-            $("#timer").html("Expired");
-            $("#timer-container").css('color', 'black');
-
-            enableContinueBtn();
-            disableAnswerBtns();
-
-            $("#wrong-sound")[0].play();
-            $(".correct-answer").css('background-color', 'green');
-            $(".correct-answer").css('transition', 'all ease 1s');
-        }
-        }, 1000);
 
     }
 
@@ -639,7 +634,6 @@ function checkForErrors(responseCode) {
         - true, if errors exist
         - false, if no errors exist
     */
-    console.log(responseCode);
     if (responseCode == 0) {
         //console.log("Code 0: SUCCESS. Returned results successfully.");
         return false;
