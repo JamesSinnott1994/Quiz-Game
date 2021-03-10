@@ -194,3 +194,32 @@ The site is deployed on GitHub pages. The setup involved was:
 ### Creating a local clone
 - Project can be downloaded as a .zip file by clicking the 'Code' button in the project repository and clicking 'Download ZIP'.
 - Project can also be cloned by entering `git clone https://github.com/JamesSinnott1994/Quiz-Game.git` in the terminal.
+
+---
+## Credits
+
+### Code Attribution
+- Used code relating to the [Bootstrap Navbar](https://getbootstrap.com/docs/5.0/components/navbar/).
+- Used code relating to [Bootstrap Tables](https://getbootstrap.com/docs/5.0/content/tables/).
+- Code for the [Modal Window](https://www.w3schools.com/howto/howto_css_modals.asp).
+- Leaderboard [sticky footer](https://css-tricks.com/couple-takes-sticky-footer/).
+- [Countdown Timer](https://www.w3schools.com/howto/howto_js_countdown.asp).
+- Help with [playing audio](https://medium.com/@ericschwartz7/adding-audio-to-your-app-with-jquery-fa96b99dfa97).
+- Help with making answer button divs the [same height](https://css-tricks.com/snippets/jquery/equalize-heights-of-divs/).
+- [Smooth scrolling](https://css-tricks.com/snippets/jquery/smooth-scrolling/.)
+- Sort an array of objects by [property value](https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/).
+
+### Image Source Attribution
+- [Logo](https://www.shutterstock.com/image-vector/question-mark-sign-icon-help-speech-672447283)
+-[General Knowledge](https://images.creativemarket.com/0.1.0/ps/6151529/3005/2000/m1/fpnw/wm0/quiz-1-.jpg?1553762089&s=9b9ad3d167a8d446dd625dabd9ef4ea0)
+- [Entertainment image](https://cdn.wallpapersafari.com/32/9/sQUjeX.jpg)
+- [Science](https://image.freepik.com/free-vector/hand-drawn-science-background_23-2148532292.jpg)
+- [History](https://images-na.ssl-images-amazon.com/images/S/sgp-catalog-images/region_US/qez76-05TFSK3K6AQ-Full-Image_GalleryBackground-en-US-1588781643677._SX1080_.jpg)
+- [Mythology](https://ounews.co/wp-content/uploads/2019/11/Troy.jpg)
+- [Geography](https://i.pinimg.com/originals/83/60/a9/8360a97f8ece0fb7cceacd7bb2f6d910.jpg)
+- [Sports](https://i.pinimg.com/originals/ee/66/bf/ee66bf512ebff05c91c83c9d77ab09b5.jpg)
+- [Politics](https://festivalofpolitics.ie/wp-content/uploads/2019/10/FOP_HumansOfPolitics_2600x1000-720x320.jpg)
+
+### Sound Source Attribution
+- [Correct Answer](https://www.dreamstime.com/quiz-correct-answer-sound-quiz-games-etc-quiz-correct-answer-audio158435040)
+- [Wrong Answer](https://www.dreamstime.com/royalty-free-sound-effect-wrong-answer-sound-to-indicate-audio127883895)
