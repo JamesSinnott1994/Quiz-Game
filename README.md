@@ -151,3 +151,31 @@ The website will be broken down into three areas in order to achieve the project
 - There will be fading animations for buttons fading out of sight.
 - There will be hover effects for the various buttons.
 - There will be shadow effects for the various buttons.
+
+---
+## Technologies
+
+### Workspace
+
+- Gitpod
+
+### Languages
+
+- HTML5
+- CSS3
+- JavaScript
+
+### Frameworks & Libraries
+
+- Bootstrap5
+- jQuery
+- Google Fonts
+
+### Version Control
+
+- Git
+- Github
+
+### Wireframes
+
+- Balsamiq
