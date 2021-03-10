@@ -179,3 +179,18 @@ The website will be broken down into three areas in order to achieve the project
 ### Wireframes
 
 - Balsamiq
+
+---
+## Deployment
+### Deploying to Github pages
+The site is deployed on GitHub pages. The setup involved was:
+
+- Using Git, I pushed all my committed code to my repository at [https://github.com/JamesSinnott1994/Quiz-Game](https://github.com/JamesSinnott1994/Quiz-Game).
+- Opened the "Settings" tab in my project repository.
+- Scrolled down to 'Github Pages' section.
+- Selected 'main' branch and 'root' folder to deploy to GitHub pages, and pressed 'Save'.
+- Navigated to https://jamessinnott1994.github.io/Quiz-Game/ to view deployed website.
+
+### Creating a local clone
+- Project can be downloaded as a .zip file by clicking the 'Code' button in the project repository and clicking 'Download ZIP'.
+- Project can also be cloned by entering `git clone https://github.com/JamesSinnott1994/Quiz-Game.git` in the terminal.
