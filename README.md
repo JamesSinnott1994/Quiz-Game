@@ -206,8 +206,9 @@ The site is deployed on GitHub pages. The setup involved was:
 - [Countdown Timer](https://www.w3schools.com/howto/howto_js_countdown.asp).
 - Help with [playing audio](https://medium.com/@ericschwartz7/adding-audio-to-your-app-with-jquery-fa96b99dfa97).
 - Help with making answer button divs the [same height](https://css-tricks.com/snippets/jquery/equalize-heights-of-divs/).
-- [Smooth scrolling](https://css-tricks.com/snippets/jquery/smooth-scrolling/.)
-- Sort an array of objects by [property value](https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/).
+- [Smooth scrolling](https://css-tricks.com/snippets/jquery/smooth-scrolling/).
+- Sort an array of objects by [property value](https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/). (For sorting leaderboard data).
+- Help for understanding [Local Storage](https://javascript.info/localstorage).
 
 ### Image Source Attribution
 - [Logo](https://www.shutterstock.com/image-vector/question-mark-sign-icon-help-speech-672447283)
