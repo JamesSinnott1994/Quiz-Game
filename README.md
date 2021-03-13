@@ -181,6 +181,10 @@ The website will be broken down into three areas in order to achieve the project
 - Balsamiq
 
 ---
+## Testing
+Separate file for testing is located [here.](TESTING.md)
+
+---
 ## Deployment
 ### Deploying to Github pages
 The site is deployed on GitHub pages. The setup involved was:
@@ -212,7 +216,7 @@ The site is deployed on GitHub pages. The setup involved was:
 
 ### Image Source Attribution
 - [Logo](https://www.shutterstock.com/image-vector/question-mark-sign-icon-help-speech-672447283)
--[General Knowledge](https://images.creativemarket.com/0.1.0/ps/6151529/3005/2000/m1/fpnw/wm0/quiz-1-.jpg?1553762089&s=9b9ad3d167a8d446dd625dabd9ef4ea0)
+- [General Knowledge](https://images.creativemarket.com/0.1.0/ps/6151529/3005/2000/m1/fpnw/wm0/quiz-1-.jpg?1553762089&s=9b9ad3d167a8d446dd625dabd9ef4ea0)
 - [Entertainment image](https://cdn.wallpapersafari.com/32/9/sQUjeX.jpg)
 - [Science](https://image.freepik.com/free-vector/hand-drawn-science-background_23-2148532292.jpg)
 - [History](https://images-na.ssl-images-amazon.com/images/S/sgp-catalog-images/region_US/qez76-05TFSK3K6AQ-Full-Image_GalleryBackground-en-US-1588781643677._SX1080_.jpg)
