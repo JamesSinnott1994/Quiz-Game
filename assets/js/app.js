@@ -24,7 +24,7 @@ $(document).ready(function() {
     */
 
     // Update the count down every 1 second
-    let myTimer = setInterval(function() {
+    let myTimer = setInterval(() => {
         
         // Decrement timer each second
         if (!timerStopped) {
@@ -66,7 +66,7 @@ $(document).ready(function() {
     }
 
     // Binds a click event to the username button
-    $("#username-btn").bind('click', function() {
+    $("#username-btn").bind('click', () => {
 
         let issue = ""; // Used in switch statement
         username = $('#user-input').val()
@@ -106,7 +106,7 @@ $(document).ready(function() {
     });
 
     // Binds a keypress event to the document for entering username
-    $(document).on('keypress', function(e) {
+    $(document).on('keypress', e => {
 
         let issue = ""; // Used in switch statement
         username = $('#user-input').val()
@@ -149,15 +149,15 @@ $(document).ready(function() {
     });
 
     // Binds a click event to each button on the Topic screen
-    $("#topic-section button").each(function() {
-        $(this).bind('click', function() {
+    $("#topic-section button").each((i, button) => {
+        $(button).bind('click', () => {
 
             // Get topic of button that was clicked
             // Helps us get data from the Quiz API
-            topic = $(this).val();
+            topic = $(button).val();
 
             // Helps us dynamically display the correct topic image
-            imageName = $(this).html().toLowerCase();
+            imageName = $(button).html().toLowerCase();
             imageName = imageName.replace(/\s/g, "-"); // Join string separated by whitespace with hyphen
             $("#img").attr("src", `assets/img/${imageName}.jpg`);
 
@@ -166,12 +166,12 @@ $(document).ready(function() {
     });
 
     // Binds a click event to each button on the Difficulty screen
-    $("#difficulty-section button").each(function() {
-        $(this).bind('click', function() {
+    $("#difficulty-section button").each((i, button) => {
+        $(button).bind('click', () => {
 
             // Get difficulty of button that was clicked
             // Helps us get data from the Quiz API
-            difficulty = $(this).html().toLowerCase();
+            difficulty = $(button).html().toLowerCase();
 
             // Call function to retrieve API Data
             getAPIData(filterAPIData);
@@ -231,11 +231,11 @@ $(document).ready(function() {
         addAnswerButtons();
 
         // Binds a click event to each answer button on the Game screen
-        $("#answer-btn-container button").each(function() {
-            $(this).bind('click', function() {
+        $("#answer-btn-container button").each((i, button) => {
+            $(button).bind('click', () => {
 
                 // Gets answer from the button that was clicked
-                let answer = $(this).html();
+                let answer = $(button).html();
 
                 // Stop the timer
                 timerStopped = true;
@@ -247,8 +247,8 @@ $(document).ready(function() {
                     $("#correct-sound")[0].play();
 
                     // Animation to fill correct answer button with green
-                    $(this).css('background-color', 'green');
-                    $(this).css('transition', 'all ease 1s');
+                    $(button).css('background-color', 'green');
+                    $(button).css('transition', 'all ease 1s');
 
                     enableContinueBtn();
                     disableAnswerBtns();
@@ -271,8 +271,8 @@ $(document).ready(function() {
                     $("#questions-answered").html(questionsAnswered);
 
                     // Animation to fill wrong answer button with red
-                    $(this).css('background-color', 'red');
-                    $(this).css('transition', 'all ease 1s');
+                    $(button).css('background-color', 'red');
+                    $(button).css('transition', 'all ease 1s');
 
                     // Animation to fill correct answer button with green
                     $(".correct-answer").css('background-color', 'green');
@@ -322,7 +322,7 @@ $(document).ready(function() {
     $("#questions-amount").html(amountOfQuestions);
 
     // Binds click event listener to Continue button
-    $("#continue-btn").bind('click', function() {
+    $("#continue-btn").bind('click', () => {
 
         // Display next question
         if (quizData.length > 1) {
@@ -372,14 +372,14 @@ $(document).ready(function() {
     });
 
     // Binds click event to game header logo (For modal window)
-    $('#modal-logo').bind('click', function() {
+    $('#modal-logo').bind('click', () => {
         // https://www.w3schools.com/howto/howto_css_modals.asp
         timerStopped = true;
         $("#myModal").css('display', 'block');
     });
 
     // Closes modal when Resume Button is clicked
-    $('#modal-resume-btn').bind('click', function() {
+    $('#modal-resume-btn').bind('click', () => {
 
         timerStopped = false;
 
@@ -387,7 +387,7 @@ $(document).ready(function() {
     });
 
     // Click event that displays leaderboard screen
-    $('#leaderboard-btn').bind('click', function() {
+    $('#leaderboard-btn').bind('click', () => {
 
         displayLeaderboardData();
 
@@ -401,7 +401,7 @@ $(document).ready(function() {
     });
 
     // Click event that displays Game Over Screen
-    $('#game-stats-btn').bind('click', function() {
+    $('#game-stats-btn').bind('click', () => {
 
         // Display Game Over screen
         $("#leaderboard-screen").hide();
@@ -415,10 +415,6 @@ $(document).ready(function() {
         // Prevents same data from being appended multiple times in the displayLeaderboardData function
         $("#leaderboard-list").empty();
     });
-
-    function timer() {
-
-    }
 
     function addAnswerButtons() {
         /*
@@ -483,10 +479,10 @@ function makeBtnHeightSame() {
     */
     let maxHeight = 0;
 
-    $(".answer-btn").each(function() {
+    $(".answer-btn").each((i, button) => {
 
-        if ($(this).height() > maxHeight) { 
-            maxHeight = $(this).height();
+        if ($(button).height() > maxHeight) { 
+            maxHeight = $(button).height();
         }
     });
 
@@ -499,9 +495,7 @@ function enableContinueBtn() {
 }
 
 function enableAnswerBtns() {
-    $("#answer-btn-container button").each(function() {
-        $(this).attr("disabled", false);
-    });
+    $("#answer-btn-container button").each((i, button) => $(button).attr("disabled", false));
 }
 
 function disableContinueBtn() {
@@ -510,9 +504,7 @@ function disableContinueBtn() {
 }
 
 function disableAnswerBtns() {
-    $("#answer-btn-container button").each(function() {
-        $(this).attr("disabled", true);
-    });
+    $("#answer-btn-container button").each((i, button) => $(button).attr("disabled", true));
 }
 
 function smoothFocus() {
@@ -529,7 +521,7 @@ function smoothFocus() {
     event.preventDefault();
     $('html, body').animate({
         scrollTop: target.offset().top
-    }, 1000, function() {
+    }, 1000, () => {
         // Callback after animation
         // Must change focus!
         let $target = $(target);
@@ -559,7 +551,7 @@ function smoothFocusOnTop() {
     event.preventDefault();
     $('html, body').animate({
         scrollTop: target.offset().top
-    }, 500, function() {
+    }, 500, () => {
         // Callback after animation
         // Must change focus!
         let $target = $(target);
@@ -585,7 +577,7 @@ function getLeaderboardPosition() {
     // https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
     leaderboardSortedData = leaderboardData.sort((a, b) => (a.score > b.score) ? -1 : 1);
 
-    leaderboardSortedData.forEach(function(user, position){
+    leaderboardSortedData.forEach((user, position) =>{
         if (user["name"] == $('#username').html()) {
             $('#position').html(position+1);
             $('#no-of-players').html(leaderboardSortedData.length);
@@ -658,8 +650,8 @@ function checkForErrors(responseCode) {
         $("#error-response-section").show();
         return true;
     } else {
-        //console.log("UNKNOWAN ERROR");
-        $("#error-response").html("Unknowan Error");
+        //console.log("UNKNOWN ERROR");
+        $("#error-response").html("Unknown Error");
         $("#error-response-section").show();
         return true;
     }
