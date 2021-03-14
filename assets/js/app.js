@@ -607,8 +607,7 @@ function displayLeaderboardData() {
         }
 
         // Append user data to the leaderboard table
-        for (let i = 0; i < leaderboardSortedData.length; i++) {
-
+        leaderboardSortedData.forEach((currentValue, i) => {
             $("tbody").append(
                 `<tr>
                     <th>#${i+1}</th>
@@ -616,7 +615,7 @@ function displayLeaderboardData() {
                     <td>${leaderboardSortedData[i]["score"]}</td>
                 </tr>`
             );
-        }
+        })
     }
 }
 
