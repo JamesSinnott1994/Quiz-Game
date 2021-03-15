@@ -281,7 +281,7 @@ $(document).ready(function() {
                     $("#questions-answered").html(questionsAnswered);
 
                     // Smoothly move the focus to the continue button
-                    smoothFocus();
+                    smoothFocus("#continue-btn", 1000);
                 } else {
                     // Play sound for wrong answer
                     $("#wrong-sound")[0].play();
@@ -302,7 +302,7 @@ $(document).ready(function() {
                     disableAnswerBtns();
 
                     // Smoothly move the focus to the continue button
-                    smoothFocus();
+                    smoothFocus("#continue-btn", 1000);
                 }
             });
         });
@@ -363,7 +363,7 @@ $(document).ready(function() {
             enableAnswerBtns();
 
             // Returns focus to top of screen if at bottom
-            smoothFocusOnTop();
+            smoothFocus("#img", 500);
         } else {
 
             // Log User score in local storage
@@ -527,13 +527,13 @@ function disableAnswerBtns() {
     $("#answer-btn-container button").each((i, button) => $(button).attr("disabled", true));
 }
 
-function smoothFocus() {
+function smoothFocus(element, time) {
     /*
     For help with smoothly focusing on the continue button, I got help from the following source:
     https://css-tricks.com/snippets/jquery/smooth-scrolling/
     */
 
-    let target = $("#continue-btn");
+    let target = $(element);
     target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
     // Does a scroll target exist?
     if (target.length) {
@@ -541,37 +541,7 @@ function smoothFocus() {
     event.preventDefault();
     $('html, body').animate({
         scrollTop: target.offset().top
-    }, 1000, () => {
-        // Callback after animation
-        // Must change focus!
-        let $target = $(target);
-        $target.focus();
-        if ($target.is(":focus")) { // Checking if the target was focused
-            return false;
-        } else {
-            $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
-            $target.focus(); // Set focus again
-        };
-    });
-    }
-
-}
-
-function smoothFocusOnTop() {
-    /*
-    For help with smoothly focusing on the continue button, I got help from the following source:
-    https://css-tricks.com/snippets/jquery/smooth-scrolling/
-    */
-
-    let target = $("#img");
-    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-    // Does a scroll target exist?
-    if (target.length) {
-    // Only prevent default if animation is actually gonna happen
-    event.preventDefault();
-    $('html, body').animate({
-        scrollTop: target.offset().top
-    }, 500, () => {
+    }, time, () => {
         // Callback after animation
         // Must change focus!
         let $target = $(target);
