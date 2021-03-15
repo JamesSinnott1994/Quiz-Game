@@ -174,43 +174,63 @@ $(document).ready(function() {
             difficulty = $(button).html().toLowerCase();
 
             // Call function to retrieve API Data
-            getAPIData(filterAPIData);
+            // https://gomakethings.com/promise-based-xhr/
+            apiRequest()
+                .then(data => {
+                    // Checks for any error from the response code of the API data
+                    let anyErrors = checkForErrors(data["response_code"]);
+
+                    // If no errors, store the quiz data
+                    if (!anyErrors) {
+                        for (let i = 0; i < amountOfQuestions; i++) {
+                            quizData.push(data["results"][i]);
+                        }
+                    }
+                })
+                // Once quiz data is stored display the question
+                .then(() => displayQuestion())
+                .catch(error => console.log('Error receiving API Data', error));
         });
     });
 
-    // Retrieve questions from the API
-    function getAPIData(callback) {
-        var xhr = new XMLHttpRequest();
+    // Request the API data
+    let apiRequest = () => {
 
-        if (difficulty != "random") {
-            xhr.open("GET", `https://opentdb.com/api.php?amount=10&category=${topic}&difficulty=${difficulty}&type=multiple`);
-        } else {
-            xhr.open("GET", `https://opentdb.com/api.php?amount=10&category=${topic}&type=multiple`);
-        }
-        xhr.send();
+        // Create the XHR request
+        let xhr = new XMLHttpRequest();
 
-        xhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                callback(JSON.parse(this.responseText)); // Sends data to the filterAPIData callback function
+        // Return it as a Promise
+        // Got help with Promises from the following link:
+        // https://gomakethings.com/promise-based-xhr/
+        return new Promise((resolve, reject) => {
+            
+            // Setup our listener to process completed requests
+            xhr.onreadystatechange = () => {
+                // Only run if the request is complete
+                if (xhr.readyState !== 4) return;
+
+                // Process the response
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    resolve(JSON.parse(xhr.responseText));
+                } else {
+                    reject({
+                        status: xhr.status,
+                        statusText: xhr.statusText
+                    });
+                }
+            };
+
+            // Setup our HTTP request
+            if (difficulty != "random") {
+                xhr.open("GET", `https://opentdb.com/api.php?amount=10&category=${topic}&difficulty=${difficulty}&type=multiple`, true);
+            } else {
+                xhr.open("GET", `https://opentdb.com/api.php?amount=10&category=${topic}&type=multiple`, true);
             }
-        };
-    }
 
-    // Filter API Data
-    function filterAPIData(data) {
-
-        // Checks for any error from the response code of the API data
-        let anyErrors = checkForErrors(data["response_code"]);
-
-        if (!anyErrors) {
-            for (let i = 0; i < amountOfQuestions; i++) {
-                quizData.push(data["results"][i]); // Store our quiz data
-            }
-
-            // Once quiz data is stored display the question
-            displayQuestion();
-        }
-    }
+            // Send the request
+            xhr.send();
+        });
+    };
 
     // Display question
     function displayQuestion() {
@@ -577,7 +597,7 @@ function getLeaderboardPosition() {
     // https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
     leaderboardSortedData = leaderboardData.sort((a, b) => (a.score > b.score) ? -1 : 1);
 
-    leaderboardSortedData.forEach((user, position) =>{
+    leaderboardSortedData.forEach((user, position) => {
         if (user["name"] == $('#username').html()) {
             $('#position').html(position+1);
             $('#no-of-players').html(leaderboardSortedData.length);
@@ -607,7 +627,7 @@ function displayLeaderboardData() {
         }
 
         // Append user data to the leaderboard table
-        leaderboardSortedData.forEach((currentValue, i) => {
+        leaderboardSortedData.forEach( (currentValue, i) => {
             $("tbody").append(
                 `<tr>
                     <th>#${i+1}</th>
