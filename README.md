@@ -213,6 +213,7 @@ The site is deployed on GitHub pages. The setup involved was:
 - [Smooth scrolling](https://css-tricks.com/snippets/jquery/smooth-scrolling/).
 - Sort an array of objects by [property value](https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/). (For sorting leaderboard data).
 - Help for understanding [Local Storage](https://javascript.info/localstorage).
+- Help for understanding [Promises](https://gomakethings.com/promise-based-xhr/).
 
 ### Image Source Attribution
 - [Logo](https://www.shutterstock.com/image-vector/question-mark-sign-icon-help-speech-672447283)
