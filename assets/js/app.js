@@ -616,30 +616,29 @@ function checkForErrors(responseCode) {
         - false, if no errors exist
     */
     if (responseCode == 0) {
-        //console.log("Code 0: SUCCESS. Returned results successfully.");
+        // Code 0: Sucesss
         return false;
     } else if (responseCode == 1) {
-        //console.log("Code 1: NO RESULTS. Could not return results. The API doesn't have enough questions for your query. (Ex. Asking for 50 Questions in a Category that only has 20.)");
+        // Code 1: No results
         $("#error-response").html("No results from that particular category");
         $("#error-response-section").show();
         return true;
     } else if (responseCode == 2) {
-        //console.log("Code 2: INVALID PARAMETER. Contains an invalid parameter. Arguements passed in aren't valid. (Ex. Amount = Five)");
-        $("#error-response").html("2");
+        // Code 2: Invalid parameter. Contains an invalid parameter. Arguements passed in aren't valid. (Ex. Amount = Five)
+        $("#error-response").html("Invalid parameter");
         $("#error-response-section").show();
         return true;
     } else if (responseCode == 3) {
-        //console.log("Code 3: TOKEN NOT FOUND. Session Token does not exist.");
-        $("#error-response").html("3");
+        // Code 3: Token not found. Session Token does not exist.
+        $("#error-response").html("Session token not found.");
         $("#error-response-section").show();
         return true;
     } else if (responseCode == 4) {
-        //console.log("Code 4: TOKEN EMPTY. Session Token has returned all possible questions for the specified query. Resetting the Token is necessary.");
-        $("#error-response").html("4");
+        // Code 4: Token empty. Session Token has returned all possible questions for the specified query. Resetting the Token is necessary.
+        $("#error-response").html("Session token empty");
         $("#error-response-section").show();
         return true;
     } else {
-        //console.log("UNKNOWN ERROR");
         $("#error-response").html("Unknown Error");
         $("#error-response-section").show();
         return true;
