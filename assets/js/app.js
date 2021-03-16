@@ -17,6 +17,7 @@ $(document).ready(function() {
     let time = 30;
     let timerStopped = true;
     let gameScreenDisplayed = false;
+    let anyErrors = false;
 
     /*
     Got help with this timer function from here:
@@ -178,18 +179,19 @@ $(document).ready(function() {
             apiRequest()
                 .then(data => {
                     // Checks for any error from the response code of the API data
-                    let anyErrors = checkForErrors(data["response_code"]);
+                    anyErrors = checkForErrors(data["response_code"]);
 
                     // If no errors, store the quiz data
                     if (!anyErrors) {
                         for (let i = 0; i < amountOfQuestions; i++) {
                             quizData.push(data["results"][i]);
                         }
+                        displayQuestion();
                     }
                 })
-                // Once quiz data is stored display the question
-                .then(() => displayQuestion())
-                .catch(error => console.log('Error receiving API Data', error));
+                .catch(error => {
+                    console.log('Error with API Data', error)
+                });
         });
     });
 
