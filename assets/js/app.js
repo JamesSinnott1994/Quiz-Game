@@ -222,9 +222,9 @@ $(document).ready(function() {
 
             // Setup our HTTP request
             if (difficulty != "random") {
-                xhr.open("GET", `https://opentdb.com/api.php?amount=10&category=${topic}&difficulty=${difficulty}&type=multiple`, true);
+                xhr.open("GET", `https://opentdb.com/api.php?amount=${amountOfQuestions}&category=${topic}&difficulty=${difficulty}&type=multiple`, true);
             } else {
-                xhr.open("GET", `https://opentdb.com/api.php?amount=10&category=${topic}&type=multiple`, true);
+                xhr.open("GET", `https://opentdb.com/api.php?amount=${amountOfQuestions}&category=${topic}&type=multiple`, true);
             }
 
             // Send the request
