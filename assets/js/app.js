@@ -47,6 +47,9 @@ $(document).ready(function() {
             $("#timer").html("Expired");
             $("#timer-container").css('color', 'black');
 
+            questionsAnswered += 1;
+            $("#questions-answered").html(questionsAnswered);
+
             enableContinueBtn();
             disableAnswerBtns();
 
