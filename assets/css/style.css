@@ -30,11 +30,11 @@ header {
     font-size: 3em;
 }
 
-#menu .button-container {
+#menu .button-wrapper {
     margin-bottom: 4em;
 }
 
-.button-container {
+.button-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -117,7 +117,7 @@ h1, #modal-logo {
     text-align: center;
 }
 
-#game-over-menu .button-container, #leaderboard-menu .button-container {
+#game-over-menu .button-wrapper, #leaderboard-menu .button-wrapper {
     margin-bottom: 2em;
 }
 
@@ -272,7 +272,7 @@ tr {
     #logo-header h1 {
         font-size: 6em;
     }
-    #menu .button-container {
+    #menu .button-wrapper {
         margin-bottom: 6em;
     }
     .button, #instructions-button, .screen-btn {
@@ -350,7 +350,7 @@ tr {
     #logo-header {
         margin-bottom: 6em;
     }
-    #menu .button-container {
+    #menu .button-wrapper {
         margin-bottom: 0;
     }
     .button {
