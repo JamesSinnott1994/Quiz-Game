@@ -1,23 +1,12 @@
 $(document).ready(function() {
 
     // Variable declarations
-    let topic;
-    let imageName;
-    let difficulty;
+    let topic, imageName, difficulty, question, correctAnswer, incorrectAnswers;
+    let questionsAnswered = 0, score = 0, noOfCorrectAnswers = 0, time = 30;
     let quizData = [];
-    let questionsAnswered = 0;
     const amountOfQuestions = 10;
-    let question;
-    let correctAnswer;
-    let incorrectAnswers;
-    let score = 0;
-    let noOfCorrectAnswers = 0;
-    let currentUserID;
     let username = '';
-    let time = 30;
-    let timerStopped = true;
-    let gameScreenDisplayed = false;
-    let anyErrors = false;
+    let anyErrors = false, gameScreenDisplayed = false, timerStopped = true;
 
     /*
     Got help with this timer function from here:
@@ -44,14 +33,14 @@ $(document).ready(function() {
         if (time <= 0) {
             timerStopped = true;
             time = 30;
-            $("#timer").html("Expired");
+            $("#timer").html("0");
             $("#timer-container").css('color', 'black');
 
             questionsAnswered += 1;
             $("#questions-answered").html(questionsAnswered);
 
-            enableContinueBtn();
-            disableAnswerBtns();
+            continueBtnDisabled(false);
+            answerBtnsDisabled(true);
 
             $("#wrong-sound")[0].play();
             $(".correct-answer").css('background-color', 'green');
@@ -59,39 +48,14 @@ $(document).ready(function() {
         }
     }, 1000);
 
-    // Get array of user objects
-    let retrievedData = localStorage.getItem("userObjects");
-    let arrayOfUserObjects = JSON.parse(retrievedData);
-
-    // If arrayOfUserObjects is null set it to an array
-    // Prevents "push" error later on
-    if (arrayOfUserObjects == null) {
-        arrayOfUserObjects = [];
-    }
+    // Get array of user objects, if they exist
+    let arrayOfUserObjects = JSON.parse(localStorage.getItem("userObjects")) || [];
 
     // Binds a click event to the username button
     $("#username-btn").bind('click', () => {
 
-        let issue = ""; // Used in switch statement
-        username = $('#user-input').val()
-
-        // Check if username entered
-        if(username == '') {
-            issue = "No username entered";
-        }
-
-        // Check if username already exists with anonymous function
-        let nameExists = false;
-        arrayOfUserObjects.forEach(user => {
-            if (user["name"] == username) {
-                nameExists = true;
-            }
-        });
-
-        // Error message if username already exists
-        if(nameExists && username != '') {
-            issue = "Username exists";
-        }
+    	username = $('#user-input').val();
+        let issue = validateUsername(arrayOfUserObjects, username);
 
         // Switch statement
         // Gets rid of nested ifs and elses
@@ -105,35 +69,17 @@ $(document).ready(function() {
                 $("#username-error-section").show();
                 break;
             default:
-                goToTopicScreen();
+                goToScreen("username", "topic");
         }
     });
 
     // Binds a keypress event to the document for entering username
     $(document).on('keypress', e => {
 
-        let issue = ""; // Used in switch statement
-        username = $('#user-input').val()
+    	username = $('#user-input').val();
+        let issue = validateUsername(arrayOfUserObjects, username);
 
-        // Check if username entered
-        if(username == '') {
-            issue = "No username entered";
-        }
-
-        // Check if username already exists with anonymous function
-        let nameExists = false;
-        arrayOfUserObjects.forEach(user => {
-            if (user["name"] == username) {
-                nameExists = true;
-            }
-        });
-
-        // Error message if username already exists
-        if(nameExists && username != '') {
-            issue = "Username exists";
-        }
-
-        if (e.which == 13) {
+        if (e.which === 13) {
             // Switch statement
             // Gets rid of nested ifs and elses
             switch(issue) {
@@ -146,7 +92,7 @@ $(document).ready(function() {
                     $("#username-error-section").show();
                     break;
                 default:
-                    goToTopicScreen();
+                    goToScreen("username", "topic");
                     $(document).off('keypress'); // Turn off keypress detection
             }
         }
@@ -155,7 +101,6 @@ $(document).ready(function() {
     // Binds a click event to each button on the Topic screen
     $("#topic-section button").each((i, button) => {
         $(button).bind('click', () => {
-
             // Get topic of button that was clicked
             // Helps us get data from the Quiz API
             topic = $(button).val();
@@ -165,14 +110,13 @@ $(document).ready(function() {
             imageName = imageName.replace(/\s/g, "-"); // Join string separated by whitespace with hyphen
             $("#img").attr("src", `assets/img/${imageName}.jpg`);
 
-            goToDifficultyScreen();
+            goToScreen("topic", "difficulty");
         });
     });
 
     // Binds a click event to each button on the Difficulty screen
     $("#difficulty-section button").each((i, button) => {
         $(button).bind('click', () => {
-
             // Get difficulty of button that was clicked
             // Helps us get data from the Quiz API
             difficulty = $(button).html().toLowerCase();
@@ -200,7 +144,6 @@ $(document).ready(function() {
 
     // Request the API data
     let apiRequest = () => {
-
         // Create the XHR request
         let xhr = new XMLHttpRequest();
 
@@ -215,7 +158,7 @@ $(document).ready(function() {
                 if (xhr.readyState !== 4) return;
 
                 // Process the response
-                if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.readyState === 4 && xhr.status === 200) {
                     resolve(JSON.parse(xhr.responseText));
                 } else {
                     reject({
@@ -226,10 +169,10 @@ $(document).ready(function() {
             };
 
             // Setup our HTTP request
-            if (difficulty != "random") {
-                xhr.open("GET", `https://opentdb.com/api.php?amount=${amountOfQuestions}&category=${topic}&difficulty=${difficulty}&type=multiple`, true);
+            if (difficulty === "random") {
+            	xhr.open("GET", `https://opentdb.com/api.php?amount=${amountOfQuestions}&category=${topic}&type=multiple`, true);
             } else {
-                xhr.open("GET", `https://opentdb.com/api.php?amount=${amountOfQuestions}&category=${topic}&type=multiple`, true);
+                xhr.open("GET", `https://opentdb.com/api.php?amount=${amountOfQuestions}&category=${topic}&difficulty=${difficulty}&type=multiple`, true);
             }
 
             // Send the request
@@ -241,9 +184,7 @@ $(document).ready(function() {
     function displayQuestion() {
 
         if (!gameScreenDisplayed) {
-            // Hide Difficulty screen
-            $("#difficulty-screen").hide();
-            $("#difficulty-header").hide();
+            hideScreen("difficulty");
 
             // Show Game screen
             $("#game-screen").fadeIn(1000);
@@ -265,7 +206,7 @@ $(document).ready(function() {
                 // Stop the timer
                 timerStopped = true;
 
-                if (answer == correctAnswer) {
+                if (answer === correctAnswer) {
 
                     // Play sound for correct answer
                     // https://medium.com/@ericschwartz7/adding-audio-to-your-app-with-jquery-fa96b99dfa97
@@ -275,8 +216,8 @@ $(document).ready(function() {
                     $(button).css('background-color', 'green');
                     $(button).css('transition', 'all ease 1s');
 
-                    enableContinueBtn();
-                    disableAnswerBtns();
+                    continueBtnDisabled(false);
+                    answerBtnsDisabled(true);
 
                     // Change game information
                     score += 5;
@@ -303,8 +244,8 @@ $(document).ready(function() {
                     $(".correct-answer").css('background-color', 'green');
                     $(".correct-answer").css('transition', 'all ease 1s');
 
-                    enableContinueBtn();
-                    disableAnswerBtns();
+                    continueBtnDisabled(false);
+                    answerBtnsDisabled(true);
 
                     // Smoothly move the focus to the continue button
                     smoothFocus("#continue-btn", 1000);
@@ -358,14 +299,13 @@ $(document).ready(function() {
             $("#timer-container").css('color', 'black');
 
             // Animation to fade from question to question
-            $("#game-screen").hide();
-            $("#game-header").hide();
+            hideScreen("game");
             $("#game-screen").fadeIn(1000);
             $("#game-header").css('display', 'flex');
 
             displayQuestion();
-            disableContinueBtn();
-            enableAnswerBtns();
+            continueBtnDisabled(true);
+            answerBtnsDisabled(false);
 
             // Returns focus to top of screen if at bottom
             smoothFocus("#img", 500);
@@ -387,8 +327,7 @@ $(document).ready(function() {
             getLeaderboardPosition();
 
             // Hide Game screen
-            $("#game-screen").hide();
-            $("#game-header").hide();
+            hideScreen("game");
 
             // Display Game Over screen
             $("#game-over-screen").show();
@@ -417,8 +356,7 @@ $(document).ready(function() {
         displayLeaderboardData();
 
         // Hide Game Over screen
-        $("#game-over-screen").hide();
-        $("#game-over-header").hide();
+        hideScreen("game-over");
 
         // Display Game Over screen
         $("#leaderboard-screen").css('display', 'grid');
@@ -429,8 +367,7 @@ $(document).ready(function() {
     $('#game-stats-btn').bind('click', () => {
 
         // Display Game Over screen
-        $("#leaderboard-screen").hide();
-        $("#leaderboard-header").hide();
+        hideScreen("leaderboard");
 
         // Show Game Over Screen
         $("#game-over-screen").show();
@@ -452,19 +389,19 @@ $(document).ready(function() {
 
         $("#answer-btn-container").append(`
             <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
-                <button id="answer-1" class="answer-btn">"Quote"</button>
+                <button id="answer-1" class="answer-btn"></button>
             </div>
 
             <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
-                <button id="answer-2" class="answer-btn">"Quote"</button>
+                <button id="answer-2" class="answer-btn"></button>
             </div>
 
             <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
-                <button id="answer-3" class="answer-btn">"Quote"</button>
+                <button id="answer-3" class="answer-btn"></button>
             </div>
 
             <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
-                <button id="answer-4" class="answer-btn">"Quote"</button>
+                <button id="answer-4" class="answer-btn"></button>
             </div>
             `
         );
@@ -474,24 +411,40 @@ $(document).ready(function() {
 
 /* ********************** HELPER FUNCTIONS ********************** */
 
-function goToTopicScreen() {
-    // Hide Username screen
-    $("#username-screen").hide();
-    $("#username-header").hide();
+function validateUsername(users, username) {
+   
+    // Check if username entered
+    if(username === '') {
+        return "No username entered";
+    }
 
-    // Display Topic screen
-    $("#topic-screen").show();
-    $("#topic-header").show();
+    // Check if username already exists with anonymous function
+    let nameExists = false;
+    users.forEach(user => {
+        if (user["name"] === username) {
+            nameExists = true;
+        }
+    });
+
+    // Error message if username already exists
+    if(nameExists && username !== '') {
+        return "Username exists";
+    }
 }
 
-function goToDifficultyScreen() {
-    // Hide Topic screen
-    $("#topic-screen").hide();
-    $("#topic-header").hide();
+function hideScreen(screenName) {
+    $(`#${screenName}-screen`).hide();
+    $(`#${screenName}-header`).hide();
+}
 
-    // Display difficulty screen
-    $("#difficulty-screen").show();
-    $("#difficulty-header").show();
+function goToScreen(oldScreen, newScreen) {
+	// Hide old screen
+    $(`#${oldScreen}-screen`).hide();
+    $(`#${oldScreen}-header`).hide();
+
+    // Display new screen
+    $(`#${newScreen}-screen`).show();
+    $(`#${newScreen}-header`).show();
 }
 
 function makeBtnHeightSame() {
@@ -513,22 +466,13 @@ function makeBtnHeightSame() {
     $(".answer-btn").height(maxHeight);
 }
 
-function enableContinueBtn() {
-    $("#continue-btn").css('opacity', '1');
-    $("#continue-btn").attr("disabled", false);
+function continueBtnDisabled(state) {
+	state ? $("#continue-btn").css('opacity', '0.5') : $("#continue-btn").css('opacity', '1');
+	$("#continue-btn").attr("disabled", state);
 }
 
-function enableAnswerBtns() {
-    $("#answer-btn-container button").each((i, button) => $(button).attr("disabled", false));
-}
-
-function disableContinueBtn() {
-    $("#continue-btn").css('opacity', '0.5');
-    $("#continue-btn").attr("disabled", true);
-}
-
-function disableAnswerBtns() {
-    $("#answer-btn-container button").each((i, button) => $(button).attr("disabled", true));
+function answerBtnsDisabled(state) {
+	$("#answer-btn-container button").each((i, button) => $(button).attr("disabled", state));
 }
 
 function smoothFocus(element, time) {
@@ -562,8 +506,7 @@ function smoothFocus(element, time) {
 
 function getLeaderboardPosition() {
     // Retrieve names and scores from local storage
-    let retrievedData = localStorage.getItem("userObjects");
-    let leaderboardData = JSON.parse(retrievedData);
+    let leaderboardData = JSON.parse(localStorage.getItem("userObjects"));
     let leaderboardSortedData;
 
     // Got help for below with the following link
@@ -571,7 +514,7 @@ function getLeaderboardPosition() {
     leaderboardSortedData = leaderboardData.sort((a, b) => (a.score > b.score) ? -1 : 1);
 
     leaderboardSortedData.forEach((user, position) => {
-        if (user["name"] == $('#username').html()) {
+        if (user["name"] === $('#username').html()) {
             $('#position').html(position+1);
             $('#no-of-players').html(leaderboardSortedData.length);
         }
@@ -584,11 +527,10 @@ function displayLeaderboardData() {
     $("tbody").empty();
 
     // Retrieve names and scores from local storage
-    let retrievedData = localStorage.getItem("userObjects");
-    let leaderboardData = JSON.parse(retrievedData);
+    let leaderboardData = JSON.parse(localStorage.getItem("userObjects"));
     let leaderboardSortedData;
 
-    if (leaderboardData != null) {
+    if (leaderboardData !== null) {
 
         // Got help for below with the following link
         // https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
@@ -618,25 +560,25 @@ function checkForErrors(responseCode) {
         - true, if errors exist
         - false, if no errors exist
     */
-    if (responseCode == 0) {
+    if (responseCode === 0) {
         // Code 0: Sucesss
         return false;
-    } else if (responseCode == 1) {
+    } else if (responseCode === 1) {
         // Code 1: No results
         $("#error-response").html("No results from that particular category");
         $("#error-response-section").show();
         return true;
-    } else if (responseCode == 2) {
+    } else if (responseCode === 2) {
         // Code 2: Invalid parameter. Contains an invalid parameter. Arguements passed in aren't valid. (Ex. Amount = Five)
         $("#error-response").html("Invalid parameter");
         $("#error-response-section").show();
         return true;
-    } else if (responseCode == 3) {
+    } else if (responseCode === 3) {
         // Code 3: Token not found. Session Token does not exist.
         $("#error-response").html("Session token not found.");
         $("#error-response-section").show();
         return true;
-    } else if (responseCode == 4) {
+    } else if (responseCode === 4) {
         // Code 4: Token empty. Session Token has returned all possible questions for the specified query. Resetting the Token is necessary.
         $("#error-response").html("Session token empty");
         $("#error-response-section").show();
