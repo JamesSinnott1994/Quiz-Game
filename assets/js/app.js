@@ -4,7 +4,7 @@ $(document).ready(function() {
     let topic, imageName, difficulty, question, correctAnswer, incorrectAnswers;
     let questionsAnswered = 0, score = 0, noOfCorrectAnswers = 0, time = 30;
     let quizData = [];
-    const amountOfQuestions = 10;
+    const amountOfQuestions = 1;
     let username = '';
     let anyErrors = false, gameScreenDisplayed = false, timerStopped = true;
 
@@ -314,7 +314,8 @@ $(document).ready(function() {
             // Log User score in local storage
             let userObject = {
                 "name": username,
-                "score": score
+                "score": score,
+                "difficulty": difficulty
             };
             arrayOfUserObjects.push(userObject);
             localStorage.setItem('userObjects', JSON.stringify(arrayOfUserObjects));
@@ -324,7 +325,7 @@ $(document).ready(function() {
             $('#points').html(score);
             $('#correct-answers').html(noOfCorrectAnswers);
             $('#total-questions').html(amountOfQuestions);
-            getLeaderboardPosition();
+            getLeaderboardPosition(difficulty);
 
             // Hide Game screen
             hideScreen("game");
@@ -353,7 +354,7 @@ $(document).ready(function() {
     // Click event that displays leaderboard screen
     $('#leaderboard-btn').bind('click', () => {
 
-        displayLeaderboardData();
+        displayLeaderboardData(difficulty);
 
         // Hide Game Over screen
         hideScreen("game-over");
@@ -504,14 +505,23 @@ function smoothFocus(element, time) {
     }
 }
 
-function getLeaderboardPosition() {
+function getLeaderboardPosition(difficulty) {
     // Retrieve names and scores from local storage
     let leaderboardData = JSON.parse(localStorage.getItem("userObjects"));
-    let leaderboardSortedData;
+    let leaderboardSortedData = [];
 
     // Got help for below with the following link
     // https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
-    leaderboardSortedData = leaderboardData.sort((a, b) => (a.score > b.score) ? -1 : 1);
+    leaderboardData = leaderboardData.sort((a, b) => (a.score > b.score) ? -1 : 1);
+
+    // Add users whose difficulty matches the difficulty for the current game
+    leaderboardData.forEach( (user, i) => {
+        if (user["difficulty"] === difficulty) {
+            leaderboardSortedData.push(user);
+        }
+    })
+
+    console.log(leaderboardSortedData);
 
     leaderboardSortedData.forEach((user, position) => {
         if (user["name"] === $('#username').html()) {
@@ -521,35 +531,49 @@ function getLeaderboardPosition() {
     });
 }
 
-function displayLeaderboardData() {
+function displayLeaderboardData(difficulty) {
+
+    // Leaderboard header difficulty
+    // For capitalizing the first letter of the string, got help from below:
+    // https://www.digitalocean.com/community/tutorials/js-capitalizing-strings
+    $("#difficulty").html(difficulty.replace(/^\w/, (c) => c.toUpperCase()));
 
     // Empties leaderboard of any data to prevent duplicate data being appended below
     $("tbody").empty();
 
     // Retrieve names and scores from local storage
     let leaderboardData = JSON.parse(localStorage.getItem("userObjects"));
-    let leaderboardSortedData;
+    let leaderboardSortedData = [];
 
     if (leaderboardData !== null) {
 
-        // Got help for below with the following link
+        // Got help for below with the following link:
         // https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
-        leaderboardSortedData = leaderboardData.sort((a, b) => (a.score > b.score) ? -1 : 1);
+        leaderboardData = leaderboardData.sort((a, b) => (a.score > b.score) && a.difficulty === difficulty ? -1 : 1);
+
+        // Add users whose difficulty matches the difficulty for the current game
+        leaderboardData.forEach( (user, i) => {
+            if (user["difficulty"] === difficulty) {
+                leaderboardSortedData.push(user);
+            }
+        })
 
         // Show the top 12 names
         while (leaderboardSortedData.length > 12) {
             leaderboardSortedData.pop();
         }
 
-        // Append user data to the leaderboard table
-        leaderboardSortedData.forEach( (currentValue, i) => {
-            $("tbody").append(
-                `<tr>
-                    <th>#${i+1}</th>
-                    <td>${leaderboardSortedData[i]["name"]}</td>
-                    <td>${leaderboardSortedData[i]["score"]}</td>
-                </tr>`
-            );
+        // Append user data to the leaderboard table for the specific category of difficulty
+        leaderboardSortedData.forEach( (user, i) => {
+            if (user["difficulty"] === difficulty) {
+                $("tbody").append(
+                    `<tr>
+                        <th>#${i+1}</th>
+                        <td>${leaderboardSortedData[i]["name"]}</td>
+                        <td>${leaderboardSortedData[i]["score"]}</td>
+                    </tr>`
+                );
+            }
         })
     }
 }
