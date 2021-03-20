@@ -11,6 +11,12 @@ header {
 	text-align: center;
 }
 
+/*--------------------------------------------404 ERROR PAGE*/
+
+#error-body .button-wrapper {
+    margin-top: 15em;
+}
+
 /*--------------------------------------------HOME PAGE*/
 
 #logo-img-container {
@@ -284,6 +290,9 @@ tr {
 
 /* // Medium devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+    #error-body .button-wrapper {
+        margin-top: 25em;
+    }
     #logo-img-container {
         width: 45%;
         height: 280px;
@@ -374,6 +383,9 @@ tr {
 
 /* // Large devices (desktops, 992px and up) */
 @media (min-width: 992px) {
+    #error-body .button-wrapper {
+        margin-top: 15em;
+    }
     #logo-img-container {
         width: 20%;
         margin: 2em auto 0;
