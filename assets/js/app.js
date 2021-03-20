@@ -1,22 +1,25 @@
 $(document).ready(function() {
 
     // Variable declarations
-    let topic, imageName, difficulty, question, correctAnswer, incorrectAnswers;
+    let topic, difficulty, question, correctAnswer, incorrectAnswers;
     let questionsAnswered = 0, score = 0, noOfCorrectAnswers = 0, time = 30;
     let quizData = [];
-    const amountOfQuestions = 1;
+    const amountOfQuestions = 10;
     let username = '';
-    let usernameInSession = false, anyErrors = false, gameScreenDisplayed = false, timerStopped = true;
+    let anyErrors = false, gameScreenDisplayed = false, timerStopped = true;
+
+    // Generates random string for the User ID:
+    // https://gist.github.com/6174/6062387
     let userID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
+    // Session storage
+    let session = window.sessionStorage;
+
     // Check if there is a username in the session storage
-    if (window.sessionStorage.getItem("username") !== null) {
-        usernameInSession = true;
-        $("#session-username").html(window.sessionStorage.getItem("username"));
-        $("#username-section").hide();
-        
-        $("#username-prompt-menu").css('display', 'flex');
-        $("#username-prompt-section").show();
+    if (session.getItem("username") !== null) {
+
+    	// Display prompt for continuing with previously entered name
+    	displayPrompt(session);
     }
 
     /*
@@ -62,19 +65,17 @@ $(document).ready(function() {
     // Get array of user objects, if they exist
     let arrayOfUserObjects = JSON.parse(localStorage.getItem("userObjects")) || [];
 
-    // Binds click events to buttons on the user screen for whether or not to use username in session
+    // Binds click events to buttons on the user screen for whether or not to use previously entered username
     $("#username-prompt-menu button").each((i, button) => {
         $(button).bind('click', () => {
-            // Gets whether or not player wants to use username in sessions
+            // Gets whether or not player wants to use previously entered username in sessions
             let useNameInSession = $(button).val();
 
             if(useNameInSession === "Yes") {
-                username = window.sessionStorage.getItem("username");
-                goToScreen("username", "topic");
+                username = session.getItem("username");
+                goToScreen("topic", "username");
             } else {
-                $("#username-prompt-menu").hide();
-                $("#username-prompt-section").hide();
-                $("#username-section").show();
+                hidePrompt();
             }
         });
     });
@@ -82,8 +83,8 @@ $(document).ready(function() {
     // Binds a click event to the username button
     $("#username-btn").bind('click', () => {
 
-    	username = $('#user-input').val();
-        let issue = validateUsername(arrayOfUserObjects, username);
+    	username = $('#user-input').val(); // Gets username from input box
+        let issue = validateUsername(username);
 
         // Switch statement
         // Gets rid of nested ifs and elses
@@ -94,16 +95,16 @@ $(document).ready(function() {
                 break;
             default:
                 // Save name in session storage
-                window.sessionStorage.setItem('username', username);
-                goToScreen("username", "topic");
+                session.setItem('username', username);
+                goToScreen("topic", "username");
         }
     });
 
-    // Binds a keypress event to the document for entering username
+    // Binds a keypress event to the page document for entering username
     $(document).on('keypress', e => {
 
-    	username = $('#user-input').val();
-        let issue = validateUsername(arrayOfUserObjects, username);
+    	username = $('#user-input').val(); // Gets username from input box
+        let issue = validateUsername(username);
 
         if (e.which === 13) {
             // Switch statement
@@ -114,8 +115,8 @@ $(document).ready(function() {
                     $("#username-error-section").show();
                     break;
                 default:
-                    window.sessionStorage.setItem('username', username);
-                    goToScreen("username", "topic");
+                    session.setItem('username', username);
+                    goToScreen("topic", "username");
                     $(document).off('keypress'); // Turn off keypress detection
             }
         }
@@ -129,11 +130,11 @@ $(document).ready(function() {
             topic = $(button).val();
 
             // Helps us dynamically display the correct topic image
-            imageName = $(button).html().toLowerCase();
+            let imageName = $(button).html().toLowerCase();
             imageName = imageName.replace(/\s/g, "-"); // Join string separated by whitespace with hyphen
             $("#img").attr("src", `assets/img/${imageName}.jpg`);
 
-            goToScreen("topic", "difficulty");
+            goToScreen("difficulty", "topic");
         });
     });
 
@@ -206,6 +207,7 @@ $(document).ready(function() {
     // Display question
     function displayQuestion() {
 
+    	// Don't display screen again for the next question
         if (!gameScreenDisplayed) {
             hideScreen("difficulty");
 
@@ -274,7 +276,7 @@ $(document).ready(function() {
                     smoothFocus("#continue-btn", 1000);
                 }
             });
-        });
+        }); // End of answer button click event function
 
         question = quizData[0]["question"];
         incorrectAnswers = quizData[0]["incorrect_answers"];
@@ -305,7 +307,8 @@ $(document).ready(function() {
 
         // Make the height of all our answer buttons the same
         makeBtnHeightSame();
-    }
+
+    } // End of displayQuestion() function
 
     // Display the amount of questions in the Heads-Up-Display
     $("#questions-amount").html(amountOfQuestions);
@@ -369,9 +372,7 @@ $(document).ready(function() {
 
     // Closes modal when Resume Button is clicked
     $('#modal-resume-btn').bind('click', () => {
-
         timerStopped = false;
-
         $("#myModal").css('display', 'none');
     });
 
@@ -403,7 +404,47 @@ $(document).ready(function() {
         $("#leaderboard-list").empty();
     });
 
-    function addAnswerButtons() {
+});
+
+/* ********************** HELPER FUNCTIONS ********************** */
+
+function displayPrompt(session) {
+	$("#session-username").html(session.getItem("username"));
+    $("#username-section").hide();
+    $("#username-prompt-menu").css('display', 'flex');
+    $("#username-prompt-section").show();
+}
+
+function hidePrompt() {
+	$("#username-prompt-menu").hide();
+    $("#username-prompt-section").hide();
+    $("#username-section").show();
+}
+
+function validateUsername(username) {
+   
+    // Check if username entered
+    if(username === '') {
+        return "No username entered";
+    }
+}
+
+function hideScreen(screenName) {
+    $(`#${screenName}-screen`).hide();
+    $(`#${screenName}-header`).hide();
+}
+
+function goToScreen(newScreen, oldScreen) {
+	// Hide old screen
+    $(`#${oldScreen}-screen`).hide();
+    $(`#${oldScreen}-header`).hide();
+
+    // Display new screen
+    $(`#${newScreen}-screen`).show();
+    $(`#${newScreen}-header`).show();
+}
+
+function addAnswerButtons() {
         /*
         - Re-creates all answer buttons.
 
@@ -431,33 +472,6 @@ $(document).ready(function() {
             `
         );
     }
-
-});
-
-/* ********************** HELPER FUNCTIONS ********************** */
-
-function validateUsername(users, username) {
-   
-    // Check if username entered
-    if(username === '') {
-        return "No username entered";
-    }
-}
-
-function hideScreen(screenName) {
-    $(`#${screenName}-screen`).hide();
-    $(`#${screenName}-header`).hide();
-}
-
-function goToScreen(oldScreen, newScreen) {
-	// Hide old screen
-    $(`#${oldScreen}-screen`).hide();
-    $(`#${oldScreen}-header`).hide();
-
-    // Display new screen
-    $(`#${newScreen}-screen`).show();
-    $(`#${newScreen}-header`).show();
-}
 
 function makeBtnHeightSame() {
     /*
@@ -517,23 +531,11 @@ function smoothFocus(element, time) {
 }
 
 function getLeaderboardPosition(difficulty, userID) {
-    // Retrieve names and scores from local storage
-    let leaderboardData = JSON.parse(localStorage.getItem("userObjects"));
-    let leaderboardSortedData = [];
+   
+   // Sort leaderboard data
+   let leaderboardSortedData = sortLeaderboardData(difficulty);
 
-    // Got help for below with the following link
-    // https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
-    leaderboardData = leaderboardData.sort((a, b) => (a.score > b.score) ? -1 : 1);
-
-    // Add users whose difficulty matches the difficulty for the current game
-    leaderboardData.forEach( (user, i) => {
-        if (user["difficulty"] === difficulty) {
-            leaderboardSortedData.push(user);
-        }
-    })
-
-    console.log(leaderboardSortedData);
-
+    // Calculates user's position
     leaderboardSortedData.forEach((user, position) => {
         if (user["name"] === $('#username').html() && user["id"] === userID) {
             $('#position').html(position+1);
@@ -552,41 +554,45 @@ function displayLeaderboardData(difficulty) {
     // Empties leaderboard of any data to prevent duplicate data being appended below
     $("tbody").empty();
 
-    // Retrieve names and scores from local storage
+    // Sort leaderboard data
+    let leaderboardSortedData = sortLeaderboardData(difficulty);
+
+    // Show the top 12 names
+    while (leaderboardSortedData.length > 12) {
+        leaderboardSortedData.pop();
+    }
+
+    // Append user data to the leaderboard table for the specific category of difficulty
+    leaderboardSortedData.forEach( (user, i) => {
+        if (user["difficulty"] === difficulty) {
+            $("tbody").append(
+                `<tr>
+                    <th>#${i+1}</th>
+                    <td>${leaderboardSortedData[i]["name"]}</td>
+                    <td>${leaderboardSortedData[i]["score"]}</td>
+                </tr>`
+            );
+        }
+    })
+}
+
+function sortLeaderboardData(difficulty) {
+	// Retrieve names and scores from local storage
     let leaderboardData = JSON.parse(localStorage.getItem("userObjects"));
     let leaderboardSortedData = [];
 
-    if (leaderboardData !== null) {
+    // Got help for below with the following link:
+    // https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
+    leaderboardData = leaderboardData.sort((a, b) => (a.score > b.score) && a.difficulty === difficulty ? -1 : 1);
 
-        // Got help for below with the following link:
-        // https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
-        leaderboardData = leaderboardData.sort((a, b) => (a.score > b.score) && a.difficulty === difficulty ? -1 : 1);
-
-        // Add users whose difficulty matches the difficulty for the current game
-        leaderboardData.forEach( (user, i) => {
-            if (user["difficulty"] === difficulty) {
-                leaderboardSortedData.push(user);
-            }
-        })
-
-        // Show the top 12 names
-        while (leaderboardSortedData.length > 12) {
-            leaderboardSortedData.pop();
+    // Add users whose difficulty matches the difficulty for the current game
+    leaderboardData.forEach( (user, i) => {
+        if (user["difficulty"] === difficulty) {
+            leaderboardSortedData.push(user);
         }
+    });
 
-        // Append user data to the leaderboard table for the specific category of difficulty
-        leaderboardSortedData.forEach( (user, i) => {
-            if (user["difficulty"] === difficulty) {
-                $("tbody").append(
-                    `<tr>
-                        <th>#${i+1}</th>
-                        <td>${leaderboardSortedData[i]["name"]}</td>
-                        <td>${leaderboardSortedData[i]["score"]}</td>
-                    </tr>`
-                );
-            }
-        })
-    }
+    return leaderboardSortedData;
 }
 
 function checkForErrors(responseCode) {
