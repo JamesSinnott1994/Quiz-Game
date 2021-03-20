@@ -34,7 +34,7 @@
 
     <header>
 
-        <h1 id="username-header" class="my-5">Enter Username</h1><!-- Username header -->
+        <h1 id="username-header" class="my-5">Choose Username</h1><!-- Username header -->
         <h1 id="topic-header" class="my-5">Choose a Topic</h1><!-- Topic header -->
         <h1 id="difficulty-header" class="my-5">Choose a Difficulty</h1><!-- Difficulty header -->
 
@@ -76,13 +76,31 @@
             <p id="username-error-response">Template</p>
         </section>
 
+         <!-- Username input section -->
+        <section id="username-prompt-section">
+            <h3>Continue playing as <span id="session-username">"John Smith"</span>?</h3>
+        </section>
+
+        <!-- Username Prompt -->
+        <section id="username-prompt-menu" class="row m-0">
+
+            <div class="col-12 col-lg-6 button-wrapper">
+                <button class="screen-btn" value="Yes" style="background-color: #21AC11;">Yes</button>
+            </div>
+
+            <div class="col-12 col-lg-6 button-wrapper">
+                <button class="screen-btn" value="No" style="background-color: #f91414;">No</button>
+            </div>
+            
+        </section>
+
         <!-- Username input section -->
         <section id="username-section">
 
             <div class="input-group mb-3">
                 
                 <!-- Input box -->
-                <input id ="user-input" name="fname" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="username-btn" autofocus>
+                <input id="user-input" name="fname" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="username-btn" autofocus>
 
                 <!-- Submit button -->
                 <button class="btn btn-outline-secondary" type="button" id="username-btn">Submit</button>

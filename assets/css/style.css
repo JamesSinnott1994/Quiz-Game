@@ -133,6 +133,29 @@ h1, #modal-logo {
     margin: 0 auto;
 }
 
+#username-prompt-section {
+    display: none;
+}
+
+#username-prompt-section h3 {
+    font-family: "Caladea", sans-serif;
+    margin: 3em auto;
+    text-align: center;
+}
+
+#session-username {
+    font-weight: bold;
+}
+
+#username-prompt-menu {
+    display: none;
+}
+
+#username-prompt-menu .button-wrapper {
+    /* display: none; */
+    margin: 2em 0;
+}
+
 /*--------------------------------------------GAME PAGE - GAME SCREEN*/
 
 #nav-item-container {
@@ -290,6 +313,14 @@ tr {
     .screen-btn {
     	width: 65%;
     }
+    #username-prompt-section h3 {
+        font-size: 2em;
+        margin-bottom: 8em;
+    }
+    #username-prompt-menu .button-wrapper {
+        /* display: none; */
+        margin: 2em 0;
+    }
     .navbar-brand {
         font-size: 1.25em;
     }
@@ -368,6 +399,14 @@ tr {
     }
     .screen-btn {
     	width: 300px;
+    }
+    #username-prompt-section h3 {
+        font-size: 1.75em;
+        margin-bottom: 8em;
+    }
+    #username-prompt-menu .button-wrapper {
+        /* display: none; */
+        margin: 2em 0;
     }
     #img-container {
         max-width: 60%;

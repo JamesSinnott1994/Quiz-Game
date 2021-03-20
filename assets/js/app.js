@@ -6,7 +6,18 @@ $(document).ready(function() {
     let quizData = [];
     const amountOfQuestions = 1;
     let username = '';
-    let anyErrors = false, gameScreenDisplayed = false, timerStopped = true;
+    let usernameInSession = false, anyErrors = false, gameScreenDisplayed = false, timerStopped = true;
+
+    // Check if there is a username in the session storage
+    if (window.sessionStorage.getItem("username") !== null) {
+        usernameInSession = true;
+        $("#session-username").html(window.sessionStorage.getItem("username"));
+        console.log("HERE");
+        $("#username-section").hide();
+        
+        $("#username-prompt-menu").show();
+        $("#username-prompt-section").show();
+    }
 
     /*
     Got help with this timer function from here:
@@ -51,6 +62,25 @@ $(document).ready(function() {
     // Get array of user objects, if they exist
     let arrayOfUserObjects = JSON.parse(localStorage.getItem("userObjects")) || [];
 
+    // Binds click events to buttons on the user screen for whether or not to use username in session
+    $("#username-prompt-menu button").each((i, button) => {
+        $(button).bind('click', () => {
+            // Gets whether or not player wants to use username in sessions
+            let useNameInSession = $(button).val();
+
+            if(useNameInSession === "Yes") {
+                console.log(useNameInSession);
+                username = window.sessionStorage.getItem("username");
+                goToScreen("username", "topic");
+            } else {
+                console.log(useNameInSession);
+                $("#username-prompt-menu").hide();
+                $("#username-prompt-section").hide();
+                $("#username-section").show();
+            }
+        });
+    });
+
     // Binds a click event to the username button
     $("#username-btn").bind('click', () => {
 
@@ -60,15 +90,13 @@ $(document).ready(function() {
         // Switch statement
         // Gets rid of nested ifs and elses
         switch(issue) {
-            case "Username exists":
-                $("#username-error-response").html("Username already exists. Please enter a new username.");
-                $("#username-error-section").show();
-                break;
             case "No username entered":
                 $("#username-error-response").html("Please enter a username.");
                 $("#username-error-section").show();
                 break;
             default:
+                // Save name in session storage
+                window.sessionStorage.setItem('username', username);
                 goToScreen("username", "topic");
         }
     });
@@ -83,15 +111,12 @@ $(document).ready(function() {
             // Switch statement
             // Gets rid of nested ifs and elses
             switch(issue) {
-                case "Username exists":
-                    $("#username-error-response").html("Username already exists. Please enter a new username.");
-                    $("#username-error-section").show();
-                    break;
                 case "No username entered":
                     $("#username-error-response").html("Please enter a username.");
                     $("#username-error-section").show();
                     break;
                 default:
+                    window.sessionStorage.setItem('username', username);
                     goToScreen("username", "topic");
                     $(document).off('keypress'); // Turn off keypress detection
             }
@@ -417,19 +442,6 @@ function validateUsername(users, username) {
     // Check if username entered
     if(username === '') {
         return "No username entered";
-    }
-
-    // Check if username already exists with anonymous function
-    let nameExists = false;
-    users.forEach(user => {
-        if (user["name"] === username) {
-            nameExists = true;
-        }
-    });
-
-    // Error message if username already exists
-    if(nameExists && username !== '') {
-        return "Username exists";
     }
 }
 
