@@ -7,15 +7,15 @@ $(document).ready(function() {
     const amountOfQuestions = 1;
     let username = '';
     let usernameInSession = false, anyErrors = false, gameScreenDisplayed = false, timerStopped = true;
+    let userID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
     // Check if there is a username in the session storage
     if (window.sessionStorage.getItem("username") !== null) {
         usernameInSession = true;
         $("#session-username").html(window.sessionStorage.getItem("username"));
-        console.log("HERE");
         $("#username-section").hide();
         
-        $("#username-prompt-menu").show();
+        $("#username-prompt-menu").css('display', 'flex');
         $("#username-prompt-section").show();
     }
 
@@ -69,11 +69,9 @@ $(document).ready(function() {
             let useNameInSession = $(button).val();
 
             if(useNameInSession === "Yes") {
-                console.log(useNameInSession);
                 username = window.sessionStorage.getItem("username");
                 goToScreen("username", "topic");
             } else {
-                console.log(useNameInSession);
                 $("#username-prompt-menu").hide();
                 $("#username-prompt-section").hide();
                 $("#username-section").show();
@@ -340,7 +338,8 @@ $(document).ready(function() {
             let userObject = {
                 "name": username,
                 "score": score,
-                "difficulty": difficulty
+                "difficulty": difficulty,
+                "id": userID
             };
             arrayOfUserObjects.push(userObject);
             localStorage.setItem('userObjects', JSON.stringify(arrayOfUserObjects));
@@ -350,7 +349,7 @@ $(document).ready(function() {
             $('#points').html(score);
             $('#correct-answers').html(noOfCorrectAnswers);
             $('#total-questions').html(amountOfQuestions);
-            getLeaderboardPosition(difficulty);
+            getLeaderboardPosition(difficulty, userID);
 
             // Hide Game screen
             hideScreen("game");
@@ -517,7 +516,7 @@ function smoothFocus(element, time) {
     }
 }
 
-function getLeaderboardPosition(difficulty) {
+function getLeaderboardPosition(difficulty, userID) {
     // Retrieve names and scores from local storage
     let leaderboardData = JSON.parse(localStorage.getItem("userObjects"));
     let leaderboardSortedData = [];
@@ -536,7 +535,7 @@ function getLeaderboardPosition(difficulty) {
     console.log(leaderboardSortedData);
 
     leaderboardSortedData.forEach((user, position) => {
-        if (user["name"] === $('#username').html()) {
+        if (user["name"] === $('#username').html() && user["id"] === userID) {
             $('#position').html(position+1);
             $('#no-of-players').html(leaderboardSortedData.length);
         }
