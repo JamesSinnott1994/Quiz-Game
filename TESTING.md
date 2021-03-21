@@ -34,8 +34,42 @@ Testing HTML with [The W3C Markup Validation Service ](https://validator.w3.org/
     - 5 warnings about the document containing more than one `main` element.
         - The reason for having mulitple `main` elements is that each element represents a screen of the Game page.
         - Initially, the display for 5 of the 6 `main` elements was set to none, so they were not seen until the user clicked through each of the screens. This wasn't good enough for the HTML validator however, so the solution was to add a `hidden` attribute to 5 of the elements.
-- 404 Error page:
-    - Passed validation with no issues.
+
+### Performance Testing
+
+Testing page with Lighthouse in Chrome Dev Tools to optimise performance, accessibility, best practices and SEO
+
+#### Desktop Performance
+
+- Lighthouse Desktop Home page report:
+
+![Lighthouse Desktop Home Page Report](readme-images/desktop-home-performance.png)
+
+- Lighthouse Desktop Instructions page report:
+
+![Lighthouse Desktop Instructions Page Report](readme-images/desktop-instructions-performance.png)
+
+- Lighthouse Desktop Game page report:
+
+![Lighthouse Desktop Game Page Report](readme-images/desktop-game-performance.png)
+
+#### Mobile Performance
+
+- Lighthouse Mobile Home page report:
+
+![Lighthouse Mobile Home Page Report](readme-images/mobile-home-performance.png)
+
+- Lighthouse Mobile Instructions page report:
+
+![Lighthouse Mobile Instructions Page Report](readme-images/mobile-instructions-performance.png)
+
+- Lighthouse Mobile Game page report:
+
+![Lighthouse Mobile Game Page Report](readme-images/mobile-game-performance.png)
+
+- Performance, Accessibility, Best Practices and SEO were roughly the same on desktop and mobile. The only slight difference with performance was on mobile, however this was still of a high standard (92).
+
+![Lighthouse Post-Optimisation Mobile Report](readme-images/home-mobile-post-performance.PNG)
 
 ---
 ## Bugs
