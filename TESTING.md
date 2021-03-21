@@ -35,6 +35,35 @@ Testing HTML with [The W3C Markup Validation Service ](https://validator.w3.org/
         - The reason for having mulitple `main` elements is that each element represents a screen of the Game page.
         - Initially, the display for 5 of the 6 `main` elements was set to none, so they were not seen until the user clicked through each of the screens. This wasn't good enough for the HTML validator however, so the solution was to add a `hidden` attribute to 5 of the elements.
 
+Testing CSS with the [Jigsaw CSS Validation Service ](https://jigsaw.w3.org/css-validator/)
+- There were no errors discovered for my own custom style.css file. There were however 10 errors in Bootstrap's style sheet:
+![CSS Error](readme-images/css-errors.PNG)
+
+- These appear to be minor errors that don't have any great effect on the performance of the game.
+- Warnings were also discovered, but these relate mainly to "unknown vendor extensions", which can be safely ignored.
+
+Testing JavaScript with [JSHint](https://jshint.com/)
+
+- When I Initially put my app.js code into JSHint, I was given 51 warnings:
+![JSHint-Warning-One](readme-images/jshint-warning-1.PNG)
+    - As can be seen from the image above, most of the warnings related ES6's `let` and `const` keywords.
+    - This is a minor warning. The solution to get rid of the warning was to add the following comment to the top of the app.js file:
+        - /*jshint esversion: 6 */
+    - This had the affect of reducing the warnings from 51 to 15.
+
+- There were 3 warnings relating to semi-colons, which were easily fixed.
+
+- There were 11 warning's related to not using dot notation when accessing the properties of objects.
+    - For example, I was using the "results" from the API using the following approach:
+        - `data["results"]`
+    - The solution therefore with dot notation:
+        - `data.results`
+
+- 1 error was related to my misuse of a ternary operator
+    - Sorted by using an if-else statement.
+
+- The above approaches sorted all the warnings.
+
 ### Performance Testing
 
 Testing page with Lighthouse in Chrome Dev Tools to optimise performance, accessibility, best practices and SEO

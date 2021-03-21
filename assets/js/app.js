@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 $(document).ready(function() {
 
     // Variable declarations
@@ -150,18 +151,18 @@ $(document).ready(function() {
             apiRequest()
                 .then(data => {
                     // Checks for any error from the response code of the API data
-                    anyErrors = checkForErrors(data["response_code"]);
+                    anyErrors = checkForErrors(data.response_code);
 
                     // If no errors, store the quiz data
                     if (!anyErrors) {
                         for (let i = 0; i < amountOfQuestions; i++) {
-                            quizData.push(data["results"][i]);
+                            quizData.push(data.results[i]);
                         }
                         displayQuestion();
                     }
                 })
                 .catch(error => {
-                    console.log('Error with API Data', error)
+                    console.log('Error with API Data', error);
                 });
         });
     });
@@ -279,8 +280,8 @@ $(document).ready(function() {
             });
         }); // End of answer button click event function
 
-        question = quizData[0]["question"];
-        incorrectAnswers = quizData[0]["incorrect_answers"];
+        question = quizData[0].question;
+        incorrectAnswers = quizData[0].incorrect_answers;
 
         // Generate a random number between 1 and 4 so that the correct answer
         // is randomly placed
@@ -292,7 +293,7 @@ $(document).ready(function() {
 
         // Places the correct answer in one of the game buttons
         // Adds a class to this button so that it can be accessed later
-        $(`#answer-${randomNumber}`).html(quizData[0]["correct_answer"]);
+        $(`#answer-${randomNumber}`).html(quizData[0].correct_answer);
         $(`#answer-${randomNumber}`).addClass("correct-answer");
         correctAnswer = $(`#answer-${randomNumber}`).html(); // Sets text to answerS
 
@@ -400,7 +401,7 @@ $(document).ready(function() {
         hideScreen("leaderboard");
 
         // Show Game Over Screen
-        $("#leaderboard-screen").attr("hidden", false);
+        $("#game-over-screen").attr("hidden", false);
         $("#game-over-screen").css('display', 'grid');
         $("#game-over-header").show();
 
@@ -501,8 +502,14 @@ function makeBtnHeightSame() {
 }
 
 function continueBtnDisabled(state) {
-	state ? $("#continue-btn").css('opacity', '0.5') : $("#continue-btn").css('opacity', '1');
-	$("#continue-btn").attr("disabled", state);
+
+    if (state) {
+        $("#continue-btn").css('opacity', '0.5');
+    } else {
+        $("#continue-btn").css('opacity', '1');
+    }
+    
+    $("#continue-btn").attr("disabled", state);
 }
 
 function answerBtnsDisabled(state) {
@@ -533,7 +540,7 @@ function smoothFocus(element, time) {
             } else {
                 $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
                 $target.focus(); // Set focus again
-            };
+            }
         });
     }
 }
@@ -545,7 +552,7 @@ function getLeaderboardPosition(difficulty, userID) {
 
     // Calculates user's position
     leaderboardSortedData.forEach((user, position) => {
-        if (user["name"] === $('#username').html() && user["id"] === userID) {
+        if (user.name === $('#username').html() && user.id === userID) {
             $('#position').html(position+1);
             $('#no-of-players').html(leaderboardSortedData.length);
         }
@@ -572,16 +579,16 @@ function displayLeaderboardData(difficulty) {
 
     // Append user data to the leaderboard table for the specific category of difficulty
     leaderboardSortedData.forEach( (user, i) => {
-        if (user["difficulty"] === difficulty) {
+        if (user.difficulty === difficulty) {
             $("tbody").append(
                 `<tr>
                     <th>#${i+1}</th>
-                    <td>${leaderboardSortedData[i]["name"]}</td>
-                    <td>${leaderboardSortedData[i]["score"]}</td>
+                    <td>${leaderboardSortedData[i].name}</td>
+                    <td>${leaderboardSortedData[i].score}</td>
                 </tr>`
             );
         }
-    })
+    });
 }
 
 function sortLeaderboardData(difficulty) {
@@ -595,7 +602,7 @@ function sortLeaderboardData(difficulty) {
 
     // Add users whose difficulty matches the difficulty for the current game
     leaderboardData.forEach( (user, i) => {
-        if (user["difficulty"] === difficulty) {
+        if (user.difficulty === difficulty) {
             leaderboardSortedData.push(user);
         }
     });
