@@ -1,6 +1,10 @@
-# Quiz Game
+# QuizUp
 
-The purpose of this website is to create a fun interactive general knowledge quiz game using the [Open Trivia Database REST API.](https://www.programmableweb.com/api/open-trivia-database-rest-api-v1)
+![image](readme-images/responsive.png)
+
+The purpose of this website is to create a fun interactive quiz game using the [Open Trivia Database REST API.](https://www.programmableweb.com/api/open-trivia-database-rest-api-v1)
+
+Link to the deployed website is [here](https://jamessinnott1994.github.io/Quiz-Game/).
 
 ## Table of Contents
 - [User Experience (UX)](#user-experience-(ux))
