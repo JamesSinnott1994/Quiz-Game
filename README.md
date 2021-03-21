@@ -161,28 +161,28 @@ The website will be broken down into three areas in order to achieve the project
 
 ### Workspace
 
-- Gitpod
+- [Gitpod](https://www.gitpod.io/)
 
 ### Languages
 
-- HTML5
-- CSS3
-- JavaScript
+- [HTML5](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5)
+- [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS)
+- [JavaScript](https://www.javascript.com/)
 
 ### Frameworks & Libraries
 
-- Bootstrap5
-- jQuery
-- Google Fonts
+- [Bootstrap5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
+- [jQuery](https://jquery.com/)
+- [Google Fonts](https://fonts.google.com/)
 
 ### Version Control
 
-- Git
-- Github
+- [Git](https://git-scm.com/)
+- [Github](https://github.com/)
 
 ### Wireframes
 
-- Balsamiq
+- [Balsamiq](https://balsamiq.com/)
 
 ---
 ## Testing
@@ -218,6 +218,7 @@ The site is deployed on GitHub pages. The setup involved was:
 - Sort an array of objects by [property value](https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/). (For sorting leaderboard data).
 - Help for understanding [Local Storage](https://javascript.info/localstorage).
 - Help for understanding [Promises](https://gomakethings.com/promise-based-xhr/).
+- Generating a [random string](https://gist.github.com/6174/6062387) in JavaScript for unique user ID.
 
 ### Image Source Attribution
 - [Logo](https://www.shutterstock.com/image-vector/question-mark-sign-icon-help-speech-672447283)
@@ -233,3 +234,9 @@ The site is deployed on GitHub pages. The setup involved was:
 ### Sound Source Attribution
 - [Correct Answer](https://www.dreamstime.com/quiz-correct-answer-sound-quiz-games-etc-quiz-correct-answer-audio158435040)
 - [Wrong Answer](https://www.dreamstime.com/royalty-free-sound-effect-wrong-answer-sound-to-indicate-audio127883895)
+
+### Acknowledgements
+I would like to thank:
+- My mentor [Maranatha Ilesanmi](https://ng.linkedin.com/in/ilesanmimaranatha) for his very helpful advice during the project meetings.
+- Anna Greaves for her videos on doing the Readme document.
+- The Slack Community for help with certain problems.
