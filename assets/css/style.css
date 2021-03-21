@@ -158,7 +158,6 @@ h1, #modal-logo {
 }
 
 #username-prompt-menu .button-wrapper {
-    /* display: none; */
     margin: 2em 0;
 }
 
@@ -327,7 +326,6 @@ tr {
         margin-bottom: 8em;
     }
     #username-prompt-menu .button-wrapper {
-        /* display: none; */
         margin: 2em 0;
     }
     .navbar-brand {
@@ -417,7 +415,6 @@ tr {
         margin-bottom: 8em;
     }
     #username-prompt-menu .button-wrapper {
-        /* display: none; */
         margin: 2em 0;
     }
     #img-container {
@@ -452,5 +449,48 @@ tr {
     }
     #game-over-section {
         margin-bottom: 8em;
+    }
+}
+
+/* // X-Large devices (large desktops, 1280px and up) */
+/* @media (min-width: 1280px) and (min-height: 802px):  { */
+@media (min-width: 1280px) {
+    #menu .button-wrapper {
+        margin-top: 2em;
+    }
+    #game-over-menu .button, #leaderboard-screen .button {
+        width: 75%;
+    }
+    #game-over-screen {
+        min-height: 70vh;
+        grid-template-rows: 1fr auto;
+    }
+
+    #game-over-menu {
+        grid-row-start: 2;
+        grid-row-end: 3;
+    }
+}
+
+/* // XX-Large devices (larger desktops, 1600px and up) */
+/* @media (min-width: 1600px) and (min-height: 992px){ */
+@media (min-width: 1600px) {
+    #logo-img-container {
+        height: 350px;
+        width: 25%;
+        margin: 8em auto 0;
+    }
+    #logo-header {
+        margin-bottom: 6em;
+    }
+    #logo-header h1 {
+        font-size: 6em;
+    }
+    #menu .button-wrapper {
+        margin-bottom: 0;
+    }
+    #img-container {
+        max-width: 60%;
+        height: 350px;
     }
 }

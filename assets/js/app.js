@@ -358,7 +358,7 @@ $(document).ready(function() {
             hideScreen("game");
 
             // Display Game Over screen
-            $("#game-over-screen").show();
+            $("#game-over-screen").css('display', 'grid');
             $("#game-over-header").show();
         }
     });
@@ -396,7 +396,7 @@ $(document).ready(function() {
         hideScreen("leaderboard");
 
         // Show Game Over Screen
-        $("#game-over-screen").show();
+        $("#game-over-screen").css('display', 'grid');
         $("#game-over-header").show();
 
         // Remove all leaderboard data from the leaderboard list element
@@ -454,19 +454,19 @@ function addAnswerButtons() {
         $("#answer-btn-container").empty();
 
         $("#answer-btn-container").append(`
-            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
+            <div class="col-12 col-md-6 button-wrapper mb-4 mt-md-5">
                 <button id="answer-1" class="answer-btn"></button>
             </div>
 
-            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
+            <div class="col-12 col-md-6 button-wrapper mb-4 mt-md-5">
                 <button id="answer-2" class="answer-btn"></button>
             </div>
 
-            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
+            <div class="col-12 col-md-6 button-wrapper mb-4 mt-md-5">
                 <button id="answer-3" class="answer-btn"></button>
             </div>
 
-            <div class="col-12 col-md-6 button-container mb-4 mt-md-5">
+            <div class="col-12 col-md-6 button-wrapper mb-4 mt-md-5">
                 <button id="answer-4" class="answer-btn"></button>
             </div>
             `
