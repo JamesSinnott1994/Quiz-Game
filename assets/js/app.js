@@ -212,6 +212,7 @@ $(document).ready(function() {
             hideScreen("difficulty");
 
             // Show Game screen
+            $("#game-screen").attr("hidden", false);
             $("#game-screen").fadeIn(1000);
             $("#game-header").css('display', 'flex');
 
@@ -326,6 +327,7 @@ $(document).ready(function() {
 
             // Animation to fade from question to question
             hideScreen("game");
+            $("#game-screen").attr("hidden", false);
             $("#game-screen").fadeIn(1000);
             $("#game-header").css('display', 'flex');
 
@@ -358,6 +360,7 @@ $(document).ready(function() {
             hideScreen("game");
 
             // Display Game Over screen
+            $("#game-over-screen").attr("hidden", false);
             $("#game-over-screen").css('display', 'grid');
             $("#game-over-header").show();
         }
@@ -385,6 +388,7 @@ $(document).ready(function() {
         hideScreen("game-over");
 
         // Display Game Over screen
+        $("#leaderboard-screen").attr("hidden", false);
         $("#leaderboard-screen").css('display', 'grid');
         $("#leaderboard-header").show();
     });
@@ -396,6 +400,7 @@ $(document).ready(function() {
         hideScreen("leaderboard");
 
         // Show Game Over Screen
+        $("#leaderboard-screen").attr("hidden", false);
         $("#game-over-screen").css('display', 'grid');
         $("#game-over-header").show();
 
@@ -430,16 +435,19 @@ function validateUsername(username) {
 }
 
 function hideScreen(screenName) {
+    $(`#${screenName}-screen`).attr("hidden", true);
     $(`#${screenName}-screen`).hide();
     $(`#${screenName}-header`).hide();
 }
 
 function goToScreen(newScreen, oldScreen) {
-	// Hide old screen
+    // Hide old screen
+    $(`#${newScreen}-screen`).attr("hidden", true);
     $(`#${oldScreen}-screen`).hide();
     $(`#${oldScreen}-header`).hide();
 
     // Display new screen
+    $(`#${newScreen}-screen`).attr("hidden", false);
     $(`#${newScreen}-screen`).show();
     $(`#${newScreen}-header`).show();
 }
