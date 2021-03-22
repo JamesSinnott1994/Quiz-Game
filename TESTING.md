@@ -6,6 +6,7 @@ Back to [Readme file.](README.md)
 - [Browser Compatability](#browser-compatability)
 - [Code Validation](#code-validation)
 - [Performance Testing](#performance-testing)
+- [User Stories Testing](#user-stories-testing)
 - [Bugs](#bugs)
 
 ---
@@ -57,7 +58,8 @@ Back to [Readme file.](README.md)
 - When I Initially put my app.js code into JSHint, I was given 51 warnings:
 
 ![JSHint-Warning-One](readme-images/jshint-warning-1.PNG)
-    - As can be seen from the image above, most of the warnings related ES6's `let` and `const` keywords.
+
+- As can be seen from the image above, most of the warnings related to ES6's `let` and `const` keywords.
     - This is a minor warning. The solution to get rid of the warning was to add the following comment to the top of the app.js file:
         - /*jshint esversion: 6 */
     - This had the affect of reducing the warnings from 51 to 15.
@@ -109,6 +111,105 @@ Testing page with Lighthouse in Chrome Dev Tools to optimise performance, access
 ![Lighthouse Mobile Game Page Report](readme-images/mobile-game-performance.png)
 
 - Performance, Accessibility, Best Practices and SEO were roughly the same on desktop and mobile. The only slight difference with performance was on mobile, however this was still of a high standard (92).
+
+---
+### User Stories Testing
+
+As a **first-time player**, I want:
+1. To see a visually appealing game:
+
+![Visual Appeal](readme-images/user-stories-screenshots/visual-appeal.png)
+
+- The game has a simple visual appeal, with good contrast between text and the background, as well as a nice image for the particular quiz topic.
+
+2. To easily understand how the game works.
+
+![Instructions](readme-images/user-stories-screenshots/instructions.png)
+
+- The game is very intuitive, however the Instructions page provides a first time user all the details needed to play the game.
+
+3. To be able to pick a quiz topic.
+
+![Pick Topic](readme-images/user-stories-screenshots/pick-topic.png)
+
+4. To be given feedback on my answers.
+
+![Feedback](readme-images/user-stories-screenshots/feedback.png)
+
+- User is given visual feedback on whether or not they got the correct answer.
+    - Red button for wrong answer.
+    - Green button for correct answer.
+
+5. To be rewarded when I get the right answer.
+    - User is rewarded by visual feedback as can be seen from image above.
+    - A correct sound is played when you get the right answer.
+    - Score is increased.
+
+6. To be able to see my score.
+
+![Score](readme-images/user-stories-screenshots/score.png)
+
+- User's score is displayed clearly in the HUD.
+
+As a **returning player**, I want:
+1.	To skip any instructions and jump straight into a new game.
+
+![Home](readme-images/user-stories-screenshots/home.png)
+
+- If you are familiar with the game then you don't need to look at the instructions, you can just click the Play button to start the game.
+
+2. To increase the difficulty for new challenges.
+
+![Difficulty](readme-images/user-stories-screenshots/difficulty.png)
+
+- User can pick a difficulty of their choice.
+
+3. A large number of questions so that my playing experience is always different.
+
+![Questions](readme-images/user-stories-screenshots/questions.png)
+
+- There are thousands of questions available on the [Open Trivia database](https://opentdb.com/api_config.php) which will always lead to a different user experience.
+
+As a **site owner**, I want:
+1.	To provide a fun interactive game for users.
+
+![Username](readme-images/user-stories-screenshots/username.png)
+
+- There is plenty of interactivity in the game, from choosing your own unique username, picking topics and difficulty, and deciding which answer button to click for the correct answer to the question received from the API.
+
+2. To provide an inituitive game that will not confuse users.
+- The game is very easy to understand as it is a simple quiz game. The Instructions page should clear up any confusion.
+
+3. To provide an educational game for users.
+- There is a wide variety of topics provided for, all of which contain interesting questions and answers. A new user is bound to learn something new!
+
+4. To create a game that is available on different devices.
+
+- Game on iPad:
+
+![iPad](readme-images/user-stories-screenshots/ipad.png)
+
+- Game on Mobile:
+
+![Mobile](readme-images/user-stories-screenshots/mobile.png)
+
+5. To create a game that makes users want to play it again.
+
+- The Game Over stats screen shows how the player did, and how they are positioned on the leaderboard.
+
+![Stats](readme-images/user-stories-screenshots/statistics.png)
+
+- The Leaderboard adds a competitive element to the game which will make a user want to do better compared to other players or to their own previous score.
+
+- The "New Game" button makes it convenient to start a new game.
+
+![Leaderboard](readme-images/user-stories-screenshots/leaderboard.png)
+
+- A Session storage object stores the previous username and displays a prompt on the Username screen if there is a name in session. This makes it more convenient for a user to use their old name instead of typing out a new one.
+
+![Continue Playing](readme-images/user-stories-screenshots/continue-playing.png)
+
+- The above three factors, combined with the randomness of the questions as well as the sounds, visuals, and animations will all lead to users wanting to play the game again.
 
 ---
 ## Bugs
