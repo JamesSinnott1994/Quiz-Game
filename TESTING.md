@@ -1,5 +1,14 @@
 ## Testing
 
+Back to [Readme file.](README.md)
+
+## Table of Contents
+- [Browser Compatability](#browser-compatability)
+- [Code Validation](#code-validation)
+- [Performance Testing](#performance-testing)
+- [Bugs](#bugs)
+
+---
 ### Browser Compatability
 
 - I tested the appearance and responsiveness of the website across many different devices and browsers. Generally, the appearance and responsiveness looks quite good on the different devices, and there is no difference between the browsers.
@@ -21,9 +30,10 @@
     - 1280px x 802px (Larger laptop)
     - 1600px x 992px (Desktop)
 
+---
 ### Code Validation
 
-Testing HTML with [The W3C Markup Validation Service ](https://validator.w3.org/)
+#### Testing HTML with [The W3C Markup Validation Service](https://validator.w3.org/)
 
 - Home page:
     - Minor warning about the section containing the "Play" and "Instructions" buttons lacking a header. Not an issue as the buttons are self-explanatory and therefore the section does not need an "identifying heading".
@@ -35,16 +45,17 @@ Testing HTML with [The W3C Markup Validation Service ](https://validator.w3.org/
         - The reason for having mulitple `main` elements is that each element represents a screen of the Game page.
         - Initially, the display for 5 of the 6 `main` elements was set to none, so they were not seen until the user clicked through each of the screens. This wasn't good enough for the HTML validator however, so the solution was to add a `hidden` attribute to 5 of the elements.
 
-Testing CSS with the [Jigsaw CSS Validation Service ](https://jigsaw.w3.org/css-validator/)
+#### Testing CSS with the [Jigsaw CSS Validation Service ](https://jigsaw.w3.org/css-validator/)
 - There were no errors discovered for my own custom style.css file. There were however 10 errors in Bootstrap's style sheet:
 ![CSS Error](readme-images/css-errors.PNG)
 
 - These appear to be minor errors that don't have any great effect on the performance of the game.
 - Warnings were also discovered, but these relate mainly to "unknown vendor extensions", which can be safely ignored.
 
-Testing JavaScript with [JSHint](https://jshint.com/)
+#### Testing JavaScript with [JSHint](https://jshint.com/)
 
 - When I Initially put my app.js code into JSHint, I was given 51 warnings:
+
 ![JSHint-Warning-One](readme-images/jshint-warning-1.PNG)
     - As can be seen from the image above, most of the warnings related ES6's `let` and `const` keywords.
     - This is a minor warning. The solution to get rid of the warning was to add the following comment to the top of the app.js file:
@@ -64,6 +75,7 @@ Testing JavaScript with [JSHint](https://jshint.com/)
 
 - The above approaches sorted all the warnings.
 
+---
 ### Performance Testing
 
 Testing page with Lighthouse in Chrome Dev Tools to optimise performance, accessibility, best practices and SEO
@@ -98,8 +110,6 @@ Testing page with Lighthouse in Chrome Dev Tools to optimise performance, access
 
 - Performance, Accessibility, Best Practices and SEO were roughly the same on desktop and mobile. The only slight difference with performance was on mobile, however this was still of a high standard (92).
 
-![Lighthouse Post-Optimisation Mobile Report](readme-images/home-mobile-post-performance.PNG)
-
 ---
 ## Bugs
 
@@ -124,3 +134,7 @@ As opposed to:
 **Bug:** Countdown timer was decrementing faster if users answered questions quickly.
 
 **Fix:** Solution I used was to make the timer variable a global variable which was easier to turn on and off.
+
+**Bug:** Wrong position displayed for the current user if their name already existed on the leaderboard. If there were 3 names of the same type, then it was always the position of the same name with the lowest score that was displayed (as this was the last name in the sorted leaderboard data).
+
+**Fix:** Solution was to assign a unique userID to each user. This helped correctly displayed the position of the current user.
