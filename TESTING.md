@@ -3,11 +3,91 @@
 Back to [Readme file.](README.md)
 
 ## Table of Contents
+- [Functionality Testing](#functionality-testing)
 - [Browser Compatability](#browser-compatability)
 - [Code Validation](#code-validation)
 - [Performance Testing](#performance-testing)
 - [User Stories Testing](#user-stories-testing)
 - [Bugs](#bugs)
+
+---
+### Functionality Testing
+
+- Testing was applied throughout development to make sure everything worked as it should.
+
+#### Home Page
+
+- Play button leads to the correct destination i.e. the Game Page.
+- Instructions button leads to the correct destination i.e. the Instructions Page.
+
+#### Instructions Page
+
+- Home button leads to the correct destination i.e. Home Page.
+
+#### Game Page
+
+- Username Screen:
+    - User can successfully enter a username of their choice in the input box and then click the submit button. 
+    - The username is successfully sent to a function to make sure the name submitted is valid.
+        - If name is valid, then the Topic screen is shown.
+        - If the name is not valid, then the user is prompted to enter a new name.
+    - If there is a username stored in the session, then the user is successfully prompted to continue with the name in session or choose a new name.
+        - "Yes" button allows user to continue with old name, which brings user to Topic screen.
+        - "No" button allows user to submit a new username in the input box described above.
+
+- Topic Screen:
+    - User is presented with 8 buttons for choosing a topic.
+    - When any of the buttons are clicked the user is successfully brought to the Difficulty screen.
+    - Proof of success is that on the Game screen the image displayed represents the topic chosen, as do the nature of the questions.
+
+- Difficulty Screen:
+    - User is presented with 4 buttons for choosing a difficulty i.e. Easy, Medium, Hard, Random.
+    - When any of the buttons are clicked, a request is then sent to retrieve the Quiz data from the Open Trivia API.
+        - The user will be sent to the Game screen if the data is received without any errors.
+        - An error prompt will be displayed if the data was not received correctly i.e. not enough "Easy" questions in the "Politics" category. User will then be asked to choose a different category of difficulty.
+
+- Game Screen:
+    - Modal popup window appears when user clicks "QuizUp" logo:
+        - 3 menu buttons appear successfully in the Modal.
+        - Timer paused successfully while modal is open.
+        - "New Game" button successfully takes user back to the Username screen.
+        - "Resume" button successfully resumes the current game. Timer starts again.
+        - "Exit Game" button successfully takes user back to Home page.
+
+    - Heads-Up-Display (HUD) successfully displays game information:
+        - User can see their current score, this is incremented successfully when user gets answer correct.
+        - User can see the time remaining to answer the question:
+            - Timer decrements while the game is in-play.
+            - Timer pauses when answer is chosen or Modal window is open.
+            - Timer stays at 0 when time elapses.
+        - User can see the amount of questions they have remaining i.e. 0/10.
+
+    - Question from the Open Trivia API is displayed successfully beneath the topic image.
+
+    - Four answer buttons are displayed beneath the question.
+        - Clicking an answer button will create a sound i.e. Right / Wrong sound based on whether or not the answer was correct.
+        - Clicking an answer button will cause the button to fill up with a red or green colour based on whether or not it is correct.
+        - Clicking answer button stops timer.
+        - Clicking answer button enables the Continue button with an animation which smoothly focuses on the Continue button.
+
+    - Continue button displayed beneath the answer buttons.
+        - When clicked it successfully displays the next question and scrolls the page up to the question.
+        - When clicked the timer is reset to 30.
+        - When clicked the number of questions answered is incremented.
+        - When clicked it successfully brings to user to the Game Over screen if the user is on the last question.
+
+- Game Over Screen:
+    - User is successfully presented with their game statistics.
+    - User is presented with 3 buttons.
+        - "New Game" and "Exit Game" button have the same sucess conditions as above.
+        - "Leaderboard" button successfully takes the user to the Leaderboard screen.
+
+- Leaderboard Screen:
+    - Successfully display the table with all the users in the game.
+    - Successfully displays the user's rank, name, and score.
+    - 3 buttons.
+        - "New Game" and "Exit Game".
+        - "Game Stats" button which successfully takes the user back to the Game Over Screen.
 
 ---
 ### Browser Compatability
