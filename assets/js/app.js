@@ -23,6 +23,10 @@ $(document).ready(function() {
     	displayPrompt(session);
     }
 
+    // Create buttons
+    createTopicButtons();
+    createDifficultyButtons();
+
     /*
     Got help with this timer function from here:
     https://www.w3schools.com/howto/howto_js_countdown.asp
@@ -413,6 +417,57 @@ $(document).ready(function() {
 });
 
 /* ********************** HELPER FUNCTIONS ********************** */
+
+function createTopicButtons() {
+    /* 
+    Dynamically creates the topic buttons for the Topic screen
+    */
+   $("#topic-section").empty();
+
+    let topics = [
+        { "name": "General Knowledge", "value": 9, "colour": "#21AC11" },
+        { "name": "Entertainment", "value": 11, "colour": "#F26581" },
+        { "name": "Science", "value": 17, "colour": "#4280ef" },
+        { "name": "History", "value": 23, "colour": "#EA7216" },
+        { "name": "Mythology", "value": 20, "colour": "DarkMagenta" },
+        { "name": "Geography", "value": 22, "colour": "ForestGreen" },
+        { "name": "Sports", "value": 21, "colour": "FireBrick" },
+        { "name": "Politics", "value": 24, "colour": "LightSlateGrey" }
+    ];
+
+    // Add each topic button to the Game page
+    topics.forEach( (topic, i) => {
+        $("#topic-section").append(`
+            <div class="col-12 col-md-6 col-lg-3 button-wrapper mb-5">
+                <!-- "value" attribute corresponds to "category" value for the API query string -->
+                <button class="screen-btn" value=${topic.value} style="background-color: ${topic.colour};">${topic.name}</button>
+            </div>
+        `);
+    });
+}
+
+function createDifficultyButtons() {
+    /* 
+    Dynamically creates the difficulty buttons for the Difficulty screen
+    */
+   $("#difficulty-section").empty();
+
+    let difficulties = [
+        { "type": "Easy", "breakpoints": "col-12 col-md-6 col-lg-4", "colour": "#21AC11" },
+        { "type": "Medium", "breakpoints": "col-12 col-md-6 col-lg-4", "colour": "#4280ef" },
+        { "type": "Hard", "breakpoints": "col-12 col-md-6 col-lg-4", "colour": "#f91414" },
+        { "type": "Random", "breakpoints": "col-12 col-md-6 col-lg-12", "colour": "LightSlateGrey" }
+    ];
+
+    // Add each button to the Game page
+    difficulties.forEach( (difficulty, i) => {
+        $("#difficulty-section").append(`
+            <div class="${difficulty.breakpoints} button-wrapper mb-5">
+                <button class="screen-btn" style="background-color: ${difficulty.colour};">${difficulty.type}</button>
+            </div>
+        `);
+    });
+}
 
 function displayPrompt(session) {
 	$("#session-username").html(session.getItem("username"));
