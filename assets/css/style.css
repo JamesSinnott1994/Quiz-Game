@@ -165,6 +165,7 @@ h1, #modal-logo {
 
 #nav-item-container {
     display: flex;
+    font-family: "Caladea", sans-serif;
     flex-direction: row;
     padding-left: 0;
     margin-bottom: 0;
@@ -179,6 +180,11 @@ h1, #modal-logo {
     background-color: red;
     width: 100%;
     height: 175px;
+}
+
+#question {
+    font-family: "Caladea", sans-serif;
+    font-weight: bold;
 }
 
 .answer-btn, #continue-btn {
@@ -275,6 +281,7 @@ https://www.w3schools.com/howto/howto_css_modals.asp
 
 table {
     text-align: center;
+    font-family: "Caladea", sans-serif;
 }
 
 thead {
@@ -372,6 +379,9 @@ tr {
     #leaderboard-table {
         width: 80%;
         margin: 0 auto;
+    }
+    table {
+        font-size: 1.5em;
     }
     tr {
         border-left: 1px solid #212529;
