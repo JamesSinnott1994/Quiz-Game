@@ -128,7 +128,7 @@ Back to [Readme file.](README.md)
 
 #### Testing CSS with the [Jigsaw CSS Validation Service ](https://jigsaw.w3.org/css-validator/)
 - There were no errors discovered for my own custom style.css file. There were however 10 errors in Bootstrap's style sheet:
-![CSS Error](readme-images/css-errors.PNG)
+![CSS Error](readme-images/validator-screenshots/css-errors.PNG)
 
 - These appear to be minor errors that don't have any great effect on the performance of the game.
 - Warnings were also discovered, but these relate mainly to "unknown vendor extensions", which can be safely ignored.
@@ -137,7 +137,7 @@ Back to [Readme file.](README.md)
 
 - When I Initially put my app.js code into JSHint, I was given 51 warnings:
 
-![JSHint-Warning-One](readme-images/jshint-warning-1.PNG)
+![JSHint-Warning-One](readme-images/validator-screenshots/jshint-warning.PNG)
 
 - As can be seen from the image above, most of the warnings related to ES6's `let` and `const` keywords.
     - This is a minor warning. The solution to get rid of the warning was to add the following comment to the top of the app.js file:
@@ -166,29 +166,29 @@ Testing page with Lighthouse in Chrome Dev Tools to optimise performance, access
 
 - Lighthouse Desktop Home page report:
 
-![Lighthouse Desktop Home Page Report](readme-images/desktop-home-performance.png)
+![Lighthouse Desktop Home Page Report](readme-images/performance-screenshots/desktop-home-performance.png)
 
 - Lighthouse Desktop Instructions page report:
 
-![Lighthouse Desktop Instructions Page Report](readme-images/desktop-instructions-performance.png)
+![Lighthouse Desktop Instructions Page Report](readme-images/performance-screenshots/desktop-instructions-performance.png)
 
 - Lighthouse Desktop Game page report:
 
-![Lighthouse Desktop Game Page Report](readme-images/desktop-game-performance.png)
+![Lighthouse Desktop Game Page Report](readme-images/performance-screenshots/desktop-game-performance.png)
 
 #### Mobile Performance
 
 - Lighthouse Mobile Home page report:
 
-![Lighthouse Mobile Home Page Report](readme-images/mobile-home-performance.png)
+![Lighthouse Mobile Home Page Report](readme-images/performance-screenshots/mobile-home-performance.png)
 
 - Lighthouse Mobile Instructions page report:
 
-![Lighthouse Mobile Instructions Page Report](readme-images/mobile-instructions-performance.png)
+![Lighthouse Mobile Instructions Page Report](readme-images/performance-screenshots/mobile-instructions-performance.png)
 
 - Lighthouse Mobile Game page report:
 
-![Lighthouse Mobile Game Page Report](readme-images/mobile-game-performance.png)
+![Lighthouse Mobile Game Page Report](readme-images/performance-screenshots/mobile-game-performance.png)
 
 - Performance, Accessibility, Best Practices and SEO were roughly the same on desktop and mobile. The only slight difference with performance was on mobile, however this was still of a high standard (92).
 
