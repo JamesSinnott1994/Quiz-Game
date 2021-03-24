@@ -9,19 +9,13 @@ $(document).ready(function() {
     let username = '';
     let anyErrors = false, gameScreenDisplayed = false, timerStopped = true;
 
-    // Generates random string for the User ID:
-    // https://gist.github.com/6174/6062387
+    // Generates random string for the User ID: https://gist.github.com/6174/6062387
     let userID = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
-    // Session storage
-    let session = window.sessionStorage;
+    let session = window.sessionStorage; // Session storage
 
-    // Check if there is a username in the session storage
-    if (session.getItem("username") !== null) {
-
-    	// Display prompt for continuing with previously entered name
-    	displayPrompt(session);
-    }
+    // Check if username in session storage, if so display prompt
+    if (session.getItem("username") !== null) displayPrompt(session);
 
     // Create buttons
     createTopicButtons();
@@ -42,13 +36,9 @@ $(document).ready(function() {
         }
 
         // Change colour if less than 10
-        if (time <= 10) {
-            $("#timer-container").css('color', 'red');
-        }
+        if (time <= 10) $("#timer-container").css('color', 'red');
 
-        // If the count down is over:
-            // Play wrong sound
-            // Show correct answer
+        // If time elapses, play wrong sound, show correct answer
         if (time <= 0) {
             timerStopped = true;
             time = 30;
@@ -79,52 +69,21 @@ $(document).ready(function() {
             if(useNameInSession === "Yes") {
                 username = session.getItem("username");
                 goToScreen("topic", "username");
-            } else {
-                hidePrompt();
             }
+            hidePrompt();
         });
     });
 
     // Binds a click event to the username button
     $("#username-btn").bind('click', () => {
-
     	username = $('#user-input').val(); // Gets username from input box
-        let issue = validateUsername(username);
-
-        // Switch statement
-        // Gets rid of nested ifs and elses
-        switch(issue) {
-            case "No username entered":
-                $("#username-error-response").html("Please enter a username.");
-                $("#username-error-section").show();
-                break;
-            default:
-                // Save name in session storage
-                session.setItem('username', username);
-                goToScreen("topic", "username");
-        }
+        validateUsername(username, session);
     });
 
     // Binds a keypress event to the page document for entering username
     $(document).on('keypress', e => {
-
     	username = $('#user-input').val(); // Gets username from input box
-        let issue = validateUsername(username);
-
-        if (e.which === 13) {
-            // Switch statement
-            // Gets rid of nested ifs and elses
-            switch(issue) {
-                case "No username entered":
-                    $("#username-error-response").html("Please enter a username.");
-                    $("#username-error-section").show();
-                    break;
-                default:
-                    session.setItem('username', username);
-                    goToScreen("topic", "username");
-                    $(document).off('keypress'); // Turn off keypress detection
-            }
-        }
+        if (e.which === 13) validateUsername(username, session);
     });
 
     // Binds a click event to each button on the Topic screen
@@ -209,10 +168,10 @@ $(document).ready(function() {
         });
     };
 
-    // Display question
+    // Display each question
     function displayQuestion() {
 
-    	// Don't display screen again for the next question
+    	// Don't display Game screen again for the next question
         if (!gameScreenDisplayed) {
             hideScreen("difficulty");
 
@@ -231,14 +190,10 @@ $(document).ready(function() {
         $("#answer-btn-container button").each((i, button) => {
             $(button).bind('click', () => {
 
-                // Gets answer from the button that was clicked
-                let answer = $(button).html();
-
-                // Stop the timer
-                timerStopped = true;
+                let answer = $(button).html(); // Gets answer from the button that was clicked
+                timerStopped = true; // Stop the timer
 
                 if (answer === correctAnswer) {
-
                     // Play sound for correct answer
                     // https://medium.com/@ericschwartz7/adding-audio-to-your-app-with-jquery-fa96b99dfa97
                     $("#correct-sound")[0].play();
@@ -299,7 +254,7 @@ $(document).ready(function() {
         // Adds a class to this button so that it can be accessed later
         $(`#answer-${randomNumber}`).html(quizData[0].correct_answer);
         $(`#answer-${randomNumber}`).addClass("correct-answer");
-        correctAnswer = $(`#answer-${randomNumber}`).html(); // Sets text to answerS
+        correctAnswer = $(`#answer-${randomNumber}`).html(); // Sets text to answers
 
         // Places the incorrect answers in the buttons
         for (let i = 0; i < 4; i++) {
@@ -322,7 +277,7 @@ $(document).ready(function() {
     // Binds click event listener to Continue button
     $("#continue-btn").bind('click', () => {
 
-        // Display next question
+        // Display next question if more questions exist
         if (quizData.length > 1) {
             quizData.shift(); // Get rid of last displayed question
             time = 30; // Reset timer
@@ -343,7 +298,6 @@ $(document).ready(function() {
             // Returns focus to top of screen if at bottom
             smoothFocus("#img", 500);
         } else {
-
             // Log User score in local storage
             let userObject = {
                 "name": username,
@@ -408,10 +362,6 @@ $(document).ready(function() {
         $("#game-over-screen").attr("hidden", false);
         $("#game-over-screen").css('display', 'grid');
         $("#game-over-header").show();
-
-        // Remove all leaderboard data from the leaderboard list element
-        // Prevents same data from being appended multiple times in the displayLeaderboardData function
-        $("#leaderboard-list").empty();
     });
 
 });
@@ -422,8 +372,6 @@ function createTopicButtons() {
     /* 
     Dynamically creates the topic buttons for the Topic screen
     */
-   $("#topic-section").empty();
-
     let topics = [
         { "name": "General Knowledge", "value": 9, "colour": "#21AC11" },
         { "name": "Entertainment", "value": 11, "colour": "#F26581" },
@@ -450,8 +398,6 @@ function createDifficultyButtons() {
     /* 
     Dynamically creates the difficulty buttons for the Difficulty screen
     */
-   $("#difficulty-section").empty();
-
     let difficulties = [
         { "type": "Easy", "breakpoints": "col-12 col-md-6 col-lg-4", "colour": "#21AC11" },
         { "type": "Medium", "breakpoints": "col-12 col-md-6 col-lg-4", "colour": "#4280ef" },
@@ -482,11 +428,26 @@ function hidePrompt() {
     $("#username-section").show();
 }
 
-function validateUsername(username) {
-   
+function validateUsername(username, session) {
+    let issue = '';
+
     // Check if username entered
     if(username === '') {
-        return "No username entered";
+        issue = "No username entered";
+    }
+
+    // Switch statement
+    // Gets rid of nested ifs and elses
+    switch(issue) {
+        case "No username entered":
+            $("#username-error-response").html("Please enter a username.");
+            $("#username-error-section").show();
+            break;
+        default:
+            // Save name in session storage
+            session.setItem('username', username);
+            goToScreen("topic", "username");
+            $(document).off('keypress'); // Turn off keypress detection
     }
 }
 
@@ -498,7 +459,7 @@ function hideScreen(screenName) {
 
 function goToScreen(newScreen, oldScreen) {
     // Hide old screen
-    $(`#${newScreen}-screen`).attr("hidden", true);
+    $(`#${oldScreen}-screen`).attr("hidden", true);
     $(`#${oldScreen}-screen`).hide();
     $(`#${oldScreen}-header`).hide();
 
@@ -509,33 +470,33 @@ function goToScreen(newScreen, oldScreen) {
 }
 
 function addAnswerButtons() {
-        /*
-        - Re-creates all answer buttons.
+    /*
+    - Re-creates all answer buttons.
 
-        - The reason why we have to re-create all the buttons is because of an issue relating to the makeBtnHeightSame() function.
-        - For some reason when the height of all divs is set intially to the maxHeight of the largest div, it never then sets to the new max height for the divs of the next displayed question. I don't know why this is. But this function deals with the problem, perhaps in an inefficient way.
-        */
-        $("#answer-btn-container").empty();
+    - The reason why we have to re-create all the buttons is because of an issue relating to the makeBtnHeightSame() function.
+    - For some reason when the height of all divs is set intially to the maxHeight of the largest div, it never then sets to the new max height for the divs of the next displayed question. I don't know why this is. But this function deals with the problem, perhaps in an inefficient way.
+    */
+    $("#answer-btn-container").empty();
 
-        $("#answer-btn-container").append(`
-            <div class="col-12 col-md-6 button-wrapper mb-4 mt-md-5">
-                <button id="answer-1" class="answer-btn"></button>
-            </div>
+    $("#answer-btn-container").append(`
+        <div class="col-12 col-md-6 button-wrapper mb-4 mt-md-5">
+            <button id="answer-1" class="answer-btn"></button>
+        </div>
 
-            <div class="col-12 col-md-6 button-wrapper mb-4 mt-md-5">
-                <button id="answer-2" class="answer-btn"></button>
-            </div>
+        <div class="col-12 col-md-6 button-wrapper mb-4 mt-md-5">
+            <button id="answer-2" class="answer-btn"></button>
+        </div>
 
-            <div class="col-12 col-md-6 button-wrapper mb-4 mt-md-5">
-                <button id="answer-3" class="answer-btn"></button>
-            </div>
+        <div class="col-12 col-md-6 button-wrapper mb-4 mt-md-5">
+            <button id="answer-3" class="answer-btn"></button>
+        </div>
 
-            <div class="col-12 col-md-6 button-wrapper mb-4 mt-md-5">
-                <button id="answer-4" class="answer-btn"></button>
-            </div>
-            `
-        );
-    }
+        <div class="col-12 col-md-6 button-wrapper mb-4 mt-md-5">
+            <button id="answer-4" class="answer-btn"></button>
+        </div>
+        `
+    );
+}
 
 function makeBtnHeightSame() {
     /*
@@ -661,7 +622,6 @@ function sortLeaderboardData(difficulty) {
             leaderboardSortedData.push(user);
         }
     });
-
     return leaderboardSortedData;
 }
 
@@ -671,32 +631,23 @@ function checkForErrors(responseCode) {
         - true, if errors exist
         - false, if no errors exist
     */
-    if (responseCode === 0) {
-        // Code 0: Sucesss
-        return false;
-    } else if (responseCode === 1) {
-        // Code 1: No results
-        $("#error-response").html("No results from that particular category");
-        $("#error-response-section").show();
-        return true;
-    } else if (responseCode === 2) {
-        // Code 2: Invalid parameter. Contains an invalid parameter. Arguements passed in aren't valid. (Ex. Amount = Five)
-        $("#error-response").html("Invalid parameter");
-        $("#error-response-section").show();
-        return true;
-    } else if (responseCode === 3) {
-        // Code 3: Token not found. Session Token does not exist.
-        $("#error-response").html("Session token not found.");
-        $("#error-response-section").show();
-        return true;
-    } else if (responseCode === 4) {
-        // Code 4: Token empty. Session Token has returned all possible questions for the specified query. Resetting the Token is necessary.
-        $("#error-response").html("Session token empty");
-        $("#error-response-section").show();
-        return true;
-    } else {
-        $("#error-response").html("Unknown Error");
-        $("#error-response-section").show();
-        return true;
-    }
+    let anyErrors = false;
+
+    let errorResponses = [
+        { "responseCode": 0, "errorResponse": "", "status": false },
+        { "responseCode": 1, "errorResponse": "No results from that particular category", "status": true },
+        { "responseCode": 2, "errorResponse": "Invalid parameter", "status": true },
+        { "responseCode": 3, "errorResponse": "Session token not found.", "status": true },
+        { "responseCode": 4, "errorResponse": "Session token empty", "status": true }
+    ];
+
+    // Display error to user if any exists
+    errorResponses.forEach( error => {
+        if (responseCode === error.responseCode) {
+            $("#error-response").html(error.errorResponse);
+            $("#error-response-section").show();
+            anyErrors = error.status;
+        }
+    });
+    return anyErrors;
 }
