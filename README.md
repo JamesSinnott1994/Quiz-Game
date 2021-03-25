@@ -55,11 +55,11 @@ As a **site owner**, I want:
 - Project goal:
     - The goal of this Quiz application is to provide an enjoyable interactive game that will test a user's general knowledge or knowledge about a specific topic. The game should be easy to understand, simple to interact with and give feedback to the user on all inputs.
 - Focus:
-    - The main focus of the project is to build a fun engaging interactive quiz game that will display many different and interesting questions generated from the Open Trivia Database API.
+    - The main focus of the project is to build a fun engaging interactive quiz game that will display many different and interesting questions generated from the [Open Trivia Database API](https://opentdb.com/api_config.php).
 - Definition:
     - We are creating an interactive Quiz application that will be playable on multiple devices.
 - Value:
-    - The value this project will provide, is that it will showcase to future employers my ability to use JavaScript to add interactivity to a web application, as well as my ability to retrieve data from an API.
+    - The value this project will provide, is that it will showcase to future employers my ability to use JavaScript (as well as jQuery) to add interactivity to a web application, as well as my ability to retrieve data from an API.
     - The value for users of the application is that it will provide a fun engaging user experience.
 
 #### Strategy Tradeoffs
@@ -77,6 +77,7 @@ New Game / Exit Game | 5 | 5
 Game Instructions | 3 | 5
 End of Game information | 4 | 5
 Give hints | 2 | 4
+Leaderboard | 3 | 5
 
 ### Scope
 - Main features (For Minimal Viable Product)
@@ -95,6 +96,7 @@ Give hints | 2 | 4
     - Background music and sounds for the game.
     - There will be a game instructions page OR modal window on how to play the game.
     - Hint feature, which will subtract user points in order to reduce the possible correct answers from 4 to 2.
+    - Leaderboard.
 
 ### Structure
 The website will be broken down into three areas in order to achieve the project goals and meet the user stories:
@@ -106,14 +108,20 @@ The website will be broken down into three areas in order to achieve the project
 - Will give instructions on how to play the game. 
 - Will include a button to return to the Home page.
 3. Game Page:
+- There will be a screen that allows the user to enter their username, or use a previously entered username.
 - There will be two screens that allow a user to choose the topic and difficulty of questions.
-- There will be a header / navbar which will display certain information about the user and game i.e. Game Logo, Questions remaining, User Score etc.
+- There will be a HUD / navbar which will display certain information about the user and game i.e. Game Logo, Questions remaining, User Score etc.
+- There will be a Modal popup window which appears when user clicks on the Game Logo in the navbar / HUD.
+    - Will contain Logo and Menu button options.
 - Will display a randomly generated question for the user.
 - Underneath each question will be four boxes with each of the possible correct answers.
 - User will be given visual feedback on which answer they got correct or wrong.
-- When the game is finished, the user will be presented with their stats. Underneath the stats there will be buttons to start a new game or to exit the game.
-    - New Game button will generate a new set of quiz questions.
+- There will be a Continue button to cycle through the questions.
+- When the game is finished, the user will be presented with their stats. Underneath the stats there will be buttons to start a new game, go to Leaderboard, or to exit the game.
+    - New Game button will take user back to the Username screen.
+    - Leaderboard button brings user to Leaderboard screen.
     - Exit Game button will return the user to the Home Page.
+- There will be a Leaderboard screen which displays the names, scores and ranks of all the players.
 
 ### Skeleton
 1. Home Page Wireframe:
@@ -133,28 +141,25 @@ The website will be broken down into three areas in order to achieve the project
 
 #### Typography
 - Two fonts will be used in this application:
-    - The Calistoga font will be used for any headers.
-    - The Caladea font will be used for the text, questions, and answers.
+    - The [Calistoga](https://fonts.google.com/specimen/Calistoga?preview.text_type=custom) font will be used for any headers.
+    - The [Caladea](https://fonts.google.com/specimen/Caladea?preview.text_type=custom) font will be used for the text, questions, buttons and answers.
 
 #### Colour scheme
 - Background colour  ![#e6ece2](https://placehold.it/15/e6ece2/000000?text=+)<br>
 - Ordinary button colour  ![#c0bdae](https://placehold.it/15/c0bdae/000000?text=+)<br>
+- Text colour  ![#000000](https://placehold.it/15/000000/000000?text=+)<br>
 - Correct answer colour  ![#63ba09](https://placehold.it/15/63ba09/000000?text=+)<br>
 - Wrong answer colour  ![#e35a47](https://placehold.it/15/e35a47/000000?text=+)<br>
-- Star Colour  ![#ffe785](https://placehold.it/15/ffe785/000000?text=+)<br>
 
 #### Media
 - I will use a Logo image for the Home page
 - I will use images for the various quiz topics.
-- I may use some low fidelity background music.
-- I may use a sound for getting the correct answer.
-- I may use a sound for getting the wrong answer.
+- I will use a sound for getting the correct answer.
+- I will use a sound for getting the wrong answer.
 
 #### Effects
-- There will be a transition animation for buttons sliding into place.
-- There will be fading animations for buttons fading out of sight.
-- There will be hover effects for the various buttons.
-- There will be shadow effects for the various buttons.
+- There will be a smooth transition to move to different elements on the game page i.e. Continue button, or back to top of the page.
+- There will an animation that slowly fills an answer button with either green or red.
 
 ---
 ## Technologies
@@ -199,6 +204,14 @@ The site is deployed on GitHub pages. The setup involved was:
 - Selected 'main' branch and 'root' folder to deploy to GitHub pages, and pressed 'Save'.
 - Navigated to https://jamessinnott1994.github.io/Quiz-Game/ to view deployed website.
 
+### Forking
+
+To contribute to this website you can Fork it by following the procedure below:
+- Go to the repository page.
+- Click the Fork button on the top right of the page.
+- This creates a copy in your personal repository.
+- When you're finished making changes, return to original repository and press "New Pull Request" to request your changes be merged into the original project.
+
 ### Creating a local clone
 - Project can be downloaded as a .zip file by clicking the 'Code' button in the project repository and clicking 'Download ZIP'.
 - Project can also be cloned by entering `git clone https://github.com/JamesSinnott1994/Quiz-Game.git` in the terminal.
@@ -240,3 +253,4 @@ I would like to thank:
 - My mentor [Maranatha Ilesanmi](https://ng.linkedin.com/in/ilesanmimaranatha) for his very helpful advice during the project meetings.
 - Anna Greaves for her videos on doing the Readme document.
 - The Slack Community for help with certain problems.
+- Tutor Support.
