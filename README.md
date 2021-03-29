@@ -64,20 +64,20 @@ As a **site owner**, I want:
 
 #### Strategy Tradeoffs
 
-Opportunity/Problem | Importance (1-5) | Viability/Feasibility (1-5)
-:-------- |:--------:|:--------:
-Display Timer | 2 | 3
-Display Score | 4 | 5
-Display Questions | 5 | 5
-Present Answers | 5 | 5
-Display questions based on difficulty | 4 | 5
-Display questions based on topic | 3 | 5
-Sounds / Music | 1 | 4
-New Game / Exit Game | 5 | 5
-Game Instructions | 3 | 5
-End of Game information | 4 | 5
-Give hints | 2 | 4
-Leaderboard | 3 | 5
+Opportunity/Problem | Importance (1-5) | Viability/Feasibility (1-5) | Implemented
+:-------- |:--------:|:--------:|:--------:
+Display Timer | 2 | 3 | :heavy_check_mark:
+Display Score | 4 | 5 | :heavy_check_mark:
+Display Questions | 5 | 5 | :heavy_check_mark:
+Present Answers | 5 | 5 | :heavy_check_mark:
+Display questions based on difficulty | 4 | 5 | :heavy_check_mark:
+Display questions based on topic | 3 | 5 | :heavy_check_mark:
+Sounds / Music | 1 | 4 | :heavy_check_mark:
+New Game / Exit Game | 5 | 5 | :heavy_check_mark:
+Game Instructions | 3 | 5 | :heavy_check_mark:
+End of Game information | 4 | 5 | :heavy_check_mark:
+Give hints | 2 | 4 | :cross_mark:
+Leaderboard | 3 | 5 | :heavy_check_mark:
 
 ### Scope
 - Main features (For Minimal Viable Product)
@@ -85,7 +85,7 @@ Leaderboard | 3 | 5
     - Visual feedback for when a user selects an answer.
     - Display score that player has achieved after answering questions correctly.
     - The ability to start a New game, or exit the current game.
-    - End of game information will be given to the user.
+    - End of game information to be given to the user.
     - Built using best practices of semantic HTML and accessibility.
     - Be fully responsive for mobile use.
 
@@ -94,34 +94,34 @@ Leaderboard | 3 | 5
     - Ability to select questions based on a particular topic.
     - Ability to select questions based on a particular difficulty.
     - Background music and sounds for the game.
-    - There will be a game instructions page OR modal window on how to play the game.
-    - Hint feature, which will subtract user points in order to reduce the possible correct answers from 4 to 2.
+    - Game instructions page OR modal window on how to play the game.
+    - Hint feature, which subtracts user points in order to reduce the possible correct answers from 4 to 2.
     - Leaderboard.
 
 ### Structure
 The website will be broken down into three areas in order to achieve the project goals and meet the user stories:
 1. Home Page:
-- The Home page will showcase the logo for the game. The page will display two buttons, a "Play" button and an "Instructions" button.
-- "Play" button will take the user to the Game Page.
-- "Instructions" button will take the user to the Instructions.
+- The Home page showcases the logo for the game. The page displays two buttons, a "Play" button and an "Instructions" button.
+- "Play" button takes the user to the Game Page.
+- "Instructions" button takes the user to the Instructions.
 2. Instructions Page:
-- Will give instructions on how to play the game. 
-- Will include a button to return to the Home page.
+- Gives instructions on how to play the game. 
+- Includes a button to return to the Home page.
 3. Game Page:
-- There will be a screen that allows the user to enter their username, or use a previously entered username.
-- There will be two screens that allow a user to choose the topic and difficulty of questions.
-- There will be a HUD / navbar which will display certain information about the user and game i.e. Game Logo, Questions remaining, User Score etc.
-- There will be a Modal popup window which appears when user clicks on the Game Logo in the navbar / HUD.
-    - Will contain Logo and Menu button options.
-- Will display a randomly generated question for the user.
-- Underneath each question will be four boxes with each of the possible correct answers.
-- User will be given visual feedback on which answer they got correct or wrong.
-- There will be a Continue button to cycle through the questions.
-- When the game is finished, the user will be presented with their stats. Underneath the stats there will be buttons to start a new game, go to Leaderboard, or to exit the game.
-    - New Game button will take user back to the Username screen.
+- There is a screen that allows the user to enter their username, or use a previously entered username.
+- There are two screens that allow a user to choose the topic and difficulty of questions.
+- There is a HUD / navbar which displays certain information about the user and game i.e. Game Logo, Questions remaining, User Score etc.
+- There is a Modal popup window which appears when user clicks on the Game Logo in the navbar / HUD.
+    - Contains Logo and Menu button options.
+- Display a randomly generated question for the user.
+- Underneath each question there are four boxes with each of the possible correct answers.
+- User is given visual feedback on which answer they got correct or wrong.
+- There is a Continue button to cycle through the questions.
+- When the game is finished, the user is presented with their stats. Underneath the stats there are buttons to start a new game, go to Leaderboard, or to exit the game.
+    - New Game button takes user back to the Username screen.
     - Leaderboard button brings user to Leaderboard screen.
-    - Exit Game button will return the user to the Home Page.
-- There will be a Leaderboard screen which displays the names, scores and ranks of all the players.
+    - Exit Game button returns the user to the Home Page.
+- There is a Leaderboard screen which displays the names, scores and ranks of all the players.
 
 ### Skeleton
 1. Home Page Wireframe:
@@ -140,9 +140,9 @@ The website will be broken down into three areas in order to achieve the project
 ### Surface
 
 #### Typography
-- Two fonts will be used in this application:
-    - The [Calistoga](https://fonts.google.com/specimen/Calistoga?preview.text_type=custom) font will be used for any headers.
-    - The [Caladea](https://fonts.google.com/specimen/Caladea?preview.text_type=custom) font will be used for the text, questions, buttons and answers.
+- Two fonts are used in this application:
+    - The [Calistoga](https://fonts.google.com/specimen/Calistoga?preview.text_type=custom) font is used for any headers.
+    - The [Caladea](https://fonts.google.com/specimen/Caladea?preview.text_type=custom) font is used for the text, questions, buttons and answers.
 
 #### Colour scheme
 - Background colour  ![#e6ece2](https://placehold.it/15/e6ece2/000000?text=+)<br>
@@ -152,14 +152,14 @@ The website will be broken down into three areas in order to achieve the project
 - Wrong answer colour  ![#e35a47](https://placehold.it/15/e35a47/000000?text=+)<br>
 
 #### Media
-- I will use a Logo image for the Home page
-- I will use images for the various quiz topics.
-- I will use a sound for getting the correct answer.
-- I will use a sound for getting the wrong answer.
+- There is a Logo image for the Home page
+- There are images for the various quiz topics.
+- There is a sound for getting the correct answer.
+- There is a sound for getting the wrong answer.
 
 #### Effects
-- There will be a smooth transition to move to different elements on the game page i.e. Continue button, or back to top of the page.
-- There will an animation that slowly fills an answer button with either green or red.
+- There is a smooth transition to move to different elements on the game page i.e. Continue button, or back to top of the page.
+- There is an animation that slowly fills an answer button with either green or red.
 
 ---
 ## Technologies
