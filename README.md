@@ -76,7 +76,7 @@ Sounds / Music | 1 | 4 | :heavy_check_mark:
 New Game / Exit Game | 5 | 5 | :heavy_check_mark:
 Game Instructions | 3 | 5 | :heavy_check_mark:
 End of Game information | 4 | 5 | :heavy_check_mark:
-Give hints | 2 | 4 | :cross_mark:
+Give hints | 2 | 4 | :x:
 Leaderboard | 3 | 5 | :heavy_check_mark:
 
 ### Scope
