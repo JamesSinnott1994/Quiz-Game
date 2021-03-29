@@ -292,6 +292,11 @@ tr {
     border-bottom: 1px solid #212529;
 }
 
+.button:hover {
+    opacity: 0.8;
+    color: white;
+}
+
 /*--------------------------------------------BOOTSTRAP BREAKPOINTS*/
 
 /* // Medium devices (tablets, 768px and up) */
