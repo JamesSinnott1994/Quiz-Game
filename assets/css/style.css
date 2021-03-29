@@ -480,6 +480,10 @@ tr {
         grid-row-start: 2;
         grid-row-end: 3;
     }
+    #modal-img-container {
+        width: 33%;
+        height: 300px;
+    }
 }
 
 /* // XX-Large devices (larger desktops, 1600px and up) */
