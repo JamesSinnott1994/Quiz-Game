@@ -68,7 +68,7 @@ $(document).ready(function() {
 
             if(useNameInSession === "Yes") {
                 username = session.getItem("username");
-                goToScreen("topic", "username");
+                changeScreen("username", "topic");
             }
             hidePrompt();
         });
@@ -82,7 +82,9 @@ $(document).ready(function() {
 
     // Binds a keypress event to the page document for entering username
     $(document).on('keypress', e => {
-    	username = $('#user-input').val(); // Gets username from input box
+        username = $('#user-input').val(); // Gets username from input box
+        
+        // "e.which === 13" refers to the "Enter" key being pressed
         if (e.which === 13) validateUsername(username, session);
     });
 
@@ -98,7 +100,7 @@ $(document).ready(function() {
             imageName = imageName.replace(/\s/g, "-"); // Join string separated by whitespace with hyphen
             $("#img").attr("src", `assets/img/${imageName}.jpg`);
 
-            goToScreen("difficulty", "topic");
+            changeScreen("topic", "difficulty");
         });
     });
 
@@ -157,11 +159,11 @@ $(document).ready(function() {
             };
 
             // Setup our HTTP request
-            if (difficulty === "random") {
-            	xhr.open("GET", `https://opentdb.com/api.php?amount=${amountOfQuestions}&category=${topic}&type=multiple`, true);
-            } else {
-                xhr.open("GET", `https://opentdb.com/api.php?amount=${amountOfQuestions}&category=${topic}&difficulty=${difficulty}&type=multiple`, true);
+            let url = `https://opentdb.com/api.php?amount=${amountOfQuestions}&category=${topic}&type=multiple`;
+            if (difficulty !== "random") {
+                url = `https://opentdb.com/api.php?amount=${amountOfQuestions}&category=${topic}&difficulty=${difficulty}&type=multiple`;
             }
+            xhr.open("GET", url, true);
 
             // Send the request
             xhr.send();
@@ -173,7 +175,7 @@ $(document).ready(function() {
 
     	// Don't display Game screen again for the next question
         if (!gameScreenDisplayed) {
-            hideScreen("difficulty");
+            changeScreen("difficulty");
 
             // Show Game screen
             $("#game-screen").attr("hidden", false);
@@ -257,11 +259,11 @@ $(document).ready(function() {
         correctAnswer = $(`#answer-${randomNumber}`).html(); // Sets text to answers
 
         // Places the incorrect answers in the buttons
-        for (let i = 0; i < 4; i++) {
-            if ( $(`#answer-${i+1}`).hasClass("correct-answer") ) {
+        for (let i = 1; i <= 4; i++) {
+            if ( $(`#answer-${i}`).hasClass("correct-answer") ) {
                 continue; // Skip button that already has correct answer
             } else {
-                $(`#answer-${i+1}`).html(incorrectAnswers[0]); // Place first item from this array
+                $(`#answer-${i}`).html(incorrectAnswers[0]); // Place first item from this array
                 incorrectAnswers.shift(); // Remove first item from this array
             }
         }
@@ -286,7 +288,7 @@ $(document).ready(function() {
             $("#timer-container").css('color', 'black');
 
             // Animation to fade from question to question
-            hideScreen("game");
+            changeScreen("game");
             $("#game-screen").attr("hidden", false);
             $("#game-screen").fadeIn(1000);
             $("#game-header").css('display', 'flex');
@@ -316,7 +318,7 @@ $(document).ready(function() {
             getLeaderboardPosition(difficulty, userID);
 
             // Hide Game screen
-            hideScreen("game");
+            changeScreen("game");
 
             // Display Game Over screen
             $("#game-over-screen").attr("hidden", false);
@@ -344,7 +346,7 @@ $(document).ready(function() {
         displayLeaderboardData(difficulty);
 
         // Hide Game Over screen
-        hideScreen("game-over");
+        changeScreen("game-over");
 
         // Display Game Over screen
         $("#leaderboard-screen").attr("hidden", false);
@@ -356,7 +358,7 @@ $(document).ready(function() {
     $('#game-stats-btn').bind('click', () => {
 
         // Display Game Over screen
-        hideScreen("leaderboard");
+        changeScreen("leaderboard");
 
         // Show Game Over Screen
         $("#game-over-screen").attr("hidden", false);
@@ -446,27 +448,23 @@ function validateUsername(username, session) {
         default:
             // Save name in session storage
             session.setItem('username', username);
-            goToScreen("topic", "username");
+            changeScreen("username", "topic");
             $(document).off('keypress'); // Turn off keypress detection
     }
 }
 
-function hideScreen(screenName) {
-    $(`#${screenName}-screen`).attr("hidden", true);
-    $(`#${screenName}-screen`).hide();
-    $(`#${screenName}-header`).hide();
-}
-
-function goToScreen(newScreen, oldScreen) {
+function changeScreen(screenToHide, screenToShow = null) {
     // Hide old screen
-    $(`#${oldScreen}-screen`).attr("hidden", true);
-    $(`#${oldScreen}-screen`).hide();
-    $(`#${oldScreen}-header`).hide();
+    $(`#${screenToHide}-screen`).attr("hidden", true);
+    $(`#${screenToHide}-screen`).hide();
+    $(`#${screenToHide}-header`).hide();
 
     // Display new screen
-    $(`#${newScreen}-screen`).attr("hidden", false);
-    $(`#${newScreen}-screen`).show();
-    $(`#${newScreen}-header`).show();
+    if (screenToShow !== null) {
+        $(`#${screenToShow}-screen`).attr("hidden", false);
+        $(`#${screenToShow}-screen`).show();
+        $(`#${screenToShow}-header`).show();
+    }
 }
 
 function addAnswerButtons() {
