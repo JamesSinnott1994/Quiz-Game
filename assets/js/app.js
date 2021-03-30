@@ -3,7 +3,8 @@ $(document).ready(function() {
 
     // Variable declarations
     let topic, difficulty, question, correctAnswer, incorrectAnswers;
-    let questionsAnswered = 0, score = 0, noOfCorrectAnswers = 0, time = 30;
+    let questionsAnswered = 0, score = 0, noOfCorrectAnswers = 0, time = 60, startingTime = 60;
+    let times = { "easyTime": 60,  "mediumTime": 30, "hardTime": 20, "randomTime": 35 };
     let quizData = [];
     const amountOfQuestions = 10;
     let username = '';
@@ -39,9 +40,9 @@ $(document).ready(function() {
         if (time <= 10) $("#timer-container").css('color', 'red');
 
         // If time elapses, play wrong sound, show correct answer
-        if (time <= 0) {
+        if (time <= 0 && !timerStopped) {
             timerStopped = true;
-            time = 30;
+            time = startingTime;
             $("#timer").html("0");
             $("#timer-container").css('color', 'black');
 
@@ -110,6 +111,11 @@ $(document).ready(function() {
             // Get difficulty of button that was clicked
             // Helps us get data from the Quiz API
             difficulty = $(button).html().toLowerCase();
+
+            // Sets time based on difficulty
+            startingTime = times[`${difficulty}Time`];
+            time = startingTime;
+            $("#timer").html(`${time}`);
 
             // Call function to retrieve API Data
             // https://gomakethings.com/promise-based-xhr/
@@ -282,7 +288,7 @@ $(document).ready(function() {
         // Display next question if more questions exist
         if (quizData.length > 1) {
             quizData.shift(); // Get rid of last displayed question
-            time = 30; // Reset timer
+            time = startingTime; // Reset timer
             timerStopped = false; // Restart timer
             $("#timer").html(`${time}`);
             $("#timer-container").css('color', 'black');
