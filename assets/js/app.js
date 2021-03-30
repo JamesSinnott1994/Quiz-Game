@@ -560,15 +560,47 @@ function smoothFocus(element, time) {
 }
 
 function getLeaderboardPosition(difficulty, userID) {
-   
-   // Sort leaderboard data
-   let leaderboardSortedData = sortLeaderboardData(difficulty);
+
+    // The amount of players who can be displayed on the Leaderboard
+    // Also limits the number of users of a specific difficulty who can be stored in local storage
+    let leaderboardLimit = 10;
+
+    // Leaderboard data sorted by score and difficulty
+    let sortedUsers = sortLeaderboardData(difficulty);
+
+    // Gets the amount of players currently stored in local storage for this difficulty
+    let amountOfPlayers = sortedUsers.length;
+    if (sortedUsers.length > leaderboardLimit) {
+        // This will occur if there are 11 players stored in local storage
+        // This happens as culling has not taken effect yet
+        amountOfPlayers = leaderboardLimit;
+    }
 
     // Calculates user's position
-    leaderboardSortedData.forEach((user, position) => {
+    sortedUsers.forEach((user, position) => {
         if (user.name === $('#username').html() && user.id === userID) {
-            $('#position').html(position+1);
-            $('#no-of-players').html(leaderboardSortedData.length);
+            let userPosition = (position+1);
+
+            // Tells user whether or not they made it onto the Leaderboard
+            if ( userPosition > leaderboardLimit ) {
+                $('#position-wrapper').append(
+                    `
+                    <p>Sorry ${user.name}, you didn't make it into the <b>Top ${leaderboardLimit}</b> on the <b>Leaderboard</b> :(</p>
+                    `
+                );
+            } else {
+                $('#position-wrapper').append(
+                    `
+                    <p>
+                    You are at position <b>${userPosition}</b> 
+                    out of <b>${amountOfPlayers}</b> 
+                    players on the leaderboard.
+                    </p>
+                    `
+                );
+            }
+            // Remove bottom placed player (Prevents local storage from getting too big)
+            cullLeaderboardData(difficulty, sortedUsers, leaderboardLimit);
         }
     });
 }
@@ -584,21 +616,16 @@ function displayLeaderboardData(difficulty) {
     $("tbody").empty();
 
     // Sort leaderboard data
-    let leaderboardSortedData = sortLeaderboardData(difficulty);
-
-    // Show the top 12 names
-    while (leaderboardSortedData.length > 12) {
-        leaderboardSortedData.pop();
-    }
+    let sortedUsers = sortLeaderboardData(difficulty);
 
     // Append user data to the leaderboard table for the specific category of difficulty
-    leaderboardSortedData.forEach( (user, i) => {
+    sortedUsers.forEach( (user, i) => {
         if (user.difficulty === difficulty) {
             $("tbody").append(
                 `<tr>
                     <th>#${i+1}</th>
-                    <td>${leaderboardSortedData[i].name}</td>
-                    <td>${leaderboardSortedData[i].score}</td>
+                    <td>${sortedUsers[i].name}</td>
+                    <td>${sortedUsers[i].score}</td>
                 </tr>`
             );
         }
@@ -607,20 +634,57 @@ function displayLeaderboardData(difficulty) {
 
 function sortLeaderboardData(difficulty) {
 	// Retrieve names and scores from local storage
-    let leaderboardData = JSON.parse(localStorage.getItem("userObjects"));
-    let leaderboardSortedData = [];
+    let allUsers = JSON.parse(localStorage.getItem("userObjects"));
 
+    // Will sort the leaderboard data associated with the specific difficulty
+    let sortedUsers = [];
+
+    // Sort data by score and difficulty
     // Got help for below with the following link:
     // https://flaviocopes.com/how-to-sort-array-of-objects-by-property-javascript/
-    leaderboardData = leaderboardData.sort((a, b) => (a.score > b.score) && a.difficulty === difficulty ? -1 : 1);
+    allUsers = allUsers.sort((a, b) => (a.score > b.score) && a.difficulty === difficulty ? -1 : 1);
 
     // Add users whose difficulty matches the difficulty for the current game
-    leaderboardData.forEach( (user, i) => {
-        if (user.difficulty === difficulty) {
-            leaderboardSortedData.push(user);
-        }
+    allUsers.forEach( (user, i) => {
+        if (user.difficulty === difficulty) sortedUsers.push(user);
     });
-    return leaderboardSortedData;
+
+    return sortedUsers;
+}
+
+function cullLeaderboardData(difficulty, usersOfCurrentDifficulty, leaderboardLimit) {
+    /*
+    Culling takes effect after the leaderboard position of the current user is calculated.
+
+    Any user object which doesn't make it into the top number of scores is removed from local storage. 
+    This is all to prevent too many user objects being stored in local storage.
+
+    Function takes in the usersOfCurrentDifficulty array, this will be culled below if it's length exceeds the
+    leaderboard limit for that difficulty. Once culled, it is then combined with the usersOfOtherDifficulties
+    array and saved in local storage.
+    */
+
+    // Retrieve names and scores from local storage
+    let allUsers = JSON.parse(localStorage.getItem("userObjects"));
+
+    // Other difficulty user data
+    let usersOfOtherDifficulties = [];
+
+    // Gets users whose difficulty is not the same as the current difficulty
+    allUsers.forEach( (user, i) => {
+        if (user.difficulty !== difficulty) usersOfOtherDifficulties.push(user);
+    });
+
+    // Cull usersOfCurrentDifficulty array if it exceeds the limit of players stored
+    while (usersOfCurrentDifficulty.length > leaderboardLimit) {
+        usersOfCurrentDifficulty.pop();
+    }
+
+    // Combine usersOfCurrentDifficulty & usersOfOtherDifficulties
+    let postCullingUsers = usersOfOtherDifficulties.concat(usersOfCurrentDifficulty);
+
+    // Save in local storage
+    localStorage.setItem('userObjects', JSON.stringify(postCullingUsers));
 }
 
 function checkForErrors(responseCode) {
