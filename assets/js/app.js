@@ -194,6 +194,35 @@ $(document).ready(function() {
         timerStopped = false;
         addAnswerButtons();
 
+        // Quiz data to display on Game page
+        question = quizData[0].question;
+        correctAnswer = quizData[0].correct_answer;
+        incorrectAnswers = quizData[0].incorrect_answers; // 3 incorrect answers
+
+        // Generate a random number between 1 and 4 so that the correct answer
+        // is randomly placed
+        let randomNumber = 1 + Math.floor(Math.random() * 4);
+
+        // Display the question retrieved from the quiz data
+        // and place it in the h2 question element
+        $("#question").html(question);
+
+        // Places the correct answer in one of the game buttons
+        $(`#answer-${randomNumber}`).html(correctAnswer);
+
+        // Places the incorrect answers in the buttons
+        for (let i = 1; i <= 4; i++) {
+            if ( $(`#answer-${i}`).html() === correctAnswer) {
+                continue; // Skip button that already has correct answer
+            } else {
+                $(`#answer-${i}`).html(incorrectAnswers[0]); // Place first item from this array
+                incorrectAnswers.shift(); // Remove first item from this array
+            }
+        }
+
+        // Make the height of all our answer buttons the same
+        makeBtnHeightSame();
+
         // Binds a click event to each answer button on the Game screen
         $("#answer-btn-container button").each((i, button) => {
             $(button).bind('click', () => {
@@ -246,36 +275,6 @@ $(document).ready(function() {
                 }
             });
         }); // End of answer button click event function
-
-        question = quizData[0].question;
-        incorrectAnswers = quizData[0].incorrect_answers;
-
-        // Generate a random number between 1 and 4 so that the correct answer
-        // is randomly placed
-        let randomNumber = 1 + Math.floor(Math.random() * 4);
-
-        // Display the question retrieved from the quiz data
-        // and place it in the h2 question element
-        $("#question").html(question);
-
-        // Places the correct answer in one of the game buttons
-        // Adds a class to this button so that it can be accessed later
-        $(`#answer-${randomNumber}`).html(quizData[0].correct_answer);
-        $(`#answer-${randomNumber}`).addClass("correct-answer");
-        correctAnswer = $(`#answer-${randomNumber}`).html(); // Sets text to answers
-
-        // Places the incorrect answers in the buttons
-        for (let i = 1; i <= 4; i++) {
-            if ( $(`#answer-${i}`).hasClass("correct-answer") ) {
-                continue; // Skip button that already has correct answer
-            } else {
-                $(`#answer-${i}`).html(incorrectAnswers[0]); // Place first item from this array
-                incorrectAnswers.shift(); // Remove first item from this array
-            }
-        }
-
-        // Make the height of all our answer buttons the same
-        makeBtnHeightSame();
 
     } // End of displayQuestion() function
 
