@@ -53,8 +53,8 @@ $(document).ready(function() {
             answerBtnsDisabled(true);
 
             $("#wrong-sound")[0].play();
-            $(".correct-answer").css('background-color', 'green');
-            $(".correct-answer").css('transition', 'all ease 1s');
+
+            displayCorrectAnswer(correctAnswer);
         }
     }, 1000);
 
@@ -264,8 +264,7 @@ $(document).ready(function() {
                     $(button).css('transition', 'all ease 1s');
 
                     // Animation to fill correct answer button with green
-                    $(".correct-answer").css('background-color', 'green');
-                    $(".correct-answer").css('transition', 'all ease 1s');
+                    displayCorrectAnswer(correctAnswer);
 
                     continueBtnDisabled(false);
                     answerBtnsDisabled(true);
@@ -499,6 +498,16 @@ function addAnswerButtons() {
         </div>
         `
     );
+}
+
+function displayCorrectAnswer(correctAnswer) {
+    // Displays correct answer
+    $("#answer-btn-container button").each((i, button) => {
+        if ($(button).html() === correctAnswer) {
+            $(button).css('background-color', 'green');
+            $(button).css('transition', 'all ease 1s');
+        }
+    });
 }
 
 function makeBtnHeightSame() {
