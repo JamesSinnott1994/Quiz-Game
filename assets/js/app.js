@@ -196,7 +196,6 @@ $(document).ready(function() {
 
         // Quiz data to display on Game page
         question = quizData[0].question;
-        correctAnswer = quizData[0].correct_answer;
         incorrectAnswers = quizData[0].incorrect_answers; // 3 incorrect answers
 
         // Generate a random number between 1 and 4 so that the correct answer
@@ -208,7 +207,10 @@ $(document).ready(function() {
         $("#question").html(question);
 
         // Places the correct answer in one of the game buttons
-        $(`#answer-${randomNumber}`).html(correctAnswer);
+        $(`#answer-${randomNumber}`).html(quizData[0].correct_answer);
+
+        // To deal with any weird symbols (Such as question about the Greek alphabet)
+        correctAnswer = $(`#answer-${randomNumber}`).html();
 
         // Places the incorrect answers in the buttons
         for (let i = 1; i <= 4; i++) {
