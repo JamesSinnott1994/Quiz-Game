@@ -209,7 +209,8 @@ $(document).ready(function() {
         // Places the correct answer in one of the game buttons
         $(`#answer-${randomNumber}`).html(quizData[0].correct_answer);
 
-        // To deal with any weird symbols (Such as question about the Greek alphabet)
+        // To deal with any weird symbols we assign correctAnswer to the html of the button above 
+        // i.e. there was a question about the Greek alphabet which caused problems
         correctAnswer = $(`#answer-${randomNumber}`).html();
 
         // Places the incorrect answers in the buttons
