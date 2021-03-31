@@ -246,7 +246,7 @@ $(document).ready(function() {
                     answerBtnsDisabled(true);
 
                     // Change game information
-                    score += 5;
+                    score += (5 + timedScore(time, startingTime));
                     questionsAnswered += 1;
                     noOfCorrectAnswers += 1;
                     $("#score").html(score);
@@ -511,6 +511,14 @@ function displayCorrectAnswer(correctAnswer) {
             $(button).css('transition', 'all ease 1s');
         }
     });
+}
+
+function timedScore(time, startingTime) {
+    // For more variation, a timed score is calculated
+    let percentage = (time / startingTime);
+    let timedScore = Math.round( (percentage*5) );
+
+    return timedScore;
 }
 
 function makeBtnHeightSame() {
