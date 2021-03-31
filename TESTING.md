@@ -319,3 +319,8 @@ As opposed to:
 **Bug:** Wrong position displayed for the current user if their name already existed on the leaderboard. If there were 3 names of the same type, then it was always the position of the same name with the lowest score that was displayed (as this was the last name in the sorted leaderboard data).
 
 **Fix:** Solution was to assign a unique userID to each user. This helped correctly displayed the position of the current user.
+
+**Bug:** On rare occasions an answer would contain strange symbols such as letters from the Greek alphabet. This caused problems when checking if an answer was correct, as the letters appear different when they are assigned to the HTML of the buttons, compared to how they are in the data received from the API.
+
+**Fix:** Solution here was to assign the correct answer symbol to the button's HTML, then assign the "correctAnswer" variable to the HTML of that button.
+
