@@ -145,11 +145,11 @@ The website will be broken down into three areas in order to achieve the project
     - The [Caladea](https://fonts.google.com/specimen/Caladea?preview.text_type=custom) font is used for the text, questions, buttons and answers.
 
 #### Colour scheme
-- Background colour  ![#e6ece2](https://placehold.it/15/e6ece2/000000?text=+)<br>
-- Ordinary button colour  ![#c0bdae](https://placehold.it/15/c0bdae/000000?text=+)<br>
-- Text colour  ![#000000](https://placehold.it/15/000000/000000?text=+)<br>
-- Correct answer colour  ![#63ba09](https://placehold.it/15/63ba09/000000?text=+)<br>
-- Wrong answer colour  ![#e35a47](https://placehold.it/15/e35a47/000000?text=+)<br>
+- Background colour  ![#e6ece2](https://placehold.co/5x5/e6ece2/e6ece2)<br>
+- Ordinary button colour  ![#c0bdae](https://placehold.co/5x5/c0bdae/c0bdae)<br>
+- Text colour  ![#000000](https://placehold.co/5x5/000000/000000)<br>
+- Correct answer colour  ![#63ba09](https://placehold.co/5x5/63ba09/63ba09)<br>
+- Wrong answer colour  ![#e35a47](https://placehold.co/5x5/e35a47/e35a47)<br>
 
 #### Media
 - There is a Logo image for the Home page
